@@ -3,14 +3,17 @@
 ## Project Title: Team TBD
 
 ### Team Members:
-1. **Name:** Matthew Bryant
+1. **Name:** Matthew Bryant <br>
    **Contact Information:** bryantmw@mail.uc.edu
    
-2. **Name:** Kaleb Bishop
+2. **Name:** Kaleb Bishop <br>
    **Contact Information:** bishopkw@mail.uc.edu
 
-3. **Name:** Hung Nguyen
+3. **Name:** Hung Nguyen <br>
    **Contact Information:** nguye3hv@mail.uc.edu
+
+4. **Name:** Eric Buffington <br>
+   **Contact Information:** buffinea@mail.uc.edu 
 
 ### Meeting Schedule:
 - **Frequency:** Biweekly
@@ -40,9 +43,10 @@ A user-friendly interface will be developed to allow users to upload an image or
 The project will include extensive testing to ensure the system accurately recognizes dishes and returns correct allergen information. This includes testing on a wide variety of dishes, images, and text inputs, as well as ensuring robustness in different lighting conditions, angles, and levels of image clarity.
 
 ### Roles and Responsibilities:
-- **Team Member 1 (Matthew Bryant):** [Describe role]
+- **Team Member 1 (Matthew Bryant):** Frontend development, Backend server development, AI model development
 - **Team Member 2 (Kaleb Bishop):** Frontend development, Backend server development, AI model development
-- **Team Member 3 (Hung Nguyen):**  [Describe role]
+- **Team Member 3 (Hung Nguyen):**  Frontend development, Backend server development, AI model development
+- **Team Member 4 (Eric Buffington):**  Frontend development, Backend server development, AI model development
 
 The roles outlined above may evolve as the project progresses, and more detailed responsibilities will be defined in future assignments (Assignment #5 Task List and Assignment #6 Effort Matrix).
 
@@ -50,4 +54,5 @@ The roles outlined above may evolve as the project progresses, and more detailed
 This draft contract has been reviewed and approved by all team members. We agree to adhere to the schedule and responsibilities outlined above, and we understand that changes to the contract may occur with mutual consent throughout the term.
 
 ### Faculty Advisor:
-[Faculty Advisor's Name for Approval]
+   **Name:** Seokki Lee <br>
+   **Contact Information:** lee5sk@ucmail.uc.edu
