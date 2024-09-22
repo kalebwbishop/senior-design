@@ -22,7 +22,7 @@ Design D0 provides the highest-level view of the Allergen Detection System, high
 ![Design D0 Diagram](images/D0_diagram.png)
 
 ### Example
-![Design D0 Example](images/D0.png)
+![Design D0 Example](images/D0-1.png)
 
 ---
 
