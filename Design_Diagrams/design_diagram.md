@@ -22,7 +22,7 @@ Design D0 provides the highest-level view of the Allergen Detection System, high
 ![Design D0 Diagram](images/D0_diagram.png)
 
 ### Example
-![Design D0 Example](images/example_1.png)
+![Design D0 Example](images/D0_example.png)
 
 ---
 
@@ -50,7 +50,7 @@ Design D1 delves deeper into the Allergen Detection System, outlining its core s
 ![Design D1 Diagram](images/D1_diagram.png)
 
 ### Example
-![Design D1 Example](images/example_2.png)
+![Design D1 Example](images/D1_example.png)
 ---
 
 ## Design D2: Detailed View of Subsystems
