@@ -1,4 +1,5 @@
-```flowchart LR
+```mermaid
+flowchart LR
 
 TXT["Text Input:
 Zipburger: Signature blend 6 oz pattiy, 
