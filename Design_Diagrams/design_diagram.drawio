@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:130.0) Gecko/20100101 Firefox/130.0" version="24.7.16">
   <diagram name="Page-1" id="Cf3LVYV3IRNGvJ8bjNK9">
-    <mxGraphModel dx="1735" dy="1169" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1908" dy="1286" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -96,29 +96,19 @@
           <mxGeometry x="115" y="870" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-22" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="1185" y="870" width="30" height="60" as="geometry" />
+          <mxGeometry x="1365" y="870" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-23" value="&lt;div&gt;User Output&lt;/div&gt;&lt;div&gt;(Potential Allergens, Recipe Guess)&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="830" width="210" height="40" as="geometry" />
+          <mxGeometry x="1270" y="830" width="210" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Lg2Q8IWw4Lxlc7aP8mto-25" target="Lg2Q8IWw4Lxlc7aP8mto-30">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="710" y="850" />
-              <mxPoint x="710" y="900" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-74" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Lg2Q8IWw4Lxlc7aP8mto-25" target="Lg2Q8IWw4Lxlc7aP8mto-71">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-25" value="Text Processing Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFE3;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="310" y="770" width="370" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Lg2Q8IWw4Lxlc7aP8mto-27" target="Lg2Q8IWw4Lxlc7aP8mto-30">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="710" y="939" />
-              <mxPoint x="710" y="900" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Lg2Q8IWw4Lxlc7aP8mto-27" target="Lg2Q8IWw4Lxlc7aP8mto-71">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-27" value="Image Processing Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFE3;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="310" y="909.2" width="370" height="120.8" as="geometry" />
@@ -130,13 +120,13 @@
           <mxGeometry x="230" y="940" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-30" value="Allergen Detection System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D3D3D3;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="850" y="825" width="210" height="150" as="geometry" />
+          <mxGeometry x="1030" y="825" width="210" height="150" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-31" value="Recipe Guess" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="720" y="868" width="100" height="30" as="geometry" />
+          <mxGeometry x="921" y="860" width="100" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-32" value="Allergen Database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4B9C1;" vertex="1" parent="1">
-          <mxGeometry x="920" y="898" width="120" height="60" as="geometry" />
+        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-32" value="Recipe &amp;amp; Allergen Database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4B9C1;" vertex="1" parent="1">
+          <mxGeometry x="1075" y="900" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Lg2Q8IWw4Lxlc7aP8mto-30" target="Lg2Q8IWw4Lxlc7aP8mto-22">
           <mxGeometry relative="1" as="geometry" />
@@ -149,6 +139,12 @@
         </mxCell>
         <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-70" value="Image Classification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A8E3A6;" vertex="1" parent="1">
           <mxGeometry x="510" y="958" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Lg2Q8IWw4Lxlc7aP8mto-71" target="Lg2Q8IWw4Lxlc7aP8mto-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Lg2Q8IWw4Lxlc7aP8mto-71" value="Recipe Query Model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFE3;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="810" y="860" width="95.26" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
