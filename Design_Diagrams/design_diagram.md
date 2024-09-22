@@ -21,6 +21,9 @@ Design D0 provides the highest-level view of the Allergen Detection System, high
 ### Diagram
 ![Design D0 Diagram](images/D0_diagram.png)
 
+### Example
+![Design D0 Example](images/example_1.png)
+
 ---
 
 ## Design D1: Elaborate Design of Subsystems
@@ -46,6 +49,8 @@ Design D1 delves deeper into the Allergen Detection System, outlining its core s
 ### Diagram
 ![Design D1 Diagram](images/D1_diagram.png)
 
+### Example
+![Design D1 Example](images/example_2.png)
 ---
 
 ## Design D2: Detailed View of Subsystems
@@ -91,10 +96,9 @@ Design D2 provides an in-depth breakdown of each subsystem within the Allergen D
 ### Notes on Diagram Conventions
 - **Boxes/Figures:** Represent different system components, subsystems, or processes.
 - **Lines/Arrows:** Indicate the flow of data or control between components.
-- **Colors:** 
-  - Light Gray: Main system
-  - Light Yellow: Subsystems
-  - Light Pink: Database interactions
-  - Sky Blue: Inputs
-  - Pale Green: Outputs
-  - Wheat: Internal processes within subsystems
+- **Icons / Colors:** 
+  - Gray: Main System
+  - Yellow: Subsystems
+  - Green: Internal Processes Within Subsystems
+  - Red: Database Interactions
+  - Stick Figures: End User
