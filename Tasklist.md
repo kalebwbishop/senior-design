@@ -23,7 +23,11 @@
 - Test Text Tokenizer Output Being Sent to Recipes Database
 - Test NLP Model Output Being Sent to Recipes Database
 
-## Unclaimed
+## Hung Nguyen
 - Test Image Classification Model Output Being Sent to NLP Model
 - Test Output on Typescript App Matching Proper Database Entry
 - Test Recipes Database Returning Proper Allergen List
+- Test Database Recipe data quality
+- Design Allergen recipe detection model
+- Integrate Allergen detection model with database
+- Test App for performance, endurance and availability
