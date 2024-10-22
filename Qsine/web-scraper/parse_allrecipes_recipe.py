@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-import re
+import json
+
+image_legend_file = 'scraped_data/image_legend.json'
 
 def parse_allrecipes_recipe(url):
     response = requests.get(url)
@@ -36,18 +38,30 @@ def parse_allrecipes_recipe(url):
 
     # Extract ingredients
     ingredients = []
-    ingredients_list_items = soup.find_all('li', class_='mm-recipes-structured-ingredients__list-item')
-    print(list(ingredients_list_items[0].children))
-    ingredients_list = [re.match(r"""<span data-ingredient-name="true">(.*?)</span>""", item) for item in ingredients_list_items]
-    print(ingredients_list)
+    ingredient_names = soup.findAll('span', {'data-ingredient-name': 'true'})
 
-    for ingredient in ingredients_list:
+    for ingredient in ingredient_names:
         ingredients.append(ingredient.get_text(strip=True))
+
+    if not ingredients:
+        return
 
     data_template['ingredients'] = ingredients
 
-    print(data_template)
+    with open(image_legend_file, 'r') as f:
+        data = json.load(f)
+        data.append(data_template)
 
-# Example usage
-url = 'https://www.allrecipes.com/recipe/274250/perfect-pumpkin-muffins/'
-parse_allrecipes_recipe(url)
+    with open(image_legend_file, 'w') as f:
+        f.write(json.dumps(data, indent=4))
+
+if __name__ == '__main__':
+    with open(image_legend_file, 'w') as f:
+        f.write('[]')
+        
+    with open('allrecipes_links.json', 'r') as f:
+        data = json.load(f)
+
+    for url in data:
+        print(f"Processing {url}")
+        parse_allrecipes_recipe(url)

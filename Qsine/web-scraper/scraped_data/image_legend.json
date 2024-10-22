@@ -1,8 +1,102 @@
 [
     {
-        "url": "",
-        "recipe_url": "",
-        "recipe_name": "",
-        "ingredients": []
+        "recipe_url": "https://www.allrecipes.com/dirt-road-martini-recipe-8707143",
+        "recipe_name": "Dirt Road Martini",
+        "image_url": "https://www.allrecipes.com/thmb/dggAwsgrET5IZb97QLYdeRZ849w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8707143-dirt-road-martini-4x3-4393347bed054b6483ceeb43c8a76b97.jpg",
+        "ingredients": [
+            "ice as needed",
+            "vodka",
+            "unsweetened tea",
+            "brine from Mezzetta Italian Mix Giardiniera",
+            "martini olives",
+            "vegetable pieces from Mezzetta Italian Mix Giardiniera, for garnish"
+        ]
+    },
+    {
+        "recipe_url": "https://www.allrecipes.com/caramelized-onion-and-roasted-garlic-pasta-recipe-8724725",
+        "recipe_name": "Caramelized Onion and Roasted Garlic Pasta",
+        "image_url": "https://www.allrecipes.com/thmb/-qVGaXbqSaOJhgSdPg0iV_SwnGU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8724725_Caramelized-Onion-and-Roasted-Garlic-Pasta_LaDonna-Langwell_4x3-085463de560c4c458e3080bd7187e439.jpg",
+        "ingredients": [
+            "garlic",
+            "olive oil",
+            "fresh thyme",
+            "white onion",
+            "butter",
+            "olive oil",
+            "water",
+            "balsamic vinegar",
+            "white sugar",
+            "salt",
+            "ground black pepper",
+            "heavy cream",
+            "garlic",
+            "chopped parsley",
+            "grated Parmesan cheese",
+            "pasta"
+        ]
+    },
+    {
+        "recipe_url": "https://www.allrecipes.com/recipe/222878/chocolate-martini-cocktail/",
+        "recipe_name": "Chocolate Martini",
+        "image_url": "https://www.allrecipes.com/thmb/Fv2kMQKVhgbBXoAFsOoNQcEPhmU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/222878-chocolate-martini-cocktail-3x4-4329-cce1447f1dbb41f1a56bcc7bfc1e8ced.jpg",
+        "ingredients": [
+            "ice, or as needed",
+            "half-and-half",
+            "chocolate liqueur",
+            "cr\u00e8me\u00a0de cacao",
+            "vodka"
+        ]
+    },
+    {
+        "recipe_url": "https://www.allrecipes.com/everything-bagel-deviled-eggs-recipe-8729732",
+        "recipe_name": "Everything Bagel Deviled Eggs",
+        "image_url": "https://www.allrecipes.com/thmb/0zwWHMsUFnfqnxLb5MuISNkbPNI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8729732_Everything-Bagel-Deviled-Eggs_Yolanda-Gutierrez_4x3-6a4a4a109e204a478abb098e539236a8.jpg",
+        "ingredients": [
+            "eggs, hard boiled, peeled",
+            "mayonnaise",
+            "mustard",
+            "salt and freshly ground black pepper to taste",
+            "everything bagel seasoning"
+        ]
+    },
+    {
+        "recipe_url": "https://www.allrecipes.com/copycat-orange-julius-recipe-8724358",
+        "recipe_name": "Copycat Orange Julius",
+        "image_url": "https://www.allrecipes.com/thmb/Q9gQdV060huhg35ie9kxjeBC8K8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8724358_Copycat-Orange-Julius_Yolanda-Gutierrez_4x3-2b065d20830440d2a3042dbf5cb05f63.jpg",
+        "ingredients": [
+            "orange juice concentrate",
+            "whole milk",
+            "heavy cream",
+            "water",
+            "confectioners sugar",
+            "vanilla extract",
+            "ice"
+        ]
+    },
+    {
+        "recipe_url": "https://www.allrecipes.com/million-dollar-deviled-eggs-recipe-8669008",
+        "recipe_name": "Million Dollar Deviled Eggs",
+        "image_url": "https://www.allrecipes.com/thmb/p3-Hb0BCHyknqBhaUmlzHFlzHuk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8669008_Million-Dollar-Deviled-Eggs_Pat-Bernitt_4x3-1f4e6df14dc944bfbc1dd27355ca30c6.jpg",
+        "ingredients": [
+            "hard-boiled eggs",
+            "mayonnaise",
+            "butter",
+            "yellow mustard",
+            "pickle juice",
+            "sriracha",
+            "salt and freshly ground black pepper to taste",
+            "bacon"
+        ]
+    },
+    {
+        "recipe_url": "https://www.allrecipes.com/recipe/162828/easy-orange-cream-slush/",
+        "recipe_name": "Easy Orange Cream Slush",
+        "image_url": "https://www.allrecipes.com/thmb/UTly1h-R9jAND8W2-RT7T2nSe7Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/959859-baf3470b710741c88fa4829010017dac.jpg",
+        "ingredients": [
+            "orange juice",
+            "milk",
+            "white sugar",
+            "ice cubes"
+        ]
     }
 ]
