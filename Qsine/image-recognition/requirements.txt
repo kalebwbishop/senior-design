@@ -1,0 +1,9 @@
+pyscreenshot
+Pillow
+pyautogui
+tensorflow
+numpy
+opencv-python
+requests
+python-dotenv
+openai

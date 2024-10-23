@@ -1,13 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import time
 
-image_legend_file = 'scraped_data/image_legend.json'
+links_file_path = 'allrecipes_links.json'
+paresed_data_file_path = 'parsed_data.json'
+data = []
+parsed_data = []
+already_parsed = set()
 
-def parse_allrecipes_recipe(url):
+def parse_allrecipes_recipe(idx ,url):
+    if url in already_parsed:
+        print(f"Already parsed {url}")
+        return True
+
+    print(f"{len(data) - idx}: Processing {url}")
+
     response = requests.get(url)
     if response.status_code != 200:
-        raise Exception(f"Failed to load page {url}")
+        return False
 
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -26,7 +37,7 @@ def parse_allrecipes_recipe(url):
     if recipe_name:
         data_template['recipe_name'] = recipe_name.get_text(strip=True)
     else:
-        return
+        return False
 
 
     # Extract primary image
@@ -34,7 +45,7 @@ def parse_allrecipes_recipe(url):
     if primary_image:
         data_template['image_url'] = primary_image['src']
     else:
-        return
+        return False
 
     # Extract ingredients
     ingredients = []
@@ -44,24 +55,42 @@ def parse_allrecipes_recipe(url):
         ingredients.append(ingredient.get_text(strip=True))
 
     if not ingredients:
-        return
+        return False
 
     data_template['ingredients'] = ingredients
 
-    with open(image_legend_file, 'r') as f:
-        data = json.load(f)
-        data.append(data_template)
+    parsed_data.append(data_template)
 
-    with open(image_legend_file, 'w') as f:
-        f.write(json.dumps(data, indent=4))
+    return True
 
 if __name__ == '__main__':
-    with open(image_legend_file, 'w') as f:
-        f.write('[]')
-        
-    with open('allrecipes_links.json', 'r') as f:
+    with open(paresed_data_file_path, 'r') as f:
+        parsed_data = json.load(f)
+        already_parsed = set([recipe['recipe_url'] for recipe in parsed_data])
+        print(f"Already parsed {len(already_parsed)} recipes")
+
+    with open(links_file_path, 'r') as f:
         data = json.load(f)
 
-    for url in data:
-        print(f"Processing {url}")
-        parse_allrecipes_recipe(url)
+    def save_data():
+        with open(links_file_path, 'w') as f:
+            f.write(json.dumps(data, indent=4))
+
+        with open(paresed_data_file_path, 'w') as f:
+            f.write(json.dumps(parsed_data, indent=4))
+
+    try:
+        for idx, url in enumerate(data):
+            isRecipe = parse_allrecipes_recipe(idx, url)
+
+            time.sleep(0.25)
+
+            if not isRecipe:
+                data.remove(url)
+
+
+    except KeyboardInterrupt:
+        pass
+
+    print("Saving data and exiting")    
+    save_data()

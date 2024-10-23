@@ -6,7 +6,7 @@ class SearchAllRecipes:
     allrecipes_links_file = 'allrecipes_links.json'
 
     def __init__(self):
-        self.checked_links = []
+        self.checked_links = set()
         self.links_to_check = set(['https://www.allrecipes.com/'])
         self.current_link = None
 
@@ -20,7 +20,7 @@ class SearchAllRecipes:
         response = requests.get(self.current_link)
         
         if response.status_code == 200:
-            self.checked_links.append(self.current_link)
+            self.checked_links.add(self.current_link)
 
             return str(response.text.encode('utf-8')).replace("\n", "")
         else:
@@ -39,7 +39,7 @@ class SearchAllRecipes:
         [self.links_to_check.add(link) for link in links]
 
         with open(SearchAllRecipes.allrecipes_links_file, 'w') as f:
-            f.write(json.dumps(self.checked_links, indent=4))
+            f.write(json.dumps(list(self.checked_links), indent=4))
 
 
         return links
