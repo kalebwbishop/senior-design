@@ -64,4 +64,3 @@ if __name__ == '__main__':
         category = categorize_images(recipe)
         print(f"Category for recipe {index}: {category}")   
         download_image(index, recipe['image_url'], category)
-        break
