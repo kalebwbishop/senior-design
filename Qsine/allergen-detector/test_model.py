@@ -17,7 +17,7 @@ data_path = join(ner_path, "data")
 jar = join(ner_path, "stanford-ner.jar")
 model = join(ner_path, "classifiers", "ingredient-ner-model.ser.gz")
 
-
+# Use NER model to indentify ingredient element from string
 def GetIngredients(ner_tagger, ingredients:list = []):
     parsed_ingredients = []
     for ingredient in ingredients:
@@ -26,6 +26,7 @@ def GetIngredients(ner_tagger, ingredients:list = []):
         parsed_ingredients.append(" ".join([tag[0] for tag in tag_lst if tag[1] == 'NAME']))
     return parsed_ingredients
 
+# Calculate TF-IDF score to find matching allergen for each ingredient
 def AllergenMatch(ingredients:list, allergens:list):
     vectorizer = TfidfVectorizer()
     tfidf_matrix = vectorizer.fit_transform(allergens)
@@ -43,13 +44,14 @@ def AllergenMatch(ingredients:list, allergens:list):
             res.append({'ingredient': query, 'allergen': allergens[index]})
     return res
     
-def RecipeProcessor(ner_tagger = StanfordNERTagger(model, jar, encoding='utf8'), recipe:dict = None, df_allergies = []):
-    tk_ingredients = GetIngredients(ner_tagger, recipe['ingredients'])
-    allergens = df_allergies['food'].tolist()
-    allergens = AllergenMatch(tk_ingredients, allergens)
-    allergens = pd.DataFrame(allergens, columns=['food'])
+# Process recipe to return ingredient allergy
+def ProcessRecipe(ner_tagger = StanfordNERTagger(model, jar, encoding='utf8'), recipe:dict = None, df_allergies = []):
+    ingredients = GetIngredients(ner_tagger, recipe['ingredients'])
+    allergens = df_allergies['allergen'].tolist()
+    df_allergens = pd.DataFrame.from_dict(AllergenMatch(ingredients, allergens))
     
-    allergies = df_allergies.join(allergies, lsuffix='_org', rsuffix='_sub', on='food')['allergy'].tolist()
+    allergies = allergies = df_allergies.merge(df_allergens, how='inner', left_on='allergen', 
+                                           right_on='allergen', suffixes=('_left', '_right'))['allergy'].unique().tolist()
     return {
         'recipe_name': recipe['recipe_name'],
         'allergeies': allergies
@@ -57,23 +59,13 @@ def RecipeProcessor(ner_tagger = StanfordNERTagger(model, jar, encoding='utf8'),
 
 
 if __name__ == "__main__":
-    
-    # Prepare NER tagger with english model
-    
-    ingredientsDB = dict()
+        
+    # NER model to identify ingredients
     ner_tagger = StanfordNERTagger(model, jar, encoding='utf8')
+    # Allergy database
     df_allergies = pd.read_csv(join(data_path, 'AllergenData.csv'),  encoding='utf8')
-    df_allergies['allergen'] = df_allergies['allergen'].astype(str)
-    df_allergies = df_allergies[["allergen", "allergy"]]
-
+    # Open Parsed data file
     with open(join(data_path, 'parsed_data.json'), 'r', encoding='utf8') as file:
         for recipe in json.load(file):
-            ingredients = GetIngredients(ner_tagger, recipe['ingredients'])
-            allergens = AllergenMatch(ingredients, df_allergies['allergen'].tolist())
-            allergens = pd.DataFrame.from_dict(allergens)
-            allergens['allergen'] = allergens['allergen'].astype(str)            
-            allergies = df_allergies.merge(allergens, how='inner', left_on='allergen', 
-                                           right_on='allergen', suffixes=('_left', '_right'))['allergy'].unique().tolist()
-            
-            recipe_name = recipe['recipe_name']
-            print(recipe['recipe_name'],allergies)
+            recipe_allergies = ProcessRecipe(ner_tagger, recipe, df_allergies)
+            print(recipe_allergies['recipe_name'],recipe_allergies['allergeies'])
