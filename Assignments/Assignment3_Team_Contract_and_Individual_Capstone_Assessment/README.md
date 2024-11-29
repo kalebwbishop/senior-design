@@ -1,6 +1,6 @@
-# Team Contract Draft
+# Team Contract
 
-## Project Title: Team TBD
+## Project Title: QSine
 
 ### Team Members:
 1. **Name:** Matthew Bryant <br>
@@ -54,5 +54,5 @@ The roles outlined above may evolve as the project progresses, and more detailed
 This draft contract has been reviewed and approved by all team members. We agree to adhere to the schedule and responsibilities outlined above, and we understand that changes to the contract may occur with mutual consent throughout the term.
 
 ### Faculty Advisor:
-   **Name:** Seokki Lee <br>
-   **Contact Information:** lee5sk@ucmail.uc.edu
+   **Name:** Professor Annexstein <br>
+   **Contact Information:** fred.annexstein@uc.edu

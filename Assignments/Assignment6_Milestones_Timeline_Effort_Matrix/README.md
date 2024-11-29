@@ -7,30 +7,28 @@
    - Kaleb will contact the professor for advisement and gather requirements for the project to ensure all deliverables align with the course expectations.
 
 2. **App Design Completion**
-   - **Due Date**: October 6, 2024
+   - **Due Date**: February 5, 2025
    - Kaleb will finalize the app's UI/UX design, including the layout and interaction flows, ensuring a seamless user experience across platforms.
 
 3. **Database Build & Populate**
-   - **Due Date**: October 13, 2024
+   - **Due Date**: February 12, 2025
    - Matthew will build the recipes database and begin populating it with data, including ranking recipes and allergens.
 
 4. **Web Scraper and NLP Integration**
-   - **Due Date**: October 20, 2024
+   - **Due Date**: February 19, 2025
    - Kaleb will complete the implementation of the web scraper, and Eric will finalize the integration of the NLP model with the tokenizer. The system will automatically pull new recipes from various websites.
 
 5. **Model Training & Testing**
-   - **Due Date**: October 27, 2024
+   - **Due Date**: February 26, 2025
    - Kaleb will complete the training of the image classification model, and Hung will ensure proper integration and testing between the app and database.
 
 6. **Allergen Detection Model Integration**
-   - **Due Date**: November 3, 2024
+   - **Due Date**: March 5, 2025
    - Hung will design and integrate the allergen detection model into the app and test the database's output accuracy for allergens.
 
 7. **Final Testing and Performance Optimization**
-   - **Due Date**: November 24, 2024
+   - **Due Date**: March 26, 2025
    - The team will test the entire app for performance, endurance, and database interactions, ensuring a high-quality product across platforms.
-
-*All milestones will be performed by the entire team, names are for ownership of responsibility.
 
 ---
 
@@ -39,29 +37,29 @@
 | Task                                                            | Start Date       | End Date         | Milestone                               |
 |------------------------------------------------------------------|------------------|------------------|-----------------------------------------|
 | Contact Professor for Advisement                                 | September 25, 2024 | September 29, 2024 | Project Setup & Initial Consultation    |
-| Design App                                                       | September 29, 2024 | October 6, 2024  | App Design Completion                   |
-| Create App in TypeScript                                         | September 29, 2024 | November 3, 2024  | App Design Completion                   |
-| Build Recipes Database                                           | October 1, 2024   | October 13, 2024 | Database Build & Populate               |
-| Populate Database and Rank Recipes                               | October 6, 2024   | October 20, 2024 | Database Build & Populate               |
-| Implement Web Scraper                                            | October 6, 2024   | October 20, 2024 | Web Scraper and NLP Integration         |
+| Design App                                                       | January 29, 2025 | February 5, 2025 | App Design Completion                   |
+| Create App in TypeScript                                         | January 29, 2025 | March 5, 2025    | App Design Completion                   |
+| Build Recipes Database                                           | February 1, 2025 | February 12, 2025 | Database Build & Populate               |
+| Populate Database and Rank Recipes                               | February 5, 2025 | February 19, 2025 | Database Build & Populate               |
 | Design Web Scraper                                               | October 1, 2024   | October 20, 2024 | Web Scraper and NLP Integration         |
-| Design & Implement Text Tokenizer                                | October 1, 2024   | October 20, 2024 | Web Scraper and NLP Integration         |
-| Research Natural Language Processing Models                      | October 1, 2024   | October 20, 2024 | Web Scraper and NLP Integration         |
-| Integrate NLP Model with Tokenizer                               | October 6, 2024   | October 20, 2024 | Web Scraper and NLP Integration         |
-| Test Text Tokenizer Output Sent to Recipes Database              | October 13, 2024  | October 27, 2024 | Model Training & Testing                |
-| Test NLP Model Output Sent to Recipes Database                   | October 13, 2024  | October 27, 2024 | Model Training & Testing                |
-| Train Image Classification Model to Recognize Dishes from Images | October 13, 2024  | October 27, 2024 | Model Training & Testing                |
-| Test Image Classification Model Output Sent to NLP Model         | October 13, 2024  | October 27, 2024 | Model Training & Testing                |
-| Test Recipes Database Making Web Scraping Requests               | October 20, 2024  | November 3, 2024 | Allergen Detection Model Integration    |
-| Test Output on TypeScript App Matching Proper Database Entry     | October 20, 2024  | November 3, 2024 | Allergen Detection Model Integration    |
-| Populate Allergens into Database                                 | October 13, 2024  | November 3, 2024 | Allergen Detection Model Integration    |
-| Design Allergen Recipe Detection Model                           | October 20, 2024  | November 3, 2024 | Allergen Detection Model Integration    |
-| Integrate Allergen Detection Model with Database                 | October 20, 2024  | November 3, 2024 | Allergen Detection Model Integration    |
-| Test Recipes Database Returning Proper Allergen List             | October 20, 2024  | November 3, 2024 | Allergen Detection Model Integration    |
-| Implement Camera Functionality into App                          | October 20, 2024  | November 24, 2024 | Final Testing and Performance Optimization |
-| Ensure Consistent Performance Across Platforms                   | October 20, 2024  | November 24, 2024 | Final Testing and Performance Optimization |
-| Test App Performance, Endurance, and Availability                | November 3, 2024  | November 24, 2024 | Final Testing and Performance Optimization |
-| Test Database Recipe Data Quality                                | November 3, 2024  | November 24, 2024 | Final Testing and Performance Optimization |
+| Implement Web Scraper                                            | October 6, 2024   | October 20, 2024 | Web Scraper and NLP Integration         |
+| Design & Implement Text Tokenizer                                | February 1, 2025 | February 19, 2025 | Web Scraper and NLP Integration         |
+| Research Natural Language Processing Models                      | February 1, 2025 | February 19, 2025 | Web Scraper and NLP Integration         |
+| Integrate NLP Model with Tokenizer                               | February 5, 2025 | February 19, 2025 | Web Scraper and NLP Integration         |
+| Test Text Tokenizer Output Sent to Recipes Database              | February 12, 2025 | February 26, 2025 | Model Training & Testing                |
+| Test NLP Model Output Sent to Recipes Database                   | February 12, 2025 | February 26, 2025 | Model Training & Testing                |
+| Train Image Classification Model to Recognize Dishes from Images | February 12, 2025 | February 26, 2025 | Model Training & Testing                |
+| Test Image Classification Model Output Sent to NLP Model         | February 12, 2025 | February 26, 2025 | Model Training & Testing                |
+| Test Recipes Database Making Web Scraping Requests               | February 19, 2025 | March 5, 2025    | Allergen Detection Model Integration    |
+| Test Output on TypeScript App Matching Proper Database Entry     | February 19, 2025 | March 5, 2025    | Allergen Detection Model Integration    |
+| Populate Allergens into Database                                 | February 12, 2025 | March 5, 2025    | Allergen Detection Model Integration    |
+| Design Allergen Recipe Detection Model                           | February 19, 2025 | March 5, 2025    | Allergen Detection Model Integration    |
+| Integrate Allergen Detection Model with Database                 | February 19, 2025 | March 5, 2025    | Allergen Detection Model Integration    |
+| Test Recipes Database Returning Proper Allergen List             | February 19, 2025 | March 5, 2025    | Allergen Detection Model Integration    |
+| Implement Camera Functionality into App                          | February 19, 2025 | March 26, 2025   | Final Testing and Performance Optimization |
+| Ensure Consistent Performance Across Platforms                   | February 19, 2025 | March 26, 2025   | Final Testing and Performance Optimization |
+| Test App Performance, Endurance, and Availability                | March 5, 2025    | March 26, 2025   | Final Testing and Performance Optimization |
+| Test Database Recipe Data Quality                                | March 5, 2025    | March 26, 2025   | Final Testing and Performance Optimization |
 
 ---
 

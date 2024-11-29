@@ -19,10 +19,10 @@ Design D0 provides the highest-level view of the Allergen Detection System, high
   - An allergen report that identifies possible allergens and their aliases, helping users make safe dietary choices.
 
 ### Diagram
-![Design D0 Diagram](images/D0_diagram.png)
+![Design D0 Diagram](README_images/D0_diagram.png)
 
 ### Example
-![Design D0 Example](images/D0-1.png)
+![Design D0 Example](README_images/D0-1.png)
 
 ---
 
@@ -47,10 +47,10 @@ Design D1 delves deeper into the Allergen Detection System, outlining its core s
   3. An allergen report is generated based on the findings.
 
 ### Diagram
-![Design D1 Diagram](images/D1_diagram.png)
+![Design D1 Diagram](README_images/D1_diagram.png)
 
 ### Example
-![Design D1 Example](images/D1.png)
+![Design D1 Example](README_images/D1.png)
 ---
 
 ## Design D2: Detailed View of Subsystems
@@ -89,9 +89,9 @@ Design D2 provides an in-depth breakdown of each subsystem within the Allergen D
     - Recommendations for users based on the analysis.
 
 ### Diagram
-![Design D2 Diagram](images/D2_diagram.png)
+![Design D2 Diagram](README_images/D2_diagram.png)
 ### Example
-![Design D2 Example](images/D2.png)
+![Design D2 Example](README_images/D2.png)
 ---
 
 ### Notes on Diagram Conventions
