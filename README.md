@@ -562,4 +562,9 @@ No donated items or sources as of now.
 #### Matthew Bryant
 - Has begun development on database; will be committed early 2025 once it's functional
 - Writing on various assignments
+
+### Eric Buffington
+- Preparing NLP model by doing more and more complex test progessively
+- Worked with multiple tokenizers to find which works with ny NLP model the best
+- Began testing the tokenizer and NLP working together at a simple level, preparing for full scale testing before implementation 
 ---
