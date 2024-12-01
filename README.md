@@ -43,7 +43,7 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 
 ## Project Description
 
-Train a machine learning application to recognize various dishes based on images or text descriptions then return a list of common allergens that may be used with those dishes
+QSine is a machine learning application designed to enhance food safety for individuals with allergies. By leveraging advanced image recognition and natural language processing (NLP) models, the app identifies dishes and their associated allergens based on images or text descriptions. The system integrates seamlessly with a robust database of recipes and allergens, providing users with quick and reliable insights to make informed dining choices. Our project aims to deliver an accessible, efficient, and secure tool to improve the quality of life for individuals navigating food allergies.
 
 [Full Page](./Assignments/Assignment2_Team_Formation_and_Project_Description/README.md)
 
