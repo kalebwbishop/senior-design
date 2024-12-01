@@ -34,6 +34,7 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 
 - **Team Name:** QSine
 - **Advisor:** Professor Annexstein
+- **Members:** Matthew Bryant, Kaleb Bishop, Hung Nguyen, Eric Buffington
 - **Project Abstract:** QSine is a machine-learning app that uses image recognition and text processing to identify dishes and allergens from images or text descriptions. Integrated with a robust recipe and allergen database, it offers quick, reliable insights for safe dining and improves accessibility and efficiency. With QSine, we empower users to make informed choices, enhancing their quality of life.
 
 [Full Page](./Assignments/Assignment2_Team_Formation_and_Project_Description/README.md)
