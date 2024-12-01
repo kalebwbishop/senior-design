@@ -544,7 +544,7 @@ No donated items or sources as of now.
 
 ### Meeting Notes
 
-[Include meeting notes from team discussions.]
+**September Meeting:** Discussed potential topics such as a digitized game book or fantasy football website before eventually settling on QSine. Determined who would work on which part of the project.
 
 ### Contributions
 
@@ -559,4 +559,6 @@ No donated items or sources as of now.
 - Manually tag and label data from Allrecipies.com for model training
 - Created a dataset containing common allergens using online sources such as AllergenOnline, Kaggle and FARRP.
 
+#### Matthew Bryant
+- Has begun development on database
 ---
