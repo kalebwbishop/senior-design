@@ -35,15 +35,14 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 - **Team Name:** QSine
 - **Advisor:** Professor Annexstein
 - **Project Abstract:**  
-  QSine is a machine learning application designed to enhance food safety for individuals with allergies. By leveraging advanced image recognition and natural language processing (NLP) models, the app identifies dishes and their associated allergens based on images or text descriptions. The system integrates seamlessly with a robust database of recipes and allergens, providing users with quick and reliable insights to make informed dining choices. Our project aims to deliver an accessible, efficient, and secure tool to improve the quality of life for individuals navigating food allergies.
+   QSine is a machine-learning app that uses image recognition and text processing to identify dishes and allergens from images or text descriptions. Integrated with a robust recipe and allergen database, it offers quick, reliable insights for safe dining and improves accessibility and efficiency. With QSine, we empower users to make informed choices, enhancing their quality of life.
 
 [Full Page](./Assignments/Assignment2_Team_Formation_and_Project_Description/README.md)
 
 ---
 
 ## Project Description
-
-QSine is a machine learning application designed to enhance food safety for individuals with allergies. By leveraging advanced image recognition and natural language processing (NLP) models, the app identifies dishes and their associated allergens based on images or text descriptions. The system integrates seamlessly with a robust database of recipes and allergens, providing users with quick and reliable insights to make informed dining choices. Our project aims to deliver an accessible, efficient, and secure tool to improve the quality of life for individuals navigating food allergies.
+   QSine is a machine learning application designed to enhance food safety for individuals with allergies. By leveraging advanced image recognition and natural language processing (NLP) models, the app identifies dishes and their associated allergens based on images or text descriptions. The system integrates seamlessly with a robust database of recipes and allergens, providing users with quick and reliable insights to make informed dining choices. Our project aims to deliver an accessible, efficient, and secure tool to improve the quality of life for individuals navigating food allergies.
 
 [Full Page](./Assignments/Assignment2_Team_Formation_and_Project_Description/README.md)
 
@@ -68,16 +67,22 @@ QSine is a machine learning application designed to enhance food safety for indi
 ### Design Diagrams
 
 - **Level 0 Diagram:**
-
 ![Design D0 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D0_diagram.png)
 
-- **Level 1 Diagram:**
+- **Level 0 Example:**
+![Design D0 Example](./Assignments/Assignment4_Design_Diagrams/README_images/README_images/D0-1.png)
 
+- **Level 1 Diagram:**
 ![Design D1 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D1_diagram.png)
 
-- **Level 2 Diagram:**
+- **Level 1 Example:**
+![Design D1 Example](./Assignments/Assignment4_Design_Diagrams/README_images/D1.png)
 
+- **Level 2 Diagram:**
 ![Design D2 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D2_diagram.png)
+
+- **Level 2 Example:**
+![Design D2 Example](./Assignments/Assignment4_Design_Diagrams/README_images/D2.png)
 
 ## Conventions and Description of Components
 
@@ -320,10 +325,5 @@ No donated items or sources as of now.
 - Created a draft frontend in react native, able to take in both text and image inputs.
 - Designed and implemented a breadth first search web scraper for Allrecipies.com. This allows us to get large amounts of text data paired with image data. We can then use this data for our AI.
 - Used the ChatGPT api in order to classify different images into categories.
-
-### Eric Buffington
-- Building up a NLP model by gradually increaasing complexity and ensuring accuracy at each step
-- Implemented multiple tokenizers to find which worked best with my NLP model
-- Began testing how the NLP adnd Tokenizer worked together at a very basic level
 
 ---
