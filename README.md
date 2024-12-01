@@ -388,10 +388,89 @@ Contact: bryantmw@mail.uc.edu
 - I am very flexible on what project I do. I don't want it to be something "easy" or that I already know how to do. This is an opportunity to work on a new skill that would be difficult to teach myself with an advisor to oversee the project. Below are some things I've considered that might be interesting
 - 3D Rendering, Smartphone/Desktop app with a professional quality UI, useful Linux module, usable website, Audio Encoding, Systems Programming project to develop a physical tool
 
-
+### Hung Nguyen
 [Hung Nguyen (nguye3hv)](./Assignments/Assignment1_Professional_Biography/nguye3hv.md)
 
+#### Contact Information
+
+Email: nguye3hv@mail.uc.edu
+
+Phone: (513) 501-5090
+
+#### Work Experience
+
+1. Logistics Co-op, Cummins Inc, Florence, KY (Aug 2023 - Aug 2024)
+- Utilize Data Analytics and business intelligence tools (Qlik, PowerBI, Tableau) for analyzing freight data, conducting monthly reporting, collaborating on continuous improvement.
+- Supporting Florence Traffic team in standardizing freight management procedures and daily tasks
+- Technical Skills: VBA, Excel, PowerBI, Access SQL, Blue Yonder, Qlik, IBM AS400
+- Non-Technical Skills: Communication, Teamwork, Problem Solving
+
+1. Project Manager Co-op, EMCOR Facilities Services, Cincinnati, OH (Jan 2023 – Apr 2023)
+- Assist project managers with documentation for project close-outs
+- Maintain work orders using management systems
+- Technical Skills: Microsoft Office, VBA, PowerBi, Smartsheet
+- Non-Technical Skills: Communication, Time management, Conflict Resolution
+
+1. Data Engineer Intern, SVTECH Company, Hanoi, Vietnam (May 2022 – Aug 2022)
+- Write SQL scripts to query data from company databases
+- Build scripts to extract, transform, and load data from several databases to another using the DataStage tool
+- Technical Skills: DataStage, DB2 SQL, Excel, Netezza SQL, Data pipeline
+- Non-Technical Skills: Communication, Problem Solving, Cooperation
+
+#### Project types sought
+
+- A web application that allows users to see nearby discounts/offers at local restaurants
+- A computerized treatment for depression that integrates psychological therapy techniques with relationship guidance and accountability.
+- Using deep learning methods (particularly the diffusion probabilistic model) to perform PET image ASC without the CT scan
+- Using self-supervised deep learning methods (specifically the deep image prior) to reduce noise and improve accuracy for low dose brain PET images
+- A variation of the normal chess game with with added squares to swap chess piece type.
+
+### Eric Buffington
 [Eric Buffington (buffinea)](./Assignments/Assignment1_Professional_Biography/buffinea.docx)
+
+#### Contact Information
+
+Email: ericbuff73@gmail.com
+
+Phone: 513-882-6460
+
+#### Co-Op/Work Experience
+
+**Software Developer - Honeywell Intelligrated, Mason, Ohio | January 22 – April 22 | August 22 – December 22**
+- Completed 5 projects with teams, over 2 Co-Op semesters, all of which were presented to management
+- Developed python programs to ensure data communication between PLC and UI was correct
+- Presented an efficiency report on new PLC program the company was going to implement nationwide
+- Worked along with senior engineers to implement 2 programs which are currently in use
+
+**Software Developer - SHP, Cincinnati, Ohio | January 7 - August 2**
+- Worked in C# to develop buttons for architects, or other engineers
+- Created, or contributed to bug fixes on 55+ buttons
+- Worked along with electrical engineers to develop tool to automatically name circuits throughout a building
+- Tested new abstract class for making tree views by implementing fully working button to test for duplicate items in a model
+
+#### Skills/Expertise
+
+- Programming Languages: C#, C++, Python, & Java
+- Operating System: Windows and Linux
+- Scripting Languages: XML, XAML, & HTML
+- Database: SQL
+- Others: Mathematics, Learning Probabilistic Models, MatLab, Visual Basics, and Julia
+
+#### Area of Interest
+
+- Artificial Intelligence
+- Sports
+- Web Application
+- Data Analysis
+
+#### Type of Project Sought
+
+- Generative AI that can assess current players on field, down & distance, time in game, and other factors and return a predicted play with a confidence level
+Web application to gather current stats of a team, and return with list of areas where they are excelling compared to league, or lacking
+Assessment of how effective the new guardian caps are at avoiding injured in NFL
+
+
+
 
 ---
 
