@@ -295,6 +295,13 @@ Our project is focused on training an artificial intelligence to be able to iden
 ### Kaleb Bishop
 [Kaleb Bishop (bishopkw)](./Assignments/Assignment1_Professional_Biography/Bishopkw.md)
 
+#### Contact Information
+- **Location:** Findlay, OH
+- **Phone:** (419) 672-9019
+- **Email:** [bishopkw@mail.uc.edu](mailto:bishopkw@mail.uc.edu)
+- **LinkedIn:** [www.linkedin.com/in/kalebwbishop](https://www.linkedin.com/in/kalebwbishop)
+- **GitHub:** [www.github.com/kalebwbishop](https://www.github.com/kalebwbishop)
+
 #### Co-op or Other Experience and Responsibilities
    **Founder, Developer | Eagle Drive | June 2024 – Present**
    - **Technical Skills:**
@@ -348,42 +355,38 @@ Our project is focused on training an artificial intelligence to be able to iden
    - Real-Time Applications
 
 #### Type of Project Sought
-Seeking a capstone project that leverages full-stack development skills, particularly in real-time applications, user authentication, and mobile or web-based platforms. Ideal projects would involve emerging technologies and collaboration with a cross-functional team, allowing the application of project management and agile practices.
+   - Seeking a capstone project that leverages full-stack development skills, particularly in real-time applications, user authentication, and mobile or  web-based platforms. Ideal projects would involve emerging technologies and collaboration with a cross-functional team, allowing the application of project management and agile practices.
 
-#### Contact Information
-- **Location:** Findlay, OH
-- **Phone:** (419) 672-9019
-- **Email:** [bishopkw@mail.uc.edu](mailto:bishopkw@mail.uc.edu)
-- **LinkedIn:** [www.linkedin.com/in/kalebwbishop](https://www.linkedin.com/in/kalebwbishop)
-- **GitHub:** [www.github.com/kalebwbishop](https://www.github.com/kalebwbishop)
 
 ### Matthew Bryant
 [Matthew Bryant (bryantmw)](./Assignments/Assignment1_Professional_Biography/bryantmw.md)
 
-Contact: bryantmw@mail.uc.edu
+#### Contact Information
+- **Email:** bryantmw@mail.uc.edu
 
-**Co-op and other experience:**
+#### Co-op and other experience
 
-- Developer, SolutionLink software at Siemens AG for 4 semesters
--- Worked closely with a large development team across multiple time zones and continents to develop and test new features with a daily meeting to report progress updates and communicate issues
--- Wrote hundreds of test cases using Gherkin in C#
--- Read through and diagnosed issues with webpages running HTML/CSS/JavaScript
-- Previously was an IT Major
--- The IT curriculum focused on Java and Web Development, so I have much more experience with those than the average Computer Science student
+**Developer, SolutionLink software at Siemens AG for 4 semesters**
+- Worked closely with a large development team across multiple time zones and continents to develop and test new features with a daily meeting to report progress updates and communicate issues
+- Wrote hundreds of test cases using Gherkin in C#
+- Read through and diagnosed issues with webpages running HTML/CSS/JavaScript
 
-**Skills/Expertise Areas:**
+**Previously was an IT Major**
+- The IT curriculum focused on Java and Web Development, so I have much more experience with those than the average Computer Science student
+
+#### Skills/Expertise Areas
 
 - Compiled and Interpreted Languages: C/C++/C#, x86 Assembly, Java, Python, Haskell
 - Web Development: HTML/CSS/JavaScript, experience with Java and Python Networking sockets
 - Database Experience: Two semesters practicing SQL
 
-**Areas of Interest:**
+#### Areas of Interest
 
 - Systems Programming
 - 3D Rendering such as with OpenGL
 - User facing applications
 
-**Type of Project Sought:**
+#### Type of Project Sought
 
 - I am very flexible on what project I do. I don't want it to be something "easy" or that I already know how to do. This is an opportunity to work on a new skill that would be difficult to teach myself with an advisor to oversee the project. Below are some things I've considered that might be interesting
 - 3D Rendering, Smartphone/Desktop app with a professional quality UI, useful Linux module, usable website, Audio Encoding, Systems Programming project to develop a physical tool
@@ -393,25 +396,25 @@ Contact: bryantmw@mail.uc.edu
 
 #### Contact Information
 
-Email: nguye3hv@mail.uc.edu
+- **Email:** nguye3hv@mail.uc.edu
 
-Phone: (513) 501-5090
+- **Phone:** (513) 501-5090
 
 #### Work Experience
 
-1. Logistics Co-op, Cummins Inc, Florence, KY (Aug 2023 - Aug 2024)
+**Logistics Co-op, Cummins Inc, Florence, KY | Aug 2023 - Aug 2024**
 - Utilize Data Analytics and business intelligence tools (Qlik, PowerBI, Tableau) for analyzing freight data, conducting monthly reporting, collaborating on continuous improvement.
 - Supporting Florence Traffic team in standardizing freight management procedures and daily tasks
 - Technical Skills: VBA, Excel, PowerBI, Access SQL, Blue Yonder, Qlik, IBM AS400
 - Non-Technical Skills: Communication, Teamwork, Problem Solving
 
-1. Project Manager Co-op, EMCOR Facilities Services, Cincinnati, OH (Jan 2023 – Apr 2023)
+**Project Manager Co-op, EMCOR Facilities Services, Cincinnati, OH | Jan 2023 – Apr 2023**
 - Assist project managers with documentation for project close-outs
 - Maintain work orders using management systems
 - Technical Skills: Microsoft Office, VBA, PowerBi, Smartsheet
 - Non-Technical Skills: Communication, Time management, Conflict Resolution
 
-1. Data Engineer Intern, SVTECH Company, Hanoi, Vietnam (May 2022 – Aug 2022)
+**Data Engineer Intern, SVTECH Company, Hanoi, Vietnam | May 2022 – Aug 2022**
 - Write SQL scripts to query data from company databases
 - Build scripts to extract, transform, and load data from several databases to another using the DataStage tool
 - Technical Skills: DataStage, DB2 SQL, Excel, Netezza SQL, Data pipeline
@@ -430,9 +433,8 @@ Phone: (513) 501-5090
 
 #### Contact Information
 
-Email: ericbuff73@gmail.com
-
-Phone: 513-882-6460
+- **Email:** ericbuff73@gmail.com
+- **Phone:** 513-882-6460
 
 #### Co-Op/Work Experience
 
@@ -466,7 +468,7 @@ Phone: 513-882-6460
 #### Type of Project Sought
 
 - Generative AI that can assess current players on field, down & distance, time in game, and other factors and return a predicted play with a confidence level
-Web application to gather current stats of a team, and return with list of areas where they are excelling compared to league, or lacking
+- Web application to gather current stats of a team, and return with list of areas where they are excelling compared to league, or lacking
 Assessment of how effective the new guardian caps are at avoiding injured in NFL
 
 

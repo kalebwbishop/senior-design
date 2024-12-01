@@ -16,13 +16,13 @@ Phone: (513) 501-5090
 - Technical Skills: VBA, Excel, PowerBI, Access SQL, Blue Yonder, Qlik, IBM AS400
 - Non-Technical Skills: Communication, Teamwork, Problem Solving
 
-1. Project Manager Co-op, EMCOR Facilities Services, Cincinnati, OH (Jan 2023 – Apr 2023)
+2. Project Manager Co-op, EMCOR Facilities Services, Cincinnati, OH (Jan 2023 – Apr 2023)
 - Assist project managers with documentation for project close-outs
 - Maintain work orders using management systems
 - Technical Skills: Microsoft Office, VBA, PowerBi, Smartsheet
 - Non-Technical Skills: Communication, Time management, Conflict Resolution
 
-1. Data Engineer Intern, SVTECH Company, Hanoi, Vietnam (May 2022 – Aug 2022)
+3. Data Engineer Intern, SVTECH Company, Hanoi, Vietnam (May 2022 – Aug 2022)
 - Write SQL scripts to query data from company databases
 - Build scripts to extract, transform, and load data from several databases to another using the DataStage tool
 - Technical Skills: DataStage, DB2 SQL, Excel, Netezza SQL, Data pipeline
