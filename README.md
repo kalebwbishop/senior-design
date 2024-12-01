@@ -535,6 +535,11 @@ No donated items or sources as of now.
 ---
 
 ## Appendix
+include appropriate references, citations, links to code repositories, and meeting notes.
+
+### Code Repositories
+
+[Qsine application code](./Qsine)
 
 
 ### Meeting Notes
