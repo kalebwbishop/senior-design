@@ -560,5 +560,6 @@ No donated items or sources as of now.
 - Created a dataset containing common allergens using online sources such as AllergenOnline, Kaggle and FARRP.
 
 #### Matthew Bryant
-- Has begun development on database
+- Has begun development on database; will be committed early 2025 once it's functional
+- Writing on various assignments
 ---
