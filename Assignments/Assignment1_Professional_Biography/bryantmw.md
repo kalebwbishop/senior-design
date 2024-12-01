@@ -1,4 +1,4 @@
-**Matthew Bryant**
+**Matthew Bryant**  
 Contact: bryantmw@mail.uc.edu
 
 **Co-op and other experience:**
