@@ -535,7 +535,6 @@ No donated items or sources as of now.
 ---
 
 ## Appendix
-include appropriate references, citations, links to code repositories, and meeting notes.
 
 ### Code Repositories
 
@@ -546,10 +545,17 @@ include appropriate references, citations, links to code repositories, and meeti
 
 [Include meeting notes from team discussions.]
 
-### Evidence of Effort
+### Contributions
+
 #### Kaleb Bishop
 - Created a draft frontend in react native, able to take in both text and image inputs.
 - Designed and implemented a breadth first search web scraper for Allrecipies.com. This allows us to get large amounts of text data paired with image data. We can then use this data for our AI.
 - Used the ChatGPT api in order to classify different images into categories.
+
+#### Hung Nguyen
+- Trained the Stanford Named Entity Recognition model to parse the ingrendient list data for into a list of tokenized ingredients
+- Created a designed an allergen detection model by using a trained Stanford Named Entity Recognition model to parse the lists of results before querying the most likely allergy of each ingredient using a Bag of Word search model
+- Manually tag and label data from Allrecipies.com for model training
+- Created a dataset containing common allergens using online sources such as AllergenOnline, Kaggle and FARRP.
 
 ---
