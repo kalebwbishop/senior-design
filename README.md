@@ -70,7 +70,7 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 ![Design D0 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D0_diagram.png)
 
 - **Level 0 Example:**
-![Design D0 Example](./Assignments/Assignment4_Design_Diagrams/README_images/README_images/D0-1.png)
+![Design D0 Example](./Assignments/Assignment4_Design_Diagrams/README_images/D0-1.png)
 
 - **Level 1 Diagram:**
 ![Design D1 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D1_diagram.png)
