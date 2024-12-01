@@ -321,4 +321,9 @@ No donated items or sources as of now.
 - Designed and implemented a breadth first search web scraper for Allrecipies.com. This allows us to get large amounts of text data paired with image data. We can then use this data for our AI.
 - Used the ChatGPT api in order to classify different images into categories.
 
+### Eric Buffington
+- Building up a NLP model by gradually increaasing complexity and ensuring accuracy at each step
+- Implemented multiple tokenizers to find which worked best with my NLP model
+- Began testing how the NLP adnd Tokenizer worked together at a very basic level
+
 ---
