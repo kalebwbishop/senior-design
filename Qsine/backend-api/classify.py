@@ -13,7 +13,3 @@ class classify_obj:
         for result in results:
             probs = result.probs
             return self.model.names[probs.top1]
-
-if __name__ == "__main__":
-    yolo = classify_obj()
-    print(yolo.classify("uploads/untitled.jpg"))

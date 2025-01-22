@@ -5,13 +5,15 @@ import json
 import requests
 import re
 
-from classify import classify
+from classify import classify_obj
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
 # Ensure the upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+classify = classify_obj()
 
 @app.route('/upload-image', methods=['POST'])
 def upload_image():
@@ -56,13 +58,12 @@ def classify_image():
     if file:
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'temp.jpg'))
 
-    classification = classify()
+    classification = classify.classify()
 
     return jsonify({"message": "Image successfully classified", "class": classification}), 200
 
 @app.route('/barcode/<barcode>', methods=['GET'])
 def get_barcode_product(barcode):
-
     if not barcode:
         return jsonify({"message": "No barcode provided"}), 400
 
@@ -72,7 +73,9 @@ def get_barcode_product(barcode):
     if len(barcode) != 12:
         return jsonify({"message": "Invalid barcode length"}), 400
 
-    with open('data.json') as f:
+    barcode_data_path = 'barcode_data.json'
+
+    with open(barcode_data_path) as f:
         data = json.load(f)
 
         product = data.get(barcode)
@@ -105,11 +108,11 @@ def get_barcode_product(barcode):
                                 "ingredients": match_ingredients.group(1).lower().split(', ')
                             }
 
-                            with open('data.json') as f:
+                            with open(barcode_data_path) as f:
                                 data = json.load(f)
                                 data[barcode] = product
 
-                            with open('data.json', 'w') as f:
+                            with open(barcode_data_path, 'w') as f:
                                 json.dump(data, f, indent=4)
 
                             return product
