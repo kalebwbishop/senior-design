@@ -1,3 +1,4 @@
 Flask
 werkzeug
 Pillow
+ultralytics

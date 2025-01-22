@@ -5,6 +5,8 @@ import json
 import requests
 import re
 
+from classify import classify
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
@@ -40,6 +42,23 @@ def upload_image():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return jsonify({"message": "Image successfully uploaded", "filename": filename}), 200
+    
+@app.route('/classify-image', methods=['POST'])
+def classify_image():
+    if 'image' not in request.files:
+        return jsonify({"error": "No image part in the request"}), 400
+
+    file = request.files['image']
+    
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    if file:
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'temp.jpg'))
+
+    classification = classify()
+
+    return jsonify({"message": "Image successfully classified", "class": classification}), 200
 
 @app.route('/barcode/<barcode>', methods=['GET'])
 def get_barcode_product(barcode):
@@ -106,4 +125,4 @@ def get_barcode_product(barcode):
             return jsonify({"message": "Product not found"}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.7.110')
+    app.run(debug=True, host='192.168.5.63', port=5000)
