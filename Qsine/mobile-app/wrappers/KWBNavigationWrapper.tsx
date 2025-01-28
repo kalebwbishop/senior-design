@@ -3,11 +3,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { RootParamList } from '../types';
-import BarcodeScannedPage from '../pages/BarcodeScanned';
+import CameraPage from '@/pages/Camera';
+import BarcodeScannedPage from '@/pages/BarcodeScanned';
 
 const Stack = createStackNavigator<RootParamList>();
 
-export default function NavigationWrapper() {
+export default function KWBNavigationWrapper() {
     return (
         <NavigationContainer>
             <Stack.Navigator
@@ -18,7 +19,8 @@ export default function NavigationWrapper() {
                     },
                     headerShown: false,
                 }}>
-                <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': ""}} />
+                <Stack.Screen name="CameraPage" component={CameraPage} />
+                <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': "014100099482"}} />
             </Stack.Navigator>
         </NavigationContainer>
     );

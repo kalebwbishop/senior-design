@@ -2,14 +2,15 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
 type RootParamList = {
-  'BarcodeScannedPage': { barcode: string };
+  'CameraPage': undefined;
+  'BarcodeScannedPage': { 'barcode': string };
 };
 
-type MainPageNavigationProp = StackNavigationProp<RootParamList, 'BarcodeScannedPage'>;
-type MainPageRouteProp = RouteProp<RootParamList, 'BarcodeScannedPage'>;
+type BarcodeScannedPageNavProp = StackNavigationProp<RootParamList, 'BarcodeScannedPage'>;
+type BarcodeScannedPageRouteProp = RouteProp<RootParamList, 'BarcodeScannedPage'>;
 
 export type {
   RootParamList,
-  MainPageNavigationProp,
-  MainPageRouteProp,
+  BarcodeScannedPageNavProp,
+  BarcodeScannedPageRouteProp,
 };

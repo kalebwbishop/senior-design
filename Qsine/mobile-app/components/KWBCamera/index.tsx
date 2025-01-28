@@ -1,12 +1,19 @@
 import React, { useRef, useState } from 'react';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions, BarcodeScanningResult } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
 import { useWindowDimensions, TouchableOpacity, Button, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Feather from '@expo/vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 export default function KWBCamera() {
+
+    const navigation = useNavigation();
+
     const cameraRef = useRef<CameraView>(null);
+    const isProcessingRef = useRef(false);
 
     const [text, setText] = useState('Take a picture of your food / barcode / medicine');
 
@@ -44,7 +51,7 @@ export default function KWBCamera() {
             });
             formData.append('metadata', JSON.stringify({ name: 'burger' }));
 
-            const uploadResponse = await fetch('http://192.168.5.69:5000/upload-image', {
+            const uploadResponse = await fetch('http://50.5.72.176:5000/upload-image', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -74,6 +81,23 @@ export default function KWBCamera() {
         );
     }
 
+    const handleBarcodeScanned = (barcodeData: BarcodeScanningResult) => {
+        if (!isProcessingRef.current) {
+            isProcessingRef.current = true; // Set the flag to prevent further processing
+            const scannedBarcode = barcodeData.data;
+
+            console.log('Barcode scanned:', scannedBarcode);
+
+            // Navigate to the next page
+            navigation.push('BarcodeScannedPage', { barcode: scannedBarcode });
+
+            // Reset the processing flag after the state is updated
+            setTimeout(() => {
+                isProcessingRef.current = false;
+            }, 1000); // Adjust delay as necessary
+        }
+    };
+
     return (
         <View style={styles.container}>
             <CameraView
@@ -84,11 +108,7 @@ export default function KWBCamera() {
                 barcodeScannerSettings={{
                     barcodeTypes: ["upc_a"],
                 }}
-                onBarcodeScanned={(barcodeData) => {
-                    setText(`Barcode scanned: ${barcodeData.data}`)
-                    console.log('Barcode scanned:', barcodeData);
-                }
-                }
+                onBarcodeScanned={handleBarcodeScanned}
             />
             <Text style={styles.message}>{text}</Text>
             <TouchableOpacity onPress={handleTakePicture} style={[styles.button, { marginBottom: insets.bottom + 40 }]}>

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import KWBCamera from '@/components/KWBCamera';
-import BarcodeScanned from '@/pages/BarcodeScanned';
+
+import KWBNavigationWrapper from '@/wrappers/KWBNavigationWrapper';
+
+import ProductNotFound from './pages/BarcodeScanned/Components/ProductNotFound';
 
 export default function Index() {
   return (
-    // <KWBCamera />
-    <BarcodeScanned />
+    <KWBNavigationWrapper />
+    // <ProductNotFound x/>
   );
 }
