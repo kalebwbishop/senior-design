@@ -1,5 +1,6 @@
 from flask import Flask, request, Response
 import requests
+import os
 
 app = Flask(__name__)
 TARGET_URL = 'http://50.5.72.176:5000'  # Replace with the URL you want to forward requests to
@@ -24,4 +25,6 @@ def proxy(path):
     return Response(response.content, response.status_code, headers)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    # Get the port from the environment variable (required for Render)
+    port = int(os.environ.get('PORT', 5001))
+    app.run(debug=True, host='0.0.0.0', port=port)
