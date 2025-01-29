@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from werkzeug.utils import secure_filename
 import os
 import json
@@ -14,6 +14,17 @@ app.config['UPLOAD_FOLDER'] = "D:/qsine/uploads"
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 classify = classify_obj()
+
+# Define allowed IPs (whitelist)
+WHITELISTED_IPS = {"3.129.111.220", "127.0.0.1"}
+
+@app.before_request
+def limit_remote_addr():
+    print('Request received')
+    client_ip = request.remote_addr
+    if client_ip not in WHITELISTED_IPS:
+        print(f"Unauthorized access from {client_ip}")
+        abort(403)  # Forbidden access
 
 @app.route('/upload-image', methods=['POST'])
 def upload_image():
@@ -55,10 +66,11 @@ def classify_image():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    if file:
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'temp.jpg'))
+    # if file:
+    #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'photo.jpg'))
 
-    classification = classify.classify()
+    classification = classify.classify(os.path.join(app.config['UPLOAD_FOLDER'], 'photo.jpg'))
+    # classification = "I don't know"
 
     return jsonify({"message": "Image successfully classified", "class": classification}), 200
 
@@ -127,5 +139,84 @@ def get_barcode_product(barcode):
 
             return jsonify({"message": "Product not found"}), 404
 
+@app.route('/barcode/<barcode>', methods=['POST'])
+def update_barcode_product(barcode):
+    # Validate barcode
+    if not barcode:
+        return jsonify({"message": "No barcode provided"}), 400
+
+    if not barcode.isdigit():
+        return jsonify({"message": "Invalid barcode type"}), 400
+
+    if len(barcode) != 12:
+        return jsonify({"message": "Invalid barcode length"}), 400
+
+    # Validate request data
+    new_data = request.get_json()
+    if not new_data:
+        return jsonify({"message": "No data provided"}), 400
+
+    required_fields = ['name', 'company', 'ingredients']
+    if not all(field in new_data for field in required_fields):
+        return jsonify({"message": f"Missing required fields: {required_fields}"}), 400
+
+    # Define the file path
+    barcode_data_path = 'barcode_data.json'
+
+    # Load existing data
+    if not os.path.exists(barcode_data_path):
+        # Create file if it doesn't exist
+        with open(barcode_data_path, 'w') as f:
+            json.dump({}, f)
+
+    try:
+        with open(barcode_data_path, 'r') as f:
+            data = json.load(f)
+    except json.JSONDecodeError:
+        return jsonify({"message": "Failed to parse JSON file"}), 500
+
+    # Update the data
+    data[barcode] = new_data
+
+    # Save updated data back to the file
+    try:
+        with open(barcode_data_path, 'w') as f:
+            json.dump(data, f, indent=4)
+    except Exception as e:
+        return jsonify({"message": f"Failed to save data: {str(e)}"}), 500
+
+    return jsonify({"message": "Barcode data updated successfully"}), 200
+
+@app.route('/recipe/<name>', methods=['POST'])
+def post_recipe(name):
+    if 'image' not in request.files:
+        return jsonify({"error": "No image part in the request"}), 400
+
+    file = request.files['image']
+    
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+    
+    print(request.form.to_dict()['data'])
+    
+    if file:
+        file.save(os.path.join('D:/qsine/scraped_data/images', name + '.jpg'))
+
+        try:
+            with open('D:/qsine/scraped_data/data.json') as f:
+                data = json.load(f)
+        except json.JSONDecodeError:
+            data = []
+
+        with open('D:/qsine/scraped_data/data.json', 'w') as f:
+            new_data = json.loads(request.form.to_dict()['data'])
+            new_data['image_path'] = os.path.join('D:/qsine/scraped_data/images', name + '.jpg').replace('\\', '/')
+            data.append(new_data)
+            json.dump(data, f, indent=4)
+
+        return jsonify({"message": "Image successfully uploaded", "filename": name}), 200
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.5.63', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
