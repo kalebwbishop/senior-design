@@ -6,6 +6,7 @@ import requests
 import re
 
 from classify import classify_obj
+from PIL import Image
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "D:/qsine/uploads"
@@ -196,11 +197,12 @@ def post_recipe(name):
     
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
-    
-    print(request.form.to_dict()['data'])
-    
+        
     if file:
-        file.save(os.path.join('D:/qsine/scraped_data/images', name + '.jpg'))
+        # Resize the image before saving it
+        img = Image.open(file)
+        img = img.resize((512, 512))
+        img.save(os.path.join('D:/qsine/scraped_data/images', name + '.jpg'))
 
         try:
             with open('D:/qsine/scraped_data/data.json') as f:
@@ -216,7 +218,14 @@ def post_recipe(name):
 
         return jsonify({"message": "Image successfully uploaded", "filename": name}), 200
 
-
+@app.route('/recipes', methods=['GET'])
+def get_recipes():
+    try:
+        with open('D:/qsine/scraped_data/data.json') as f:
+            data = json.load(f)
+            return jsonify(data)
+    except json.JSONDecodeError:
+        return jsonify([])
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
