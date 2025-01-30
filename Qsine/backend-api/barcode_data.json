@@ -156,5 +156,23 @@
         "ingredients": [
             "Carbonated Filtered Water"
         ]
+    },
+    "049000002485": {
+        "name": "Fresca can, 12 fl oz",
+        "company": "The coca-cola company",
+        "ingredients": [
+            "carbonated water",
+            "citric acid",
+            "concentrated grapefruit juice",
+            "potassium citrate",
+            "aspartame",
+            "potassium sorbate (to protect taste)",
+            "acacia gum",
+            "acesulfame potassium",
+            "natural flavors",
+            "glycerol ester of rosin",
+            "potassium benzoate and calcium disodium edta (to protect taste)",
+            "carob bean gum."
+        ]
     }
 }

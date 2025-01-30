@@ -204,11 +204,8 @@ def post_recipe(name):
         img = img.resize((512, 512))
         img.save(os.path.join('D:/qsine/scraped_data/images', name + '.jpg'))
 
-        try:
-            with open('D:/qsine/scraped_data/data.json') as f:
-                data = json.load(f)
-        except json.JSONDecodeError:
-            data = []
+        with open('D:/qsine/scraped_data/data.json') as f:
+            data = json.load(f)
 
         with open('D:/qsine/scraped_data/data.json', 'w') as f:
             new_data = json.loads(request.form.to_dict()['data'])

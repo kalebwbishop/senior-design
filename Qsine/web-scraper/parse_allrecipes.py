@@ -8,6 +8,9 @@ from io import BytesIO
 import hashlib
 import time
 import random
+from flask import Flask, request, jsonify, abort
+
+app = Flask(__name__)
 
 class AllrecipesParse():
     def __init__(self):
@@ -84,7 +87,7 @@ class AllrecipesParse():
             curr_url = self.to_parse_urls.pop()
             print(curr_url)
 
-            if "https://www.allrecipes.com/recipe/" not in curr_url:
+            if not ("/recipe/" in curr_url or "-recipe-" in curr_url):
                 print('Not a recipe')
                 continue
 
@@ -150,6 +153,20 @@ class AllrecipesParse():
                 count = 100
                 self.load()
 
-if __name__ == '__main__':
+@app.route('/parse', methods=['GET'])
+def parse():
     allrecipes_parse = AllrecipesParse()
     allrecipes_parse.parse(True)
+
+    return jsonify({'message': 'Parsing complete'})
+
+
+if __name__ == '__main__':
+    # If local, run the parser
+    local = False
+    if (local):
+        allrecipes_parse = AllrecipesParse()
+        allrecipes_parse.parse(True)
+    else:
+        port = int(os.environ.get('PORT', 5001))
+        app.run(debug=True, host='0.0.0.0', port=port)

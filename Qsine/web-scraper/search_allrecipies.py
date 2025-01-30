@@ -24,7 +24,7 @@ class AllrecipesSearch():
             data = json.load(file)
 
         self.checked_urls = set(data['checked_urls'])
-        self.to_check_urls = data['to_check_urls']
+        self.to_check_urls = data['to_check_urls'] + [self.start_url]
 
     def search(self):
         count = 100
@@ -41,7 +41,7 @@ class AllrecipesSearch():
                     print('Bad response')
                     continue
 
-                self.to_check_urls = list(set(self.to_check_urls + re.findall(r'href="(https://www.allrecipes.com/(?:recipe|recipes|ingredients|cuisine)[^"?]+)', response.text)))
+                self.to_check_urls = list(set(self.to_check_urls + re.findall(r'href="(https://www.allrecipes.com/(?!thmb)[^"?]+)', response.text)))
                 print(len(self.checked_urls), len(self.to_check_urls), curr_link)
                 self.checked_urls.add(curr_link)
 
@@ -52,6 +52,8 @@ class AllrecipesSearch():
                     self.save()
         except KeyboardInterrupt:
             self.save()
+        
+        self.save()
 
 if __name__ == '__main__':
     allrecipes_search = AllrecipesSearch()
