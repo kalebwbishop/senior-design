@@ -24,7 +24,7 @@
         ]
     },
     "028400090896": {
-        "name": "Potato Chips, Maui Onion",
+        "name": "Doritos",
         "company": "Frito-Lay Company",
         "ingredients": [
             "potatoes",
@@ -45,8 +45,7 @@
             "natural flavor [including milk]",
             "maui onion powder",
             "and sunflower oil)."
-        ],
-        "last_updated": 1737518292
+        ]
     },
     "028400090858": {
         "name": "Sunflower seeds",
@@ -70,5 +69,110 @@
             "and natural flavor."
         ],
         "last_updated": 1737517946
+    },
+    "014100099481": {
+        "name": "Vanilla cupcake grahams baked graham snacks, vanilla cupcake",
+        "company": "Pepperidge farm, inc.",
+        "ingredients": [
+            "made with smiles and whole wheat flour",
+            "enriched wheat flour (flour",
+            "niacin",
+            "reduced iron",
+            "thiamine mononitrate",
+            "riboflavin",
+            "folic acid)",
+            "vegetable oils (soybean",
+            "canola and/or sunflower",
+            "palm kernel",
+            "palm)",
+            "sugar",
+            "cornstarch",
+            "brown sugar (sugar",
+            "invert sugar",
+            "molasses)",
+            "invert syrup",
+            "contains 2% or less of: natural flavors",
+            "salt",
+            "nonfat milk",
+            "baking soda",
+            "corn syrup solids",
+            "baking powder (sodium acid pyrophosphate",
+            "baking soda",
+            "monocalcium phosphate)",
+            "cream",
+            "radish",
+            "pumpkin",
+            "tomato",
+            "apple",
+            "sweet potato and cherry juice concentrates for color",
+            "vanilla extract",
+            "soy lecithin."
+        ]
+    },
+    "000000099482": {
+        "name": "Celcius Peach",
+        "company": "Calcium",
+        "ingredients": [
+            "Water",
+            "Caffeine",
+            "Biotin"
+        ]
+    },
+    "041260370106": {
+        "name": "Blueberry mini rice cakes, blueberry",
+        "company": "Dillon companies, inc.",
+        "ingredients": [
+            "organic white rice",
+            "organic brown rice",
+            "organic apple juice concentrate",
+            "organic blueberry puree",
+            "organic black carrot juice concentrate",
+            "thiamine mononitrate (vitamin b1)."
+        ]
+    },
+    "041260007972": {
+        "name": "Ghost pepper",
+        "company": "M. a.  gedney company",
+        "ingredients": [
+            "cucumbers",
+            "sugar",
+            "distilled vinegar",
+            "salt",
+            "water",
+            "ghost peppers",
+            "modified food starch",
+            "onion",
+            "calcium chloride",
+            "garlic",
+            "natural flavors",
+            "xanthan gum",
+            "extractives of paprika (color)",
+            "gum arabic"
+        ]
+    },
+    "889392021417": {
+        "name": "Arctic Vibe Celcius",
+        "company": "Celcius Inc.",
+        "ingredients": [
+            "Carbonated Filtered Water"
+        ]
+    },
+    "049000002485": {
+        "name": "Fresca can, 12 fl oz",
+        "company": "The coca-cola company",
+        "ingredients": [
+            "carbonated water",
+            "citric acid",
+            "concentrated grapefruit juice",
+            "potassium citrate",
+            "aspartame",
+            "potassium sorbate (to protect taste)",
+            "acacia gum",
+            "acesulfame potassium",
+            "natural flavors",
+            "glycerol ester of rosin",
+            "potassium benzoate and calcium disodium edta (to protect taste)",
+            "carob bean gum."
+        ]
     }
 }

@@ -2,3 +2,5 @@ Flask
 werkzeug
 Pillow
 ultralytics
+flask-cors
+pyopenssl
