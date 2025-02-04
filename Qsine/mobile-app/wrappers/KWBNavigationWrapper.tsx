@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { RootParamList } from '../types';
 import CameraPage from '@/pages/Camera';
+import PictureTaken from '@/pages/PictureTaken';
 import BarcodeScannedPage from '@/pages/BarcodeScanned';
 
 const Stack = createStackNavigator<RootParamList>();
@@ -12,7 +13,7 @@ export default function KWBNavigationWrapper() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="BarcodeScannedPage"
+                initialRouteName="CameraPage"
                 screenOptions={{
                     cardStyle: {
                         backgroundColor: '#A0BBEA',
@@ -20,7 +21,9 @@ export default function KWBNavigationWrapper() {
                     headerShown: false,
                 }}>
                 <Stack.Screen name="CameraPage" component={CameraPage} />
-                <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': "014100099482"}} />
+                <Stack.Screen name="PictureTaken" component={PictureTaken} />
+                <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': "000000099482"}} />
+                {/* <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': "014100099482"}} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     );

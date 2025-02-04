@@ -24,8 +24,12 @@ const KWBTypography: React.FC<KWBTypographyProps> = ({ variant = 'body1', childr
         }
     };
 
+    const getFontFamily = () => {
+        return variant === 'h1' || variant === 'h2' ? 'Poppins_Bold' : 'Poppins_Regular';
+    };
+
     return (
-        <Text style={[{ fontSize: getFontSize()}, styles.text, style]} {...props}>
+        <Text style={[{ fontSize: getFontSize(), fontFamily: getFontFamily() }, styles.text, style]} {...props}>
             {children}
         </Text>
     );

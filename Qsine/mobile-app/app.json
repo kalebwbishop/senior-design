@@ -1,10 +1,10 @@
 {
   "expo": {
     "name": "QSine",
-    "slug": "QSine",
+    "slug": "qsine",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/qsine_logo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,16 +13,7 @@
       "bundleIdentifier": "com.kalebwbishop.QSine",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan QR codes.",
-        "NSMicrophoneUsageDescription": "This app uses the microphone to record audio.",
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true,
-          "NSExceptionDomains": {
-            "50.5.72.176": {
-              "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
-              "NSIncludesSubdomains": true
-            }
-          }
-        }
+        "NSMicrophoneUsageDescription": "This app uses the microphone to record audio."
       }
     },
     "android": {
@@ -57,10 +48,17 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8a896b15-05f6-4a61-b2d7-bc8445e486dc"
+      }
+    },
+    "owner": "kalebwbishop"
   }
 }

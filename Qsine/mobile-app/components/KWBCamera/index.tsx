@@ -1,21 +1,39 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CameraView, useCameraPermissions, BarcodeScanningResult } from 'expo-camera';
-import * as FileSystem from 'expo-file-system';
-import { useWindowDimensions, TouchableOpacity, Button, StyleSheet, Text, View } from 'react-native';
+import { useWindowDimensions, Button, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Feather from '@expo/vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
+import KWBTypography from '../KWBTypography';
 
+interface PictureResult {
+    success: boolean;
+    uri?: string;
+    error?: string;
+}
 
+async function handleTakePicture(camera_ref: React.RefObject<CameraView>): Promise<PictureResult> {
+    if (!camera_ref.current) {
+        return { success: false, error: "Camera ref is not ready" };
+    }
 
-export default function KWBCamera() {
+    const photo = await camera_ref.current.takePictureAsync();
 
-    const navigation = useNavigation();
+    if (!photo || !photo.uri) {
+        return { success: false, error: "No photo captured or URI is missing" };
+    }
 
+    return { success: true, uri: photo.uri };
+}
+
+type CameraProps = {
+    onBarcodeScanned?: (barcode: string) => void;
+    onPictureTaken?: (uri: string) => void;
+    pictureButtonPressed?: boolean;
+    setPictureButtonPressed?: (pressed: boolean) => void;
+};
+
+export default function KWBCamera(props: CameraProps) {
     const cameraRef = useRef<CameraView>(null);
     const isProcessingRef = useRef(false);
-
-    const [text, setText] = useState('Take a picture of your food / barcode / medicine');
 
     const [permission, requestPermission] = useCameraPermissions();
 
@@ -24,47 +42,42 @@ export default function KWBCamera() {
     const cameraSize = screenWidth - insets.left - insets.right - 40;
     const cameraTopOffset = insets.top + 20;
 
-    async function handleTakePicture() {
-        if (!cameraRef.current) {
-            console.warn('Camera ref is not ready');
-            return;
-        }
+    async function handleTakePictureButtonPressed() {
+        const result = await handleTakePicture(cameraRef);
 
-        try {
-            const photo = await cameraRef.current.takePictureAsync();
-            console.log('Photo taken:', photo);
-
-            if (!photo || !photo.uri) {
-                console.warn('No photo captured or URI is missing');
-                return;
+        if (result.success && result.uri) {
+            if (props.onPictureTaken) {
+                props.onPictureTaken(result.uri);
             }
 
-            // Read the file as a binary blob
-            const fileUri = photo.uri;
-
-            // Construct FormData
-            const formData = new FormData();
-            formData.append('image', {
-                uri: fileUri,
-                name: 'photo.jpg',
-                type: 'image/jpeg',
-            });
-            formData.append('metadata', JSON.stringify({ name: 'burger' }));
-
-            const uploadResponse = await fetch('http://50.5.72.176:5000/upload-image', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                body: formData,
-            });
-
-            const data = await uploadResponse.json();
-            console.log('Success:', data);
-        } catch (error) {
-            console.error('Error during picture capture or upload:', error);
+        } else {
+            console.error('Error during picture capture:', result.error);
         }
     }
+
+    useEffect(() => {
+        if (props.pictureButtonPressed) {
+            handleTakePictureButtonPressed();
+            props.setPictureButtonPressed && props.setPictureButtonPressed(false);
+        }
+    }, [props.pictureButtonPressed]);
+
+
+    const handleBarcodeScanned = (barcodeData: BarcodeScanningResult) => {
+        if (!isProcessingRef.current) {
+            isProcessingRef.current = true;
+            const scannedBarcode = barcodeData.data;
+
+            if (props.onBarcodeScanned) {
+                props.onBarcodeScanned(scannedBarcode);
+            }
+
+            // Reset the processing flag after the state is updated
+            setTimeout(() => {
+                isProcessingRef.current = false;
+            }, 1000); // Adjust delay as necessary
+        }
+    };
 
     if (!permission) {
         // Camera permissions are still loading.
@@ -74,47 +87,24 @@ export default function KWBCamera() {
     if (!permission.granted) {
         // Camera permissions are not granted yet.
         return (
-            <View style={styles.container}>
-                <Text style={styles.message}>We need your permission to show the camera</Text>
+            <View style={[styles.container, { justifyContent: 'center' }]}>
+                <KWBTypography style={styles.message}>We need your permission to show the camera</KWBTypography>
                 <Button onPress={requestPermission} title="Grant Permission" />
             </View>
         );
     }
 
-    const handleBarcodeScanned = (barcodeData: BarcodeScanningResult) => {
-        if (!isProcessingRef.current) {
-            isProcessingRef.current = true; // Set the flag to prevent further processing
-            const scannedBarcode = barcodeData.data;
-
-            console.log('Barcode scanned:', scannedBarcode);
-
-            // Navigate to the next page
-            navigation.push('BarcodeScannedPage', { barcode: scannedBarcode });
-
-            // Reset the processing flag after the state is updated
-            setTimeout(() => {
-                isProcessingRef.current = false;
-            }, 1000); // Adjust delay as necessary
-        }
-    };
-
     return (
-        <View style={styles.container}>
-            <CameraView
-                ref={cameraRef}
-                style={{ width: cameraSize, height: cameraSize, top: cameraTopOffset }}
-                facing="back"
-                ratio='1:1'
-                barcodeScannerSettings={{
-                    barcodeTypes: ["upc_a"],
-                }}
-                onBarcodeScanned={handleBarcodeScanned}
-            />
-            <Text style={styles.message}>{text}</Text>
-            <TouchableOpacity onPress={handleTakePicture} style={[styles.button, { marginBottom: insets.bottom + 40 }]}>
-                <Feather name="camera" size={64} color="black" />
-            </TouchableOpacity>
-        </View>
+        <CameraView
+            ref={cameraRef}
+            style={{ width: cameraSize, height: cameraSize, top: cameraTopOffset }}
+            facing="back"
+            ratio='1:1'
+            barcodeScannerSettings={{
+                barcodeTypes: ["upc_a"],
+            }}
+            onBarcodeScanned={props.onBarcodeScanned ? handleBarcodeScanned : undefined}
+        />
     );
 }
 
@@ -128,11 +118,5 @@ const styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
         marginHorizontal: 20,
-    },
-    button: {
-        marginTop: 20,
-        padding: 16,
-        backgroundColor: 'lightblue',
-        borderRadius: 45,
-    },
+    }
 });

@@ -9,12 +9,20 @@ import {
     Platform,
     Keyboard,
     TouchableWithoutFeedback,
+    Pressable
 } from 'react-native';
 
-export default function ProductNotFound() {
-    const [productName, setProductName] = useState('');
-    const [companyName, setCompanyName] = useState('');
-    const [ingredients, setIngredients] = useState<string[]>(['']);
+import { Product } from '@/types';
+
+
+
+export default function EditProduct({data, barcode, setEditMode, setData, setError}: {data: any, barcode: string, setEditMode?: any, setData?: any, setError?: any}) {
+    const [productName, setProductName] = useState(data?.name || '');
+    const [companyName, setCompanyName] = useState(data?.company || '');
+
+    let tempIngredients = [...(data?.ingredients || [])];
+    tempIngredients.push('');
+    const [ingredients, setIngredients] = useState<string[]>(tempIngredients);
     const ingredientRefs = useRef<TextInput[]>([]);
 
     function handleUpdateIngredient(index: number, value: string) {
@@ -31,6 +39,38 @@ export default function ProductNotFound() {
         Keyboard.dismiss();
     }
 
+    function handleSubmit() {
+        const filteredIngredients = ingredients.filter(ingredient => ingredient.trim() !== '');
+        setIngredients(filteredIngredients)
+
+        const new_data = {
+            name: productName,
+            company: companyName,
+            ingredients: filteredIngredients
+        };
+        const url = `https://senior-design-jhmb.onrender.com/barcode/${barcode}`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(new_data),
+        })
+
+        if (setEditMode) {
+            setEditMode(false);
+        }
+
+        if (setData) {
+            setData(new_data);
+        }
+
+        if (setError) {
+            setError(null)
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
@@ -39,7 +79,14 @@ export default function ProductNotFound() {
             >
                 <TouchableWithoutFeedback onPress={dismissKeyboard}>
                     <ScrollView contentContainerStyle={styles.content}>
+                        {!data && (
                         <Text style={styles.header}>Product not found</Text>
+                        )}
+
+                        {data && (
+                            <Text style={styles.header}>Edit Product</Text>
+                        )}
+
                         <Text>Enter product details manually:</Text>
 
                         <TextInput
@@ -74,6 +121,11 @@ export default function ProductNotFound() {
                                 }
                             />
                         ))}
+
+                        {/* Submit Button */}
+                        <Pressable onPress={handleSubmit} style={{ backgroundColor: "#ccc", padding: 10, borderRadius: 5, alignItems: "center", justifyContent: "center" }}>
+                            <Text style={styles.label}>Submit</Text>
+                        </Pressable>
                     </ScrollView>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
