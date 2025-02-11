@@ -7,6 +7,7 @@ import re
 
 from classify import classify_obj
 from PIL import Image
+import base64
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "D:/qsine/uploads"
@@ -63,17 +64,16 @@ def classify_image():
         return jsonify({"error": "No image part in the request"}), 400
 
     file = request.files['image']
-    
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
+  
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'temp_classify.jpg')
 
-    # if file:
-    #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'photo.jpg'))
+    if file:
+        file.save(file_path)
 
-    classification = classify.classify(os.path.join(app.config['UPLOAD_FOLDER'], 'photo.jpg'))
-    # classification = "I don't know"
+    classification = classify.classify(file_path)
+    print(classification)
 
-    return jsonify({"message": "Image successfully classified", "class": classification}), 200
+    return jsonify({"message": "Image successfully classified", "data": classification}), 200
 
 @app.route('/barcode/<barcode>', methods=['GET'])
 def get_barcode_product(barcode):
@@ -187,42 +187,6 @@ def update_barcode_product(barcode):
         return jsonify({"message": f"Failed to save data: {str(e)}"}), 500
 
     return jsonify({"message": "Barcode data updated successfully"}), 200
-
-@app.route('/recipe/<name>', methods=['POST'])
-def post_recipe(name):
-    if 'image' not in request.files:
-        return jsonify({"error": "No image part in the request"}), 400
-
-    file = request.files['image']
     
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
-        
-    if file:
-        # Resize the image before saving it
-        img = Image.open(file)
-        img = img.resize((512, 512))
-        img.save(os.path.join('D:/qsine/scraped_data/images', name + '.jpg'))
-
-        with open('D:/qsine/scraped_data/data.json') as f:
-            data = json.load(f)
-
-        with open('D:/qsine/scraped_data/data.json', 'w') as f:
-            new_data = json.loads(request.form.to_dict()['data'])
-            new_data['image_path'] = os.path.join('D:/qsine/scraped_data/images', name + '.jpg').replace('\\', '/')
-            data.append(new_data)
-            json.dump(data, f, indent=4)
-
-        return jsonify({"message": "Image successfully uploaded", "filename": name}), 200
-
-@app.route('/recipes', methods=['GET'])
-def get_recipes():
-    try:
-        with open('D:/qsine/scraped_data/data.json') as f:
-            data = json.load(f)
-            return jsonify(data)
-    except json.JSONDecodeError:
-        return jsonify([])
-
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
