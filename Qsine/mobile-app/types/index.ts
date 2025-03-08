@@ -5,6 +5,7 @@ type RootParamList = {
   'CameraPage': undefined;
   'PictureTaken': {'uri': string};
   'BarcodeScannedPage': { 'barcode': string };
+  'UserSettingsPage': undefined;
 };
 
 type Product = {

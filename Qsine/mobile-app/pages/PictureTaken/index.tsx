@@ -5,13 +5,10 @@ import { useRoute } from '@react-navigation/native';
 import { PictureTakenPageRouteProp } from "@/types";
 
 import Classify from "./components/Classify";
-import Save from "./components/Save";
 
 export default function PictureTaken() {
     const route = useRoute();
     const uri = (route as PictureTakenPageRouteProp).params.uri;
-
-    const [classify, setClassify] = useState(true);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -25,28 +22,8 @@ export default function PictureTaken() {
                 <Text>No image available</Text>
             )}
 
-            <Switch
-                value={classify}
-                onValueChange={() => setClassify(previousState => !previousState)}
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={classify ? "#f5dd4b" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-            />
-
-            <Pressable onPress={() => setClassify(!classify)} style={{ flexDirection: 'row', justifyContent: 'space-around', width: '100%', marginTop: 20, backgroundColor: 'red' }}>
-                <View style={{ backgroundColor: classify ? 'blue' : 'transparent' }}>
-                    <Text style={styles.text}>Classify</Text>
-                </View>
-                <View style={{ backgroundColor: !classify ? 'blue' : 'transparent' }}>
-                    <Text style={styles.text}>Save</Text>
-                </View>
-            </Pressable>
-
-            {classify ? (
-                <Classify uri={uri} />
-            ) : (
-                <Save />
-            )}
+            <Classify uri={uri} />
+       
         </SafeAreaView>
     );
 }

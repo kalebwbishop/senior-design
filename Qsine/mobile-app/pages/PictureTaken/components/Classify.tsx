@@ -16,8 +16,11 @@ interface Classification {
 export default function Classify({ uri }: { uri: string }) {
 
     const [response, setResponse] = useState<ResponseResult | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     async function handleClassifyPressed() {
+
+        setLoading(true)
         // Construct FormData
         const formData = new FormData();
         formData.append('image', {
@@ -47,7 +50,7 @@ export default function Classify({ uri }: { uri: string }) {
     return (
         <View style={styles.container}>
             <Pressable onPress={handleClassifyPressed}>
-                <Text style={styles.text}>Classify</Text>
+                <Text style={styles.text}>{loading ? "Loading" : "Classify"}</Text>
                 
                 {response && response.response && response.response.map((item, index) => (
                     <Text key={index} style={styles.text}>{item.class} - {item.prob}</Text>

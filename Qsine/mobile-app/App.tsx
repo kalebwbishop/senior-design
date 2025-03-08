@@ -21,6 +21,5 @@ export default function Index() {
 
   return (
     <KWBNavigationWrapper />
-    // <ProductNotFound x/>
   );
 }
