@@ -1,0 +1,126 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.9 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="26.0.9">
+  <diagram name="Page-1" id="uA4BpJtj0CUcpXGro3Uc">
+    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="SRzlekF5WkanAZLblf2s-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-1" target="SRzlekF5WkanAZLblf2s-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-1" value="Barcode Scan" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="180" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-2" value="&lt;div&gt;Possible Recipes:&amp;nbsp;&lt;/div&gt;&lt;div&gt;https://www.food.com/recipe/zippy-burgers-348803&amp;nbsp;&lt;/div&gt;&lt;div&gt;(Allergies: Dairy)&lt;/div&gt;&lt;div&gt;https://www.allrecipes.com/recipe/19863/best-burger-ever/&amp;nbsp;&lt;/div&gt;&lt;div&gt;(Allergies: Dairy)&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="385" width="250" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-3" target="SRzlekF5WkanAZLblf2s-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-3" value="Barcode Scan" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="180" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-5" target="SRzlekF5WkanAZLblf2s-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-5" target="SRzlekF5WkanAZLblf2s-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-5" value="&lt;div&gt;Text Input:&lt;/div&gt;&lt;div&gt;Zipburger: Signature blend 6 oz pattiy,&amp;nbsp;&lt;/div&gt;&lt;div&gt;ground fresh meat and delivered daily&amp;nbsp;&lt;/div&gt;&lt;div&gt;from our friend ay Avril-Bleh Meat Market&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="275" y="60" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-8" target="SRzlekF5WkanAZLblf2s-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-12" target="SRzlekF5WkanAZLblf2s-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-12" target="SRzlekF5WkanAZLblf2s-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-12" value="Recipe Ranker" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="660" y="460" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-14" target="SRzlekF5WkanAZLblf2s-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-14" value="Recipes Database" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="580" y="380" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-31" value="Text Processing Module" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="485" y="140" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-8" value="Natural Language Model" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-31" vertex="1">
+          <mxGeometry x="170" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-7" value="Text Tokenizer" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-31" vertex="1">
+          <mxGeometry x="10" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="SRzlekF5WkanAZLblf2s-31" source="SRzlekF5WkanAZLblf2s-7" target="SRzlekF5WkanAZLblf2s-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-32" target="SRzlekF5WkanAZLblf2s-33" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-32" value="Image Input:" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="180" y="300" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-39" value="Image Processing Module" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="320" y="255" width="270" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-33" value="Impage Preprocessor" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-39" vertex="1">
+          <mxGeometry x="20" y="45" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-35" value="Image Classifier" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-39" vertex="1">
+          <mxGeometry x="180" y="45" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="SRzlekF5WkanAZLblf2s-39" source="SRzlekF5WkanAZLblf2s-33" target="SRzlekF5WkanAZLblf2s-35" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-35" target="SRzlekF5WkanAZLblf2s-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-47" value="Allergen Detection Module" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="420" width="235" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-20" value="Text Parser" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-47" vertex="1">
+          <mxGeometry x="147.5" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="SRzlekF5WkanAZLblf2s-47" source="SRzlekF5WkanAZLblf2s-21" target="SRzlekF5WkanAZLblf2s-24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-21" value="Allergen Ranker" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-47" vertex="1">
+          <mxGeometry x="7.5" y="40" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="SRzlekF5WkanAZLblf2s-47" source="SRzlekF5WkanAZLblf2s-24" target="SRzlekF5WkanAZLblf2s-21" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="47.5" y="90" />
+              <mxPoint x="47.5" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-24" value="Allergen Database" style="rounded=0;whiteSpace=wrap;html=1;" parent="SRzlekF5WkanAZLblf2s-47" vertex="1">
+          <mxGeometry x="7.5" y="110" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="SRzlekF5WkanAZLblf2s-47" source="SRzlekF5WkanAZLblf2s-20" target="SRzlekF5WkanAZLblf2s-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SRzlekF5WkanAZLblf2s-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="SRzlekF5WkanAZLblf2s-21" target="SRzlekF5WkanAZLblf2s-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
