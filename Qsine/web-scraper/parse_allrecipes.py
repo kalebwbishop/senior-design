@@ -2,19 +2,28 @@ import requests
 import json
 import os
 import time
-import re
+import hashlib
+from bs4 import BeautifulSoup
+
 
 class AllrecipesParse():
     def __init__(self):
-        self.data_file_path = "D:/qsine/scraped_data/new.json"
-        self.parsed_images_path = "D:/qsine/scraped_data/images"
+        self.data_file_path = "./data/allrecipes/data.json"
+        self.parsed_images_path = "./data/allrecipes/images/"
+        self.links_file_path = "./data/allrecipes/links.json"
         
         self.load()
 
     def load(self):
-        if os.path.exists(self.data_file_path):
+        if os.path.exists(self.links_file_path):
+            with open(self.links_file_path, 'r') as file:
+                data = json.load(file)
+
+            self.urls = data.get('to_check_urls', []) + data.get('checked_urls', [])
+
             with open(self.data_file_path, 'r') as file:
                 self.data = json.load(file)
+
         else:
             raise FileNotFoundError("Data file not found")
     
@@ -35,124 +44,97 @@ class AllrecipesParse():
             file.write(response.content)
 
         return image_path
-    
-    def save_page(self, page_data):
-        with open('recipe.html', 'w', encoding='utf-8') as file:
-            file.write(page_data)
 
     def parse(self):
-        recipe_count = 0
-        recipe_total = len(self.data.keys())
-        counter = 0
-        for key, value in self.data.items():
+        save_counter = 0
+        for url in self.urls:
             try:
-                recipe_count += 1
+                temp_recipe = {}
+                key = hashlib.md5(url.encode('utf-8')).hexdigest()
 
-                if (
-                    value.get('recipe_name') != "" and
-                    value.get('image_url') != "" and
-                    value.get('image_path') != "" and
-                    len(value.get('ingredients')) != 0
-                    ):
-                    print(f"{key}: Already parsed")
+                print(f"Parsing {url}")
+                temp_recipe['url'] = url
+                temp_recipe['key'] = key
+
+                if any(recipe['url'] == url for recipe in self.data):
+                    print(f"{key}: URL already exists")
                     continue
 
-                if (
-                    value.get('recipe_name') != "" and
-                    value.get('image_url') != "" and
-                    len(value.get('ingredients')) != 0
-                    ):
-                    # Download the image
-                    image_path = self.download_image(value.get('image_url'), key)
-                    if not image_path:
-                        print(f"{key}: Image download failed")
-                        break
-
-                    value['image_path'] = image_path
-
-                    print(f"{key}: Only needed image downloaded")
-                    continue 
-
-                print(f"{(recipe_count / recipe_total) * 100:.2f}% {key}: Parsing")
-
-                url = value['recipe_url']
                 headers = {
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-                    }
-                                
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                }
+                
                 response = requests.get(url, headers=headers)
-
-                if ("Signal - Not Acceptable" in response.text):
+                if "Signal - Not Acceptable" in response.text:
                     print("Resting for 2 hours")
                     time.sleep(300)
+                    continue
 
-                with open('recipe.html', 'w', encoding='utf-8') as file:
-                    file.write(response.text)
+                soup = BeautifulSoup(response.text, 'html.parser')
 
-                # Match the recipe name
-                title_match = re.search(r'<title>(.*?)</title>', response.text)
-                if title_match:
-                    recipe_name = title_match.group(1)
-                else:
-                    print(f"{key}: Recipe name not found")
-                    raise ValueError("Recipe name not found")
+                # Extract recipe name
+                title_tag = soup.find('title')
+                temp_recipe['recipe_name'] = title_tag.text.strip() if title_tag else "Unknown"
 
-                value['recipe_name'] = recipe_name
-
-                # Match the ingredients
-                ingredients_match = re.findall(r'<span data-ingredient-name="true">(.+?)</span>', response.text)
-                if ingredients_match:
-                    ingredients = ingredients_match
-                else:
-                    print(f"{key}: Ingredients not found")
+                # Extract ingredients
+                ingredients = [tag.text.strip() for tag in soup.select('[data-ingredient-name="true"]')]
+                if not ingredients:
                     raise ValueError("Ingredients not found")
+                temp_recipe['ingredients'] = ingredients
 
-                value['ingredients'] = ingredients
-
-                # Match the image url
-                image_url_match = re.search(r'srcset="(https://www\.allrecipes\.com/thmb/.+?\.jpg) ', response.text)
-                if not image_url_match:
-                    image_url_match = re.search(r'data-src="(https://.*?\.jpg.*?)"', response.text)
-
-
-                if image_url_match:
-                    image_url = image_url_match.group(1)
+                # Extract image URL
+                image_tag = soup.find('img', {'srcset': True}) or soup.find('img', {'data-src': True})
+                if image_tag:
+                    image_url = image_tag['srcset'].split()[0] if 'srcset' in image_tag.attrs else image_tag['data-src']
+                    temp_recipe['image_url'] = image_url
                 else:
-                    image_url_match = re.search(r'alt="Recipe Placeholder Image"', response.text)
-                    if image_url_match:
-                        print(f"{key}: Recipe has no image")
-                        continue
+                    raise ValueError("Image URL not found")
 
-                    print(f"{key}: Image url not found")
-                    raise ValueError("Image url not found")
+                # Extract recipe description
+                description_tag = soup.select_one('.article-subheading.text-body-100')
+                temp_recipe['recipe_description'] = description_tag.text.strip() if description_tag else "No description"
 
-                value['image_url'] = image_url
+                # Extract details (label-value pairs)
+                details = {}
+                for detail in soup.select('.mm-recipes-details__label'):
+                    label = detail.text.strip()
+                    value_tag = detail.find_next_sibling(class_='mm-recipes-details__value')
+                    if value_tag:
+                        details[label] = value_tag.text.strip()
+                temp_recipe['details'] = details
+
+                # Extract steps
+                steps = [step.text.strip() for step in soup.select('.mntl-sc-block-html')]
+                temp_recipe['steps'] = steps
+
+                # Extract breadcrumbs
+                breadcrumbs = [breadcrumb.text.strip() for breadcrumb in soup.select('.mntl-breadcrumbs__item .link__wrapper')]
+                temp_recipe['breadcrumbs'] = breadcrumbs
 
                 # Download the image
-                image_path = self.download_image(image_url, key)
+                image_path = self.download_image(temp_recipe['image_url'], key)
                 if not image_path:
-                    print(f"{key}: Image download failed")
                     raise ValueError("Image download failed")
+                temp_recipe['image_path'] = image_path
 
-                value['image_path'] = image_path
-
-                counter -= 1
-                if counter == 0:
+                self.data.append(temp_recipe)
+                save_counter += 1
+                if save_counter >= 30:
                     print("Saving data")
                     with open(self.data_file_path, 'w') as file:
                         json.dump(self.data, file, indent=4)
-
-                    counter = 30
-            
+                    save_counter = 0
+                
             except KeyboardInterrupt:
                 print("Saving data")
                 with open(self.data_file_path, 'w') as file:
                     json.dump(self.data, file, indent=4)
                 return
-            except ValueError:
-                open("failures.txt", 'a').write(f"{key}\n")
+            
+            except ValueError as e:
+                print(f"Error parsing {url}: {e}")
+                continue
 
-        self.save_page(response.text)
         with open(self.data_file_path, 'w') as file:
             print("Saving data")
             json.dump(self.data, file, indent=4)
@@ -161,25 +143,3 @@ class AllrecipesParse():
 if __name__ == '__main__':
     allrecipes_parse = AllrecipesParse()
     allrecipes_parse.parse()
-
-    # print(len(allrecipes_parse.data.keys()))
-
-    # keys_to_remove = []
-
-    # for key, value in allrecipes_parse.data.items():
-    #     if '/recipe/' in value.get('recipe_url'):
-    #         continue
-
-    #     if re.search(r'-recipe-[^\d]', value.get('recipe_url')):
-    #         keys_to_remove.append(key)
-
-    # print(len(keys_to_remove))
-
-    # for key in keys_to_remove:
-    #     allrecipes_parse.data.pop(key)
-
-    # print(len(allrecipes_parse.data.keys()))
-
-    # with open(allrecipes_parse.data_file_path, 'w') as file:
-    #     json.dump(allrecipes_parse.data, file, indent=4)
-

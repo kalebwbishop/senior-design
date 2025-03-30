@@ -1,10 +1,12 @@
 import requests
 import re
 import json
+import os
 
 class AllrecipesSearch():
     def __init__(self):
         self.start_url = 'https://www.allrecipes.com/'
+        self.links_file_path = './data/allrecipes/links.json'
 
         try:
             self.load()
@@ -13,18 +15,19 @@ class AllrecipesSearch():
             self.to_check_urls = [self.start_url]
 
     def save(self):
-        with open('links.json', 'w', encoding='utf-8') as file:
+        os.makedirs(os.path.dirname(self.links_file_path), exist_ok=True)
+        with open(self.links_file_path, 'w', encoding='utf-8') as file:
             json.dump({
                 'checked_urls': list(self.checked_urls),
                 'to_check_urls': self.to_check_urls
             }, file, indent=4)
 
     def load(self):
-        with open('links.json', 'r') as file:
+        with open(self.links_file_path, 'r') as file:
             data = json.load(file)
 
-        self.checked_urls = set(data['checked_urls'])
-        self.to_check_urls = data['to_check_urls'] + [self.start_url]
+        self.checked_urls = set(data.get('checked_urls', []))
+        self.to_check_urls = data.get('to_check_urls', []) + [self.start_url]
 
     def search(self):
         count = 100
@@ -57,5 +60,4 @@ class AllrecipesSearch():
 
 if __name__ == '__main__':
     allrecipes_search = AllrecipesSearch()
-
     allrecipes_search.search()

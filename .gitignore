@@ -1,6 +1,5 @@
 **/.DS_Store
 **/node_modules
 **/venv
-**/images
 *.env
 Qsine/.DS_Store
