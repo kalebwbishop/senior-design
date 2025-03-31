@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
-
+import time
 
 
 project_path = dirname(__file__)
@@ -46,6 +46,7 @@ def AllergenMatch(ingredients:list, allergens:list):
     
 # Process recipe to return ingredient allergy
 def ProcessRecipe(recipe:dict):
+    starttime = time.time()
     ner_tagger = StanfordNERTagger(model, jar, encoding='utf8')
     df_allergies = pd.read_csv(join(data_path, 'AllergenData.csv'),  encoding='utf8')
     ingredients = GetIngredients(ner_tagger, recipe['ingredients'])
@@ -54,6 +55,8 @@ def ProcessRecipe(recipe:dict):
     
     allergies = allergies = df_allergies.merge(df_allergens, how='inner', left_on='allergen', 
                                            right_on='allergen', suffixes=('_left', '_right'))['allergy'].unique().tolist()
+    
+    print("Time taken to process recipe: ", time.time() - starttime)
     return {
         'recipe_name': recipe['recipe_name'],
         'allergies': allergies
@@ -65,4 +68,4 @@ if __name__ == "__main__":
     with open(join(data_path, 'parsed_data.json'), 'r', encoding='utf8') as file:
         for recipe in json.load(file):
             recipe_allergies = ProcessRecipe(recipe)
-            print(recipe_allergies['recipe_name'],recipe_allergies['allergeies'])
+            print(recipe_allergies['recipe_name'],recipe_allergies['allergies'])

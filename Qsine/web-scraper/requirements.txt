@@ -3,3 +3,7 @@ bs4
 openai
 Pillow
 flask
+selenium
+webdriver-manager
+pymongo
+aiohttp
