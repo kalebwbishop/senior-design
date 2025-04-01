@@ -46,6 +46,8 @@ if __name__ == "__main__":
     # Load the data from MongoDB
     collection = db["recipes"]
 
+    unique_paths = set()
+
     while True:
         data = list(collection.find({}))
 
@@ -66,6 +68,8 @@ if __name__ == "__main__":
             if not os.path.exists(directory_name):
                 os.makedirs(directory_name)
 
+            unique_paths.add(directory_name)
+
             # Download the image
             image_urls = recipe["image_urls"]
 
@@ -80,7 +84,7 @@ if __name__ == "__main__":
                     continue
 
                 print(
-                    f"Downloading image {idx + 1}/{len(image_urls)} : {running_count} : {recipe_idx}/{len(data)}"
+                    f"Downloading image {idx + 1}/{len(image_urls)} : {running_count} : {recipe_idx}/{len(data)} : Estimated total {int((running_count * len(data)) / recipe_idx)}"
                 )
 
                 try:
@@ -90,12 +94,13 @@ if __name__ == "__main__":
                         shutil.copyfileobj(response.raw, out_file)
                     del response
                 except (ConnectionError, Timeout) as e:
-                    print(f"Error downloading image from {image_url}: {e}. Retrying...")
-                    time.sleep(30)
+                    print(f"Error downloading image from {image_url}: {e}")
                 except requests.exceptions.RequestException as e:
                     print(f"Failed to download image from {image_url}: {e}")
+                except Exception as e:
+                    print(f"An unexpected error occurred: {e}")
 
         print(
-            f"Downloaded {running_count} images for {len(data)} recipes. Sleeping for 15 minutes."
+            f"Downloaded {running_count} images for {len(data)} recipes in {len(unique_paths)} categories. Sleeping for 15 minutes."
         )
         time.sleep(900)

@@ -9,6 +9,11 @@ import re
 from classify2 import classify_obj
 from PIL import Image
 import base64
+import sys
+
+sys.path.append("../custom_model")
+sys.path.append("../custom_model")
+
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "D:/qsine/uploads"

@@ -45,7 +45,7 @@ for class_name in os.listdir(all_data_dir):
     ]
 
     # Skip empty class directories
-    if len(all_files) < 100:
+    if len(all_files) < 400:
         print(f"Not enough files to split for class {class_name}. Skipping.")
         continue
 
