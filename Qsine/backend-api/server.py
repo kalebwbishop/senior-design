@@ -15,8 +15,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 sys.path.append("../custom_model")
-sys.path.append("../custom_model")
+sys.path.append("../allergen-detector")
 
+from test_model import ProcessRecipe
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "D:/qsine/uploads"
@@ -34,9 +35,9 @@ WHITELISTED_IPS = {"3.129.111.220", "127.0.0.1"}
 def limit_remote_addr():
     print("Request received")
     client_ip = request.remote_addr
-    if client_ip not in WHITELISTED_IPS:
-        print(f"Unauthorized access from {client_ip}")
-        abort(403)  # Forbidden access
+    # if client_ip not in WHITELISTED_IPS:
+    #     print(f"Unauthorized access from {client_ip}")
+    #     abort(403)  # Forbidden access
 
 
 @app.route("/classify-image", methods=["POST"])
@@ -87,64 +88,67 @@ def get_barcode_product(barcode):
         data = json.load(f)
 
         product = data.get(barcode)
-        if product:
-            return jsonify(product)
-        else:
+        # if product:
+        #   return jsonify(product)
+        # else:
 
-            def attempt_to_find_product(barcode):
-                fdc_id = None
+        def attempt_to_find_product(barcode):
+            fdc_id = None
+            response = requests.get(
+                f"https://api1.myfooddata.com/autocomplete/{barcode}"
+            )
+            if response.status_code == 200:
+                search_data = response.json()
+                if "hits" in search_data and len(search_data["hits"]) > 0:
+                    fdc_id = search_data["hits"][0]["document"]["fdc_id"]
+
+            if fdc_id:
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                }
+
                 response = requests.get(
-                    f"https://api1.myfooddata.com/autocomplete/{barcode}"
+                    f"https://tools.myfooddata.com/nutrition-facts/{fdc_id}/wt1/1",
+                    headers=headers,
                 )
                 if response.status_code == 200:
-                    search_data = response.json()
-                    if "hits" in search_data and len(search_data["hits"]) > 0:
-                        fdc_id = search_data["hits"][0]["document"]["fdc_id"]
-
-                if fdc_id:
-                    headers = {
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-                    }
-
-                    response = requests.get(
-                        f"https://tools.myfooddata.com/nutrition-facts/{fdc_id}/wt1/1",
-                        headers=headers,
+                    match_name = re.search(r'"name":"(.*?)"', response.text)
+                    match_company = re.search(r'"brand_owner":"(.*?)"', response.text)
+                    match_ingredients = re.search(
+                        r'"ingredients":"(.*?)"', response.text
                     )
-                    if response.status_code == 200:
-                        match_name = re.search(r'"name":"(.*?)"', response.text)
-                        match_company = re.search(
-                            r'"brand_owner":"(.*?)"', response.text
-                        )
-                        match_ingredients = re.search(
-                            r'"ingredients":"(.*?)"', response.text
-                        )
-                        if match_name and match_company and match_ingredients:
-                            product = {
-                                "name": match_name.group(1),
-                                "company": match_company.group(1),
-                                "ingredients": match_ingredients.group(1)
-                                .lower()
-                                .split(", "),
-                            }
+                    if match_name and match_company and match_ingredients:
+                        product = {
+                            "name": match_name.group(1),
+                            "company": match_company.group(1),
+                            "ingredients": match_ingredients.group(1)
+                            .lower()
+                            .split(", "),
+                        }
 
-                            with open(barcode_data_path) as f:
-                                data = json.load(f)
-                                data[barcode] = product
+                        with open(barcode_data_path) as f:
+                            data = json.load(f)
+                            data[barcode] = product
 
-                            with open(barcode_data_path, "w") as f:
-                                json.dump(data, f, indent=4)
+                        with open(barcode_data_path, "w") as f:
+                            json.dump(data, f, indent=4)
 
-                            return product
+                        return product
 
-                    return None
+                return None
 
-            product = attempt_to_find_product(barcode)
-            print(product)
+        product = attempt_to_find_product(barcode)
+        print(product)
 
-            if product:
-                return jsonify(product)
-
+        if not product:
             return jsonify({"message": "Product not found"}), 404
+
+        allergens = ProcessRecipe(
+            {"ingredients": product["ingredients"], "recipe_name": product["name"]}
+        )
+        print(allergens)
+
+        return jsonify({"product": product, "allergens": allergens}), 200
 
 
 @app.route("/barcode/<barcode>", methods=["POST"])

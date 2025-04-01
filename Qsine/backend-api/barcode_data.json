@@ -1,26 +1,41 @@
 {
     "014100099482": {
-        "name": "Vanilla Cupcake Goldfish Grahams",
-        "company": "Pepperidge Farm",
+        "name": "Vanilla cupcake grahams baked graham snacks, vanilla cupcake",
+        "company": "Pepperidge farm, inc.",
         "ingredients": [
-            "smiles",
-            "whole wheat flour",
-            "enriched wheat flour",
-            "vegetable oils",
+            "made with smiles and whole wheat flour",
+            "enriched wheat flour (flour",
+            "niacin",
+            "reduced iron",
+            "thiamine mononitrate",
+            "riboflavin",
+            "folic acid)",
+            "vegetable oils (soybean",
+            "canola and/or sunflower",
+            "palm kernel",
+            "palm)",
             "sugar",
             "cornstarch",
-            "brown sugar",
+            "brown sugar (sugar",
+            "invert sugar",
+            "molasses)",
             "invert syrup",
-            "natural flavors",
+            "contains 2% or less of: natural flavors",
             "salt",
             "nonfat milk",
             "baking soda",
             "corn syrup solids",
-            "baking powder",
-            "colors",
+            "baking powder (sodium acid pyrophosphate",
+            "baking soda",
+            "monocalcium phosphate)",
             "cream",
-            "soy lecithin",
-            "vanilla extract"
+            "radish",
+            "pumpkin",
+            "tomato",
+            "apple",
+            "sweet potato and cherry juice concentrates for color",
+            "vanilla extract",
+            "soy lecithin."
         ]
     },
     "028400090896": {
@@ -181,6 +196,27 @@
         "ingredients": [
             "organic coconut vinegar",
             "raw."
+        ]
+    },
+    "051500255445": {
+        "name": "Peanut butter creamy",
+        "company": "The j.m. smucker company",
+        "ingredients": [
+            "peanuts",
+            "corn syrup solids",
+            "sugar",
+            "pea protein",
+            "contains 2% or less of: salt",
+            "fully hydrogenated vegetable oils (rapeseed and soybean)",
+            "mono and diglycerides",
+            "molasses",
+            "magnesium oxide",
+            "niacinamide",
+            "ferric orthophosphate",
+            "zinc oxide",
+            "copper sulfate",
+            "folic acid",
+            "pyridoxine hydrochloride."
         ]
     }
 }
