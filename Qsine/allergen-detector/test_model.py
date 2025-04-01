@@ -9,6 +9,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import time
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import wordnet
 
 
 project_path = dirname(__file__)
@@ -16,14 +18,15 @@ ner_path =  join(project_path, "stanford-ner-tagger")
 data_path = join(ner_path, "data")
 jar = join(ner_path, "stanford-ner.jar")
 model = join(ner_path, "classifiers", "ingredient-ner-model.ser.gz")
+lemmatizer = WordNetLemmatizer()
 
-# Use NER model to indentify ingredient element from string
+# Use NER model to identify ingredient element from string
 def GetIngredients(ner_tagger, ingredients:list = []):
     parsed_ingredients = []
     for ingredient in ingredients:
         words = nltk.word_tokenize(ingredient)
         tag_lst =  ner_tagger.tag(words)        
-        parsed_ingredients.append(" ".join([tag[0] for tag in tag_lst if tag[1] == 'NAME']))
+        parsed_ingredients.append(" ".join([lemmatizer.lemmatize(tag[0], pos='n') for tag in tag_lst if tag[1] == 'NAME']))
     return parsed_ingredients
 
 # Calculate TF-IDF score to find matching allergen for each ingredient
