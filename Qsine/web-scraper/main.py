@@ -70,6 +70,18 @@ class AllrecipesSearch:
         for recipe in self.temp_recipes:
             key = recipe["key"]
 
+            # Retrieve the recipe from the database using the key
+            existing_recipe = self.db.recipes.find_one({"key": key})
+
+            # If the recipe exists, update its image_urls
+            if existing_recipe:
+                existing_data = json.loads(
+                    zlib.decompress(base64.b64decode(existing_recipe["data"])).decode(
+                        "utf-8"
+                    )
+                )
+                recipe["image_urls"] = existing_data.get("image_urls", [])
+
             compressed_recipe = self.compress_data(recipe)
 
             self.db.recipes.update_one(
@@ -220,7 +232,12 @@ class AllrecipesSearch:
             temp_recipe["details"] = details
 
             # Extract steps
-            steps = [step.text.strip() for step in soup.select(".mntl-sc-block-html")]
+            steps = [
+                step.text.strip()
+                for step in soup.select(
+                    "#mm-recipes-steps__content_1-0 ol li p.mntl-sc-block-html"
+                )
+            ]
             temp_recipe["steps"] = steps
 
             # Extract breadcrumbs
@@ -235,7 +252,7 @@ class AllrecipesSearch:
             # print(f"Found {len(image_tags)} image tags")
 
             # Extract the image URLs
-            image_urls = find_image_urls(url)
+            # image_urls = find_image_urls(url)
             # for idx, div in enumerate(image_tags):
             #     inner1 = div.find("figure")
             #     inner2 = inner1.find("div")
@@ -251,10 +268,10 @@ class AllrecipesSearch:
 
             #         image_urls.append(image_url)
 
-            if len(image_urls) == 0:
-                raise ValueError("No images found")
+            # if len(image_urls) == 0:
+            #     raise ValueError("No images found")
 
-            temp_recipe["image_urls"] = image_urls
+            # temp_recipe["image_urls"] = image_urls
 
             self.temp_recipes.append(temp_recipe)
             return temp_recipe
@@ -279,7 +296,7 @@ if __name__ == "__main__":
     # For testing purposes, you can uncomment the following lines to test the parse method directly
     # print(
     #     allrecipes_search.parse(
-    #         "https://www.allrecipes.com/recipe/213452/fresh-strawberry-pie-with-orange-liqueur-glaze/",
+    #         "https://www.allrecipes.com/recipe/282905/honey-garlic-shrimp/",
     #         check_failures=False,
     #     )
     # )

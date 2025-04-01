@@ -79,6 +79,7 @@ if __name__ == "__main__":
                 "ingredients": recipe["ingredients"],
                 "steps": recipe["steps"],
                 "breadcrumbs": recipe["breadcrumbs"],
+                "url": recipe["url"],
             }
         )
 
