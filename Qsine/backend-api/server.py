@@ -10,6 +10,9 @@ from classify2 import classify_obj
 from PIL import Image
 import base64
 import sys
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sys.path.append("../custom_model")
 sys.path.append("../custom_model")
@@ -191,6 +194,56 @@ def update_barcode_product(barcode):
         return jsonify({"message": f"Failed to save data: {str(e)}"}), 500
 
     return jsonify({"message": "Barcode data updated successfully"}), 200
+
+
+@app.route("/upload-text-image", methods=["POST"])
+def upload_text_image():
+    OCR_API_URL = "https://api.ocr.space/parse/image"
+    OCR_API_KEY = os.environ.get("OCR_API_KEY")
+    if "image" not in request.files:
+        return jsonify({"error": "No image part in the request"}), 400
+
+    file = request.files["image"]
+
+    # Prepare the image for the OCR API
+
+    payload = {
+        "isOverlayRequired": False,
+        "apikey": OCR_API_KEY,
+        "language": "eng",
+    }
+
+    files = {"image": (file.filename, file.stream, file.mimetype)}
+    # Send image to OCR API
+    response = requests.post(OCR_API_URL, files=files, data=payload)
+
+    def clean_text(text):
+        # Remove unwanted characters and newlines
+        text = re.sub(r"[^\w\s,.]", "", text)
+        text = re.sub(r"\s+", " ", text)
+
+        text = text.strip()
+
+        return text
+
+    if response.status_code == 200:
+        return (
+            jsonify(
+                {
+                    "text": clean_text(
+                        response.json()
+                        .get("ParsedResults", [{}])[0]
+                        .get("ParsedText", "None")
+                    )
+                }
+            ),
+            200,
+        )
+    else:
+        return (
+            jsonify({"error": "Failed to process image", "details": response.text}),
+            response.status_code,
+        )
 
 
 @app.route("/process-recipe", methods=["POST"])

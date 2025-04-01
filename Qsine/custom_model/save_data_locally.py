@@ -57,5 +57,5 @@ if __name__ == "__main__":
         all_data.append(recipe)
 
     # Save data to a JSON file
-    with open("all_data.json", "w") as f:
+    with open("../data/data.json", "w") as f:
         json.dump(all_data, f, indent=4)
