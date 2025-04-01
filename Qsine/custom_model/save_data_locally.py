@@ -13,11 +13,25 @@ from requests.exceptions import ConnectionError, Timeout
 load_dotenv()
 
 
+def clean_item(item):
+    return (
+        item.replace("\n", " ")
+        .replace("\r", " ")
+        .replace("\t", " ")
+        .replace('"', "")
+        .encode("ascii", "ignore")
+        .decode("ascii")
+    )
+
+
 # Function to sanitize directory names
-def sanitize_directory_name(name):
-    # Remove invalid characters for Windows paths
-    # Invalid characters: < > : " / \ | ? *
-    return re.sub(r'[<>:"/\\|?*]', "_", name)
+def sanitize_recipe(recipe):
+    for key in recipe.keys():
+        if isinstance(recipe[key], str):
+            recipe[key] = clean_item(recipe[key])
+        elif isinstance(recipe[key], list):
+            recipe[key] = [clean_item(item) for item in recipe[key]]
+    return recipe
 
 
 # Connect to MongoDB
@@ -54,7 +68,19 @@ if __name__ == "__main__":
         compressed_data = recipe["data"]
         recipe = decompress_data(compressed_data)
 
-        all_data.append(recipe)
+        recipe = sanitize_recipe(recipe)
+
+        print(f"Processing recipe {recipe_idx + 1}/{len(data)}")
+
+        all_data.append(
+            {
+                "recipe_name": recipe["recipe_name"],
+                "key": recipe["key"],
+                "ingredients": recipe["ingredients"],
+                "steps": recipe["steps"],
+                "breadcrumbs": recipe["breadcrumbs"],
+            }
+        )
 
     # Save data to a JSON file
     with open("../data/data.json", "w") as f:

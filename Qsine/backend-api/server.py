@@ -209,6 +209,10 @@ def upload_text_image():
 
     file = request.files["image"]
 
+    # Save the uploaded image to a temporary file
+    file_path = os.path.join("temp", secure_filename(file.filename))
+    file.save(file_path)
+
     # Prepare the image for the OCR API
 
     payload = {
@@ -231,16 +235,12 @@ def upload_text_image():
         return text
 
     if response.status_code == 200:
+        cleaned_text = clean_text(
+            response.json().get("ParsedResults", [{}])[0].get("ParsedText", "None")
+        )
+        print(f"Cleaned text: {cleaned_text}")
         return (
-            jsonify(
-                {
-                    "text": clean_text(
-                        response.json()
-                        .get("ParsedResults", [{}])[0]
-                        .get("ParsedText", "None")
-                    )
-                }
-            ),
+            jsonify({"message": "Image successfully processed", "text": cleaned_text}),
             200,
         )
     else:
