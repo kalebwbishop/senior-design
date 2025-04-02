@@ -2,15 +2,38 @@ from os.path import dirname, join
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import Trainer, TrainingArguments
 import csv
-from datasets import load_dataset
+from datasets import load_dataset, ClassLabel
+from sklearn.metrics import f1_score, precision_recall_fscore_support
+import torch
+
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    probabilities = torch.sigmoid(torch.tensor(logits))
+    predictions = (probabilities > 0.5).int()  # Apply your threshold
+
+    # Ensure labels are also in the same format (numpy array of integers)
+    labels = labels.astype(int)
+
+    micro_f1 = f1_score(labels, predictions, average="micro")
+    macro_f1 = f1_score(labels, predictions, average="macro")
+    weighted_f1 = f1_score(labels, predictions, average="weighted")
+    precision, recall, f1, _ = precision_recall_fscore_support(labels, predictions, average="micro", zero_division=0)
+
+    return {
+        "micro_f1": micro_f1,
+        "macro_f1": macro_f1,
+        "weighted_f1": weighted_f1,
+        "precision": precision,
+        "recall": recall,
+    }
+    
 
 
 class BERT():
     #Initilize model and tokenizer
-    def __init__(self, train_filepath, valid_filepath):
-        self.train = self.JSON2Dataset(train_filepath)
-        self.valid = self.JSON2Dataset(valid_filepath)
-        self.unique_labels = self.GetLabels(self.train, self.valid)
+    def __init__(self, data_filepath):
+        self.data = self.JSON2Dataset(data_filepath)
+        self.unique_labels = self.GetLabels(self.data)
         print("Number of unique classes: {}".format(len(self.unique_labels)))
         
         model_name = "microsoft/deberta-v3-base"
@@ -23,7 +46,8 @@ class BERT():
         self.train_ready = False
         self.tk_train = None
         self.tk_valid = None        
-        
+    
+    
     def SetTrainParam(self, outdir, lr, bsize, epochs, wgtdecay, maxgrad):
         self.training_args = TrainingArguments(
             output_dir=outdir,
@@ -37,7 +61,8 @@ class BERT():
             save_strategy="epoch",
             max_grad_norm = maxgrad,
             load_best_model_at_end=True,
-            metric_for_best_model="f1",
+            fp16=True,  # Enable float16 mixed precision
+            metric_for_best_model="micro_f1",
         )
     
     def JSON2Dataset(self,filepath):
@@ -58,20 +83,22 @@ class BERT():
             
         return data.map(parse_label, batched=True, batch_size=4, num_proc=4)
     
-    def GetLabels(self, train_dataset, valid_dataset):
+    def GetLabels(self, data):
         """Get list of unique labels"""        
-        return list(set(train_dataset['labels'] + valid_dataset['labels']))
+        return list(set(data['labels']))
     
     def TokenizeDataset(self, bsize=16, nprocs=16, maxlen=512):
         def preprocess_function(examples):
             #Create one hotcoded labels
             examples['labels'] = [[1.0 if lb == label else 0.0 for lb in self.unique_labels] for label in examples['labels']]
             return self.tokenizer(examples['text'], truncation=True, padding="max_length", max_length=maxlen)
+
+        # Now you can perform the train_test_split without stratification:
+        self.data = self.data.train_test_split(test_size=0.2, shuffle=True, seed=42)
         
-        self.tk_train = self.train.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
-        self.tk_valid = self.valid.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
-        self.train = None
-        self.valid = None
+        self.tk_train = self.data["train"].map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
+        self.tk_valid = self.data["test"].map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
+        self.data = None
         self.train_ready = True
 
 
@@ -85,6 +112,7 @@ class BERT():
             args=self.training_args,
             train_dataset=self.tk_train,
             eval_dataset=self.tk_valid,
+            compute_metrics=compute_metrics
         )
         
         history = trainer.train()
@@ -119,11 +147,9 @@ class BERT():
 
 if __name__ == "__main__":
     project_root = dirname(dirname(__file__))
-    data_path = join(project_root, "data")
-    train_path = join(data_path,"data.json")
-    valid_path = train_path
+    data_path = join(project_root, "data","data.json")
     
-    model = BERT(train_path, valid_path)
+    model = BERT(data_path)
     model.Finetune(
         outdir = "./deberta_multi_label",
         lr = 2e-5,
