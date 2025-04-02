@@ -4,8 +4,9 @@ from transformers import Trainer, TrainingArguments
 import csv
 from datasets import load_dataset, ClassLabel
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
-import torch
 import numpy as np
+from transformers.callbacks import EarlyStoppingCallback
+
 
 
 def compute_metrics(eval_pred):
@@ -24,7 +25,7 @@ def compute_metrics(eval_pred):
 
 class BERT():
     #Initilize model and tokenizer
-    def __init__(self, data_filepath):
+    def __init__(self, data_filepath, label_filepath = ""):
         self.data = self.JSON2Dataset(data_filepath)
         self.unique_labels = self.GetLabels(self.data)
         print("Number of unique classes: {}".format(len(self.unique_labels)))
@@ -41,6 +42,8 @@ class BERT():
     
     
     def SetTrainParam(self, outdir, lr, bsize, epochs, wgtdecay, maxgrad):
+        early_stopping_callback = EarlyStoppingCallback(patience=3)  # Stop if no improvement for 3 epochs
+        
         self.training_args = TrainingArguments(
             output_dir=outdir,
             learning_rate=lr,
@@ -51,10 +54,12 @@ class BERT():
             evaluation_strategy="epoch",
             logging_strategy = "epoch",
             save_strategy="epoch",
-            max_grad_norm = maxgrad,
+            max_grad_norm = maxgrad, #Gradient clipping
             load_best_model_at_end=True,
             fp16=True,  # Enable float16 mixed precision
             metric_for_best_model="f1",
+            greater_is_better=True,     # Whether a higher value of the metric is better (for F1)
+            callbacks=[early_stopping_callback],
         )
     
     def JSON2Dataset(self,filepath):
@@ -64,7 +69,7 @@ class BERT():
         def parse_label(examples):
             # 1. Access the 'breadcrumbs' columns as lists of lists
             # 2. Extract the last element from each list   
-            rtype = [sublist[-2] if len(sublist) >= 2 else "Other" for sublist in examples['breadcrumbs']]  
+            rtype = [sublist[-1] if len(sublist) >= 1 else "Other" for sublist in examples['breadcrumbs']]  
             #print(rtype)          
             #Create text columns
             txts = [examples['recipe_name'][i] \
@@ -143,7 +148,7 @@ if __name__ == "__main__":
     
     model = BERT(data_path)
     model.Finetune(
-        outdir = join(project_root, "text-processor", "deberta_multi_label")
+        outdir = join(project_root, "text-processor", "deberta_multi-label_single-class")
         lr = 2e-5,
         bsize = 4,
         epochs = 3,
