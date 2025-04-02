@@ -19,7 +19,7 @@ class BERT():
         self.train = self.JSON2Dataset(train_filepath)
         self.valid = self.JSON2Dataset(valid_filepath)
         self.unique_labels = self.GetLabels(self.train, self.valid)
-        print(len(self.unique_labels))
+        print("Number of unique classes: {}".format(len(self.unique_labels)))
         
         self.tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-v2-xlarge")
         self.model = DebertaV2ForSequenceClassification.from_pretrained("microsoft/deberta-v2-xlarge", 
@@ -54,7 +54,19 @@ class BERT():
         def parse_label(examples):
             # 1. Access the 'breadcrumbs' columns as lists of lists
             # 2. Extract the last element from each list
-            rtype = [sublist[-1] if sublist else "Other" for sublist in examples['breadcrumbs']]            
+            rtype = []
+            for breadcrumb in examples['breadcrumbs']:
+                print(breadcrumb)  
+                match len(breadcrumb):
+                    case 0:
+                        rtype.append("Other")
+                    case 1:
+                        rtype.append(breadcrumb[0])
+                    case _:
+                        rtype.append(breadcrumb[-2])
+            
+            #rtype = [sublist[-2] if len(sublist) >= 2 else "Other" for sublist in examples['breadcrumbs']]  
+            #print(rtype)          
             #Create text columns
             txts = []
             for i in range(len(examples['ingredients'])):
