@@ -3,30 +3,23 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import Trainer, TrainingArguments
 import csv
 from datasets import load_dataset, ClassLabel
-from sklearn.metrics import f1_score, precision_recall_fscore_support
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import torch
+import numpy as np
+
 
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
-    probabilities = torch.sigmoid(torch.tensor(logits))
-    predictions = (probabilities > 0.5).int()  # Apply your threshold
-
-    # Ensure labels are also in the same format (numpy array of integers)
-    labels = labels.astype(int)
-
-    micro_f1 = f1_score(labels, predictions, average="micro")
-    macro_f1 = f1_score(labels, predictions, average="macro")
-    weighted_f1 = f1_score(labels, predictions, average="weighted")
-    precision, recall, f1, _ = precision_recall_fscore_support(labels, predictions, average="micro", zero_division=0)
-
+    predictions = np.argmax(logits, axis=-1)
+    #labels = labels.numpy()
+    precision, recall, f1, _ = precision_recall_fscore_support(labels, predictions, average='weighted', zero_division=0)
+    acc = accuracy_score(labels, predictions)
     return {
-        "micro_f1": micro_f1,
-        "macro_f1": macro_f1,
-        "weighted_f1": weighted_f1,
-        "precision": precision,
-        "recall": recall,
+        'accuracy': acc,
+        'f1': f1,
+        'precision': precision,
+        'recall': recall
     }
-    
 
 
 class BERT():
@@ -39,8 +32,7 @@ class BERT():
         model_name = "microsoft/deberta-v3-base"
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name,
-                                                                        num_labels=len(self.unique_labels), 
-                                                                        problem_type="multi_label_classification")
+                                                                        num_labels=len(self.unique_labels))
         self.trainer = None
         self.training_args = None
         self.train_ready = False
@@ -62,7 +54,7 @@ class BERT():
             max_grad_norm = maxgrad,
             load_best_model_at_end=True,
             fp16=True,  # Enable float16 mixed precision
-            metric_for_best_model="micro_f1",
+            metric_for_best_model="f1",
         )
     
     def JSON2Dataset(self,filepath):
@@ -79,20 +71,20 @@ class BERT():
                     + "\nIngredients: " + ",".join(examples['ingredients'][i]) \
                     + "\nDirections:" + " ".join(examples['steps'][i]) for i in range(len(examples['ingredients'])) ]
             
-            return {'labels': rtype, "text": txts}
+            return {'label': rtype, "text": txts}
             
         return data.map(parse_label, batched=True, batch_size=4, num_proc=4)
     
     def GetLabels(self, data):
         """Get list of unique labels"""        
-        return list(set(data['labels']))
+        return list(set(data['label']))
     
     def TokenizeDataset(self, bsize=16, nprocs=16, maxlen=512):
         def preprocess_function(examples):
             #Create one hotcoded labels
-            examples['labels'] = [[1.0 if lb == label else 0.0 for lb in self.unique_labels] for label in examples['labels']]
+            examples['label'] = [self.unique_labels.index(label) for label in examples['label']]
             return self.tokenizer(examples['text'], truncation=True, padding="max_length", max_length=maxlen)
-
+        
         # Now you can perform the train_test_split without stratification:
         self.data = self.data.train_test_split(test_size=0.2, shuffle=True, seed=42)
         
@@ -151,7 +143,7 @@ if __name__ == "__main__":
     
     model = BERT(data_path)
     model.Finetune(
-        outdir = "./deberta_multi_label",
+        outdir = join(project_root, "text-processor", "deberta_multi_label")
         lr = 2e-5,
         bsize = 4,
         epochs = 3,
