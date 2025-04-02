@@ -1,16 +1,8 @@
-import sentencepiece
-import tiktoken
 from os.path import dirname, join
-from transformers import AutoTokenizer, DebertaV2ForSequenceClassification
-import numpy as np
-from torch.random import manual_seed
-from torch import randint, tensor, int64
-import torch
-from torch.cuda import empty_cache
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import Trainer, TrainingArguments
 import csv
-from datasets import load_dataset, Dataset
-import json
+from datasets import load_dataset
 
 
 class BERT():
@@ -21,8 +13,9 @@ class BERT():
         self.unique_labels = self.GetLabels(self.train, self.valid)
         print("Number of unique classes: {}".format(len(self.unique_labels)))
         
-        self.tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-v2-xlarge")
-        self.model = DebertaV2ForSequenceClassification.from_pretrained("microsoft/deberta-v2-xlarge", 
+        model_name = "microsoft/deberta-v3-base"
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name,
                                                                         num_labels=len(self.unique_labels), 
                                                                         problem_type="multi_label_classification")
         self.trainer = None
@@ -53,31 +46,17 @@ class BERT():
         
         def parse_label(examples):
             # 1. Access the 'breadcrumbs' columns as lists of lists
-            # 2. Extract the last element from each list
-            rtype = []
-            for breadcrumb in examples['breadcrumbs']:
-                print(breadcrumb)  
-                match len(breadcrumb):
-                    case 0:
-                        rtype.append("Other")
-                    case 1:
-                        rtype.append(breadcrumb[0])
-                    case _:
-                        rtype.append(breadcrumb[-2])
-            
-            #rtype = [sublist[-2] if len(sublist) >= 2 else "Other" for sublist in examples['breadcrumbs']]  
+            # 2. Extract the last element from each list   
+            rtype = [sublist[-2] if len(sublist) >= 2 else "Other" for sublist in examples['breadcrumbs']]  
             #print(rtype)          
             #Create text columns
-            txts = []
-            for i in range(len(examples['ingredients'])):
-                ctxt = examples['recipe_name'][i] \
+            txts = [examples['recipe_name'][i] \
                     + "\nIngredients: " + ",".join(examples['ingredients'][i]) \
-                    + "\nDirections:" + " ".join(examples['steps'][i])
-                txts.append(ctxt)
+                    + "\nDirections:" + " ".join(examples['steps'][i]) for i in range(len(examples['ingredients'])) ]
+            
             return {'labels': rtype, "text": txts}
             
-        return data.map(parse_label, batched=True, remove_columns=["breadcrumbs", "recipe_name", "ingredients", "steps"],
-                        batch_size=4, num_proc=4)
+        return data.map(parse_label, batched=True, batch_size=4, num_proc=4)
     
     def GetLabels(self, train_dataset, valid_dataset):
         """Get list of unique labels"""        
@@ -86,17 +65,13 @@ class BERT():
     def TokenizeDataset(self, bsize=16, nprocs=16, maxlen=512):
         def preprocess_function(examples):
             #Create one hotcoded labels
-            lbs = []
-            for label in examples['labels']:
-                lb = [0.0] * len(self.unique_labels)
-                index = self.unique_labels.index(label)
-                lb[index] = 1.0
-                lbs.append(lb)
-            examples['labels'] = lbs
+            examples['labels'] = [[1.0 if lb == label else 0.0 for lb in self.unique_labels] for label in examples['labels']]
             return self.tokenizer(examples['text'], truncation=True, padding="max_length", max_length=maxlen)
         
         self.tk_train = self.train.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
         self.tk_valid = self.valid.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
+        self.train = None
+        self.valid = None
         self.train_ready = True
 
 
