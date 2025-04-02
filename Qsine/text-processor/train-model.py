@@ -1,29 +1,37 @@
-
+import sentencepiece
+import tiktoken
 from os.path import dirname, join
 from transformers import AutoTokenizer, DebertaV2ForSequenceClassification
 import numpy as np
 from torch.random import manual_seed
 from torch import randint, tensor, int64
+import torch
 from torch.cuda import empty_cache
 from transformers import Trainer, TrainingArguments
-from datetime import datetime
 import csv
-from datasets import load_dataset, Dataset, load_metric
-from peft import get_peft_model, LoraConfig, TaskType
+from datasets import load_dataset, Dataset
 import json
+
 
 class BERT():
     #Initilize model and tokenizer
-    def __init__(self, train_filepath, test_filepath, numclass):
-        self.train_filepath = train_filepath
-        self.test_filepath = test_filepath
+    def __init__(self, train_filepath, valid_filepath):
+        self.train = self.JSON2Dataset(train_filepath)
+        self.valid = self.JSON2Dataset(valid_filepath)
+        self.unique_labels = self.GetLabels(self.train, self.valid)
+        print(len(self.unique_labels))
+        
         self.tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-v2-xlarge")
         self.model = DebertaV2ForSequenceClassification.from_pretrained("microsoft/deberta-v2-xlarge", 
-                                                                        num_labels=numclass, 
+                                                                        num_labels=len(self.unique_labels), 
                                                                         problem_type="multi_label_classification")
-
-    
-    def SetTrainParam(self, outdir, lr = 5e-5, bsize = 16, epochs = 3, wgtdecay = 0.1):
+        self.trainer = None
+        self.training_args = None
+        self.train_ready = False
+        self.tk_train = None
+        self.tk_valid = None        
+        
+    def SetTrainParam(self, outdir, lr, bsize, epochs, wgtdecay, maxgrad):
         self.training_args = TrainingArguments(
             output_dir=outdir,
             learning_rate=lr,
@@ -31,49 +39,65 @@ class BERT():
             per_device_eval_batch_size=bsize,
             num_train_epochs=epochs,
             weight_decay=wgtdecay,
-            evaluation_strategy="steps",
-            logging_strategy = "steps",
-            logging_steps = 10,
-            eval_steps = 10,
+            evaluation_strategy="epoch",
+            logging_strategy = "epoch",
+            save_strategy="epoch",
+            max_grad_norm = maxgrad,
+            load_best_model_at_end=True,
+            metric_for_best_model="f1",
         )
-
-         
+    
+    def JSON2Dataset(self,filepath):
+        #Convert JSON to Dataset
+        data = load_dataset('json', data_files=filepath)["train"]
+        
+        def parse_label(examples):
+            # 1. Access the 'breadcrumbs' columns as lists of lists
+            # 2. Extract the last element from each list
+            rtype = [sublist[-1] if sublist else "Other" for sublist in examples['breadcrumbs']]            
+            #Create text columns
+            txts = []
+            for i in range(len(examples['ingredients'])):
+                ctxt = examples['recipe_name'][i] \
+                    + "\nIngredients: " + ",".join(examples['ingredients'][i]) \
+                    + "\nDirections:" + " ".join(examples['steps'][i])
+                txts.append(ctxt)
+            return {'labels': rtype, "text": txts}
+            
+        return data.map(parse_label, batched=True, remove_columns=["breadcrumbs", "recipe_name", "ingredients", "steps"],
+                        batch_size=4, num_proc=4)
+    
+    def GetLabels(self, train_dataset, valid_dataset):
+        """Get list of unique labels"""        
+        return list(set(train_dataset['labels'] + valid_dataset['labels']))
+    
     def TokenizeDataset(self, bsize=16, nprocs=16, maxlen=512):
         def preprocess_function(examples):
-            first_sentences = [[context] * 4 for context in examples["sent1"]]
-            question_headers = examples["sent2"]
-            second_sentences = [
-                [f"{header} {examples[end][i]}" for end in self.choicetag] for i, header in enumerate(question_headers)
-            ]
-
-            first_sentences = sum(first_sentences, [])
-            second_sentences = sum(second_sentences, [])
-
-            tokenized_examples = self.tokenizer(first_sentences, second_sentences, truncation=True, padding=True, max_length=maxlen)
-            return {k: [v[i : i + 4] for i in range(0, len(v), 4)] for k, v in tokenized_examples.items()}
+            #Create one hotcoded labels
+            lbs = []
+            for label in examples['labels']:
+                lb = [0.0] * len(self.unique_labels)
+                index = self.unique_labels.index(label)
+                lb[index] = 1.0
+                lbs.append(lb)
+            examples['labels'] = lbs
+            return self.tokenizer(examples['text'], truncation=True, padding="max_length", max_length=maxlen)
         
-        train_dataset = self.NPYtoDataset(self.train)
-        valid_dataset = self.NPYtoDataset(self.valid)
-        
-        self.tk_train = train_dataset.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
-        self.tk_valid = valid_dataset.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
+        self.tk_train = self.train.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
+        self.tk_valid = self.valid.map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
         self.train_ready = True
-    
-    def Finetune(self, outdir, lr, bsize, epochs, wgtdecay, ttype, rval, ldropout, tmod, nprocs, maxlen):        
+
+
+    def Finetune(self, outdir, lr, bsize, epochs, wgtdecay, nprocs, maxlen, maxgrad):
         if not self.train_ready:
             self.TokenizeDataset(bsize, nprocs, maxlen)
         
-        self.SetTrainParam(outdir, lr, bsize, epochs, wgtdecay)
-        self.SetLoraConfig(ttype, rval, ldropout, tmod)
-        self.SetCollator()
-        
+        self.SetTrainParam(outdir, lr, bsize, epochs, wgtdecay, maxgrad)
         trainer = Trainer(
-            model=get_peft_model(self.model, self.config),
+            model=self.model,
             args=self.training_args,
             train_dataset=self.tk_train,
-            eval_dataset=self.tk_train,
-            tokenizer=self.tokenizer,
-            data_collator=self.data_collator,
+            eval_dataset=self.tk_valid,
         )
         
         history = trainer.train()
@@ -96,3 +120,32 @@ class BERT():
             writer.writeheader()
             writer.writerows(data)
 
+    def SetModel(self, model_path, local_files_only = False):
+        pass
+    
+    def TestModel():
+        pass
+        
+
+
+
+
+if __name__ == "__main__":
+    project_root = dirname(dirname(__file__))
+    data_path = join(project_root, "data")
+    train_path = join(data_path,"data.json")
+    valid_path = train_path
+    
+    model = BERT(train_path, valid_path)
+    model.Finetune(
+        outdir = "./deberta_multi_label",
+        lr = 2e-5,
+        bsize = 4,
+        epochs = 3,
+        wgtdecay = 0.01,
+        maxgrad = 1.0,
+        nprocs = 4,
+        maxlen = 512
+    )
+    
+    
