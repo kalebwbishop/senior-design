@@ -58,6 +58,7 @@ class BERT():
             metric_for_best_model="f1",
             greater_is_better=True,     # Whether a higher value of the metric is better (for F1)
             callbacks=[early_stopping_callback],
+            early_stopping_patience=3,
         )
     
     def JSON2Dataset(self,filepath):
