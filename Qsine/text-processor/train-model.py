@@ -65,7 +65,7 @@ class BERT():
         def parse_label(examples):
             # 1. Access the 'breadcrumbs' columns as lists of lists
             # 2. Extract the last element from each list   
-            rtype = [sublist[-1] if len(sublist) >= 2 else "Recipes" for sublist in examples['breadcrumbs']]  
+            rtype = [sublist[-2] if len(sublist) >= 2 else "Recipes" for sublist in examples['breadcrumbs']]  
             #print(rtype)          
             #Create text columns
             txts = [examples['recipe_name'][i] \
@@ -155,7 +155,7 @@ if __name__ == "__main__":
         epochs = 20,
         wgtdecay = 0.01,
         maxgrad = 1.0,
-        nprocs = 4,
+        nprocs = 8,
         maxlen = 512
     )
     
