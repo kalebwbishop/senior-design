@@ -40,7 +40,7 @@ def PredictClass(model_path, label_path, query):
 
 def RerankRecipe(model_name, query, dataset, rclass):
     #  Rerank recipes within class
-    model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L6-v2")
+    model = CrossEncoder(model_name)
     ranks = model.rank(query, dataset, return_documents=True)
     
     print("Query:", query)
