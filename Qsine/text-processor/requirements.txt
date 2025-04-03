@@ -7,3 +7,4 @@ tiktoken
 sentencepiece
 accelerate
 protobuf
+huggingface_hub[hf_xet]
