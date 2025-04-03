@@ -147,7 +147,7 @@ if __name__ == "__main__":
     
     model = BERT(data_path)
     model.Finetune(
-        outdir = join(project_root, "text-processor", "deberta_multi-label_single-class")
+        outdir = join(project_root, "text-processor", "deberta_multi-label_single-class"),
         lr = 2e-5,
         bsize = 4,
         epochs = 3,
