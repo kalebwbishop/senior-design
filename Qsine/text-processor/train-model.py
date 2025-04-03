@@ -29,7 +29,7 @@ class BERT():
         self.unique_labels = self.GetLabels(self.data)
         print("Number of unique classes: {}".format(len(self.unique_labels)))
         
-        model_name = "microsoft/deberta-v3-base"
+        model_name = "microsoft/deberta-v3-large"
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name,
                                                                         num_labels=len(self.unique_labels))
@@ -150,9 +150,9 @@ if __name__ == "__main__":
     model = BERT(data_path)
     model.Finetune(
         outdir = join(project_root, "text-processor", "deberta_multi-label_single-class"),
-        lr = 2e-5,
+        lr = 1e-5,
         bsize = 4,
-        epochs = 3,
+        epochs = 20,
         wgtdecay = 0.01,
         maxgrad = 1.0,
         nprocs = 4,
