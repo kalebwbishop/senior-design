@@ -4,3 +4,5 @@ ultralytics
 python-dotenv
 pymongo
 scikit-learn
+nltk
+tqdm

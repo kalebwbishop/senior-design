@@ -23,11 +23,11 @@ if __name__ == "__main__":
         results = model.val(data=DATA_PATH, imgsz=224)
         print(f"Validation results: {results}")
 
-        model.save("model.pt")  # Save the model after training
+        model.save("model2.pt")  # Save the model after training
 
     except KeyboardInterrupt:
         print("\nTraining interrupted. Saving the model and exiting safely...")
-        model.save("model.pt")  # Save the model after training
+        model.save("model2.pt")  # Save the model after training
 
     finally:
         print("Process completed.")
