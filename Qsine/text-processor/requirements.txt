@@ -6,3 +6,4 @@ torch
 tiktoken
 sentencepiece
 accelerate
+protobuf
