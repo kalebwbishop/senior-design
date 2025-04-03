@@ -1,0 +1,9 @@
+transformers
+csv
+datasets
+scikit-learn
+numpy
+torch
+tiktoken
+sentencepiece
+accelerate
