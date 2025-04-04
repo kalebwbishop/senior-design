@@ -5,6 +5,6 @@ numpy
 torch
 tiktoken
 sentencepiece
-accelerate
+conda-forge::accelerate
 protobuf
 huggingface_hub[hf_xet]
