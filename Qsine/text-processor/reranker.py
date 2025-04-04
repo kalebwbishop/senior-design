@@ -2,9 +2,7 @@ import torch
 import csv
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sentence_transformers import CrossEncoder
-
-
-model_name = "microsoft/deberta-v3-base"
+from .train_model import BERT
 
 
 def ParseLabel(label_path):
@@ -17,13 +15,12 @@ def ParseLabel(label_path):
         return dict1, dict2, len(data_rows)
     
 
-def PredictClass(model_path, label_path, query):
+def PredictClass(classifier, label_path, query):
     #Parse Label
     id2label, label2id, numclass = ParseLabel(label_path)
     
     #Load model for inference
-    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
-    model = AutoModelForSequenceClassification.from_pretrained(model_path, numlabels=numclass, local_files_only=True)
+    model = BERT()
     
     # 2. Prepare Input Text
     inputs = tokenizer(query, padding=True, truncation=True, return_tensors="pt")
@@ -38,17 +35,19 @@ def PredictClass(model_path, label_path, query):
     # Return predicted class
     return id2label[predicted_id]
 
-def RerankRecipe(model_name, query, dataset, rclass):
+def RerankRecipe(reranker, query, passage, rclass):
     #  Rerank recipes within class
-    model = CrossEncoder(model_name)
-    ranks = model.rank(query, dataset, return_documents=True)
+    model = CrossEncoder(reranker)
+    ranks = model.rank(query, passage, return_documents=True)
     
     print("Query:", query)
     for rank in ranks:
         print(f"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}")
     
     
-def GetRecipe():
+def GetRecipe(query):
+    #Get dish class
+    
     pass    
 
 if __name__ == "__main__":

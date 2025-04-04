@@ -24,12 +24,12 @@ def compute_metrics(eval_pred):
 
 class BERT():
     #Initilize model and tokenizer
-    def __init__(self, data_filepath):
+    def __init__(self, data_filepath = "", label_filepath=""):
         self.data = self.JSON2Dataset(data_filepath)
         self.unique_labels = self.GetLabels(self.data)
         print("Number of unique classes: {}".format(len(self.unique_labels)))
         
-        model_name = "microsoft/deberta-v3-large"
+        model_name = "microsoft/deberta-v3-base"
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name,
                                                                         num_labels=len(self.unique_labels))
@@ -140,8 +140,10 @@ class BERT():
     def SetModel(self, model_path, local_files_only = False):
         pass
     
-    def TestModel():
+    def Query(self):
         pass
+    
+
     
 if __name__ == "__main__":
     project_root = dirname(dirname(__file__))
