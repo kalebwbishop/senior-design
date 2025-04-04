@@ -1,4 +1,6 @@
 name: ML
+channels:
+  - conda-forge
 dependencies:
   - transformers
   - datasets
