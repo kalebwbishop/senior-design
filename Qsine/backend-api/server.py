@@ -15,9 +15,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 sys.path.append("../custom_model")
+
+from classify import infer_image
+
 sys.path.append("../allergen-detector")
 
-from test_model import ProcessRecipe
+from test_model import ProcessRecipe, GetAllergenData
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "D:/qsine/uploads"
@@ -73,6 +76,8 @@ def classify_image():
 
 @app.route("/barcode/<barcode>", methods=["GET"])
 def get_barcode_product(barcode):
+    edit = request.args.get("edit", default="false").lower() == "true"
+
     if not barcode:
         return jsonify({"message": "No barcode provided"}), 400
 
@@ -88,70 +93,73 @@ def get_barcode_product(barcode):
         data = json.load(f)
 
         product = data.get(barcode)
-        # if product:
-        #   return jsonify(product)
-        # else:
+        if not product:
 
-        def attempt_to_find_product(barcode):
-            fdc_id = None
-            response = requests.get(
-                f"https://api1.myfooddata.com/autocomplete/{barcode}"
-            )
-            if response.status_code == 200:
-                search_data = response.json()
-                if "hits" in search_data and len(search_data["hits"]) > 0:
-                    fdc_id = search_data["hits"][0]["document"]["fdc_id"]
-
-            if fdc_id:
-                headers = {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-                }
-
+            def attempt_to_find_product(barcode):
+                fdc_id = None
                 response = requests.get(
-                    f"https://tools.myfooddata.com/nutrition-facts/{fdc_id}/wt1/1",
-                    headers=headers,
+                    f"https://api1.myfooddata.com/autocomplete/{barcode}"
                 )
                 if response.status_code == 200:
-                    match_name = re.search(r'"name":"(.*?)"', response.text)
-                    match_company = re.search(r'"brand_owner":"(.*?)"', response.text)
-                    match_ingredients = re.search(
-                        r'"ingredients":"(.*?)"', response.text
+                    search_data = response.json()
+                    if "hits" in search_data and len(search_data["hits"]) > 0:
+                        fdc_id = search_data["hits"][0]["document"]["fdc_id"]
+
+                if fdc_id:
+                    headers = {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                    }
+
+                    response = requests.get(
+                        f"https://tools.myfooddata.com/nutrition-facts/{fdc_id}/wt1/1",
+                        headers=headers,
                     )
-                    if match_name and match_company and match_ingredients:
-                        product = {
-                            "name": match_name.group(1),
-                            "company": match_company.group(1),
-                            "ingredients": match_ingredients.group(1)
-                            .lower()
-                            .split(", "),
-                        }
+                    if response.status_code == 200:
+                        match_name = re.search(r'"name":"(.*?)"', response.text)
+                        match_company = re.search(
+                            r'"brand_owner":"(.*?)"', response.text
+                        )
+                        match_ingredients = re.search(
+                            r'"ingredients":"(.*?)"', response.text
+                        )
+                        if match_name and match_company and match_ingredients:
+                            product = {
+                                "name": match_name.group(1),
+                                "company": match_company.group(1),
+                                "ingredients": match_ingredients.group(1)
+                                .lower()
+                                .split(", "),
+                            }
 
-                        with open(barcode_data_path) as f:
-                            data = json.load(f)
-                            data[barcode] = product
+                            with open(barcode_data_path) as f:
+                                data = json.load(f)
+                                data[barcode] = product
 
-                        with open(barcode_data_path, "w") as f:
-                            json.dump(data, f, indent=4)
+                            with open(barcode_data_path, "w") as f:
+                                json.dump(data, f, indent=4)
 
-                        return product
+                            return product
 
-                return None
+                    return None
 
-        product = attempt_to_find_product(barcode)
-        print(product)
+            product = attempt_to_find_product(barcode)
+            print(product)
 
         if not product:
             return jsonify({"message": "Product not found"}), 404
 
-        allergens = ProcessRecipe(
-            {"ingredients": product["ingredients"], "recipe_name": product["name"]}
-        )
-        print(allergens)
+        if not edit:
+            allergens = ProcessRecipe(
+                {"ingredients": product["ingredients"], "recipe_name": product["name"]}
+            )
+            print(allergens)
+        else:
+            allergens = None
 
         return jsonify({"product": product, "allergens": allergens}), 200
 
 
-@app.route("/barcode/<barcode>", methods=["POST"])
+@app.route("/barcode/<barcode>", methods=["PUT"])
 def update_barcode_product(barcode):
     # Validate barcode
     if not barcode:
@@ -167,6 +175,8 @@ def update_barcode_product(barcode):
     new_data = request.get_json()
     if not new_data:
         return jsonify({"message": "No data provided"}), 400
+
+    new_data = new_data.get("product")
 
     required_fields = ["name", "company", "ingredients"]
     if not all(field in new_data for field in required_fields):
@@ -200,8 +210,8 @@ def update_barcode_product(barcode):
     return jsonify({"message": "Barcode data updated successfully"}), 200
 
 
-@app.route("/upload-text-image", methods=["POST"])
-def upload_text_image():
+@app.route("/upload-text-image/<lang>", methods=["POST"])
+def upload_text_image(lang):
     OCR_API_URL = "https://api.ocr.space/parse/image"
     OCR_API_KEY = os.environ.get("OCR_API_KEY")
     if "image" not in request.files:
@@ -211,19 +221,36 @@ def upload_text_image():
 
     # Save the uploaded image to a temporary file
     file_path = os.path.join("temp", secure_filename(file.filename))
-    file.save(file_path)
+
+    # Ensure the temp directory exists
+    os.makedirs("temp", exist_ok=True)
+
+    # Check the file size
+    file.seek(0, os.SEEK_END)
+    file_size = file.tell()
+    file.seek(0)
+
+    # If the file size exceeds 1 MB, resize the image
+    if file_size > 1 * 1024 * 1024:  # 1 MB in bytes
+        with Image.open(file) as img:
+            img = img.convert("RGB")  # Ensure the image is in RGB mode
+            img.thumbnail((1024, 1024))  # Resize the image to a maximum of 1024x1024
+            img.save(file_path, format="JPEG", quality=85)  # Save with reduced quality
+    else:
+        file.save(file_path)
+
+    filename = file_path
 
     # Prepare the image for the OCR API
-
     payload = {
         "isOverlayRequired": False,
         "apikey": OCR_API_KEY,
-        "language": "eng",
+        "language": lang,
     }
 
-    files = {"image": (file.filename, file.stream, file.mimetype)}
     # Send image to OCR API
-    response = requests.post(OCR_API_URL, files=files, data=payload)
+    with open(filename, "rb") as f:
+        response = requests.post(OCR_API_URL, files={filename: f}, data=payload)
 
     def clean_text(text):
         # Remove unwanted characters and newlines
@@ -235,6 +262,7 @@ def upload_text_image():
         return text
 
     if response.status_code == 200:
+        print(f"Response: {response.json()}")
         cleaned_text = clean_text(
             response.json().get("ParsedResults", [{}])[0].get("ParsedText", "None")
         )
@@ -250,14 +278,48 @@ def upload_text_image():
         )
 
 
-@app.route("/process-recipe", methods=["POST"])
-def process_recipe():
-    data = request.get_json()
+@app.route("/upload-image", methods=["POST"])
+def upload_image():
+    if "image" not in request.files:
+        return jsonify({"error": "No image part in the request"}), 400
 
-    ProcessRecipe()
+    file = request.files["image"]
 
-    return jsonify({"message": "Recipe processed successfully", "recipe": recipe}), 200
+    # Save the uploaded image to a temporary file
+    file_path = os.path.join(
+        app.config["UPLOAD_FOLDER"], secure_filename(file.filename)
+    )
+
+    # Ensure the upload folder exists
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+
+    # Save the file
+    file.save(file_path)
+
+    classification = infer_image(file_path)
+
+    print(f"Classification: {classification}")
+
+    return (
+        jsonify(
+            {"message": "Image successfully uploaded", "classification": classification}
+        ),
+        200,
+    )
+
+
+@app.route("/get-allergens", methods=["GET"])
+def get_allergens():
+    allergens = GetAllergenData()
+
+    allergen_list = [
+        {"name": allergen, "id": allergen.lower().replace(" ", "_").replace("-", "_")}
+        for allergen in allergens
+        if allergen != "None"
+    ]
+
+    return jsonify(allergen_list), 200
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5001)

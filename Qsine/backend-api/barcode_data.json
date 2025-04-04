@@ -218,5 +218,137 @@
             "folic acid",
             "pyridoxine hydrochloride."
         ]
+    },
+    "051500720011": {
+        "name": "Butter no-stick spray, butter",
+        "company": "The j.m. smucker company",
+        "ingredients": [
+            "canola oil*",
+            "soy lecithin",
+            "natural and artificial flavor",
+            "dimethyl silicone (for anti-foaming)",
+            "beta carotene (color)",
+            "propellant."
+        ]
+    },
+    "051500241288": {
+        "name": "Almond butter",
+        "company": "The j.m. smucker company",
+        "ingredients": [
+            "made from roasted almonds",
+            "sugar",
+            "hydrogenated vegetable oils (rapeseed",
+            "cottonseed and soybean)",
+            "sunflower oil",
+            "contains 2% or less of: salt."
+        ]
+    },
+    "051500255162": {
+        "name": "Reduced fat creamy peanut butter spread, creamy",
+        "company": "The j.m. smucker company",
+        "ingredients": [
+            "peanuts",
+            "corn syrup solids",
+            "sugar",
+            "pea protein",
+            "contains 2% or less of: salt",
+            "fully hydrogenated vegetable oils (rapeseed and soybean)",
+            "mono and diglycerides",
+            "molasses",
+            "magnesium oxide",
+            "niacinamide",
+            "ferric orthophosphate",
+            "zinc oxide",
+            "copper sulfate",
+            "pyridoxine hydrochloride",
+            "folic acid."
+        ]
+    },
+    "016000123991": {
+        "name": "Lucky charms gluten free breakfast cereal with unicorn marshmallows",
+        "company": "General mills sales inc.",
+        "ingredients": [
+            "whole grain oats",
+            "sugar",
+            "corn starch",
+            "modified corn starch",
+            "corn syrup",
+            "dextrose. contains 2% or less of: salt",
+            "gelatin",
+            "trisodium phosphate",
+            "red 40",
+            "yellow 5 &amp; 6",
+            "blue 1",
+            "natural and artificial flavor. vitamin e (mixed tocopherols) added to preserve freshness. vitamins and minerals: calcium carbonate",
+            "vitamin c (sodium ascorbate)",
+            "iron and zinc (mineral nutrients)",
+            "a b vitamin (niacinamide)",
+            "vitamin b6 (pyridoxine hydrochloride)",
+            "vitamin b1 (thiamin mononitrate)",
+            "vitamin a (palmitate)",
+            "vitamin b2 (riboflavin)",
+            "a b vitamin (folic acid)",
+            "vitamin b12",
+            "vitamin d3."
+        ]
+    },
+    "850031990203": {
+        "company": "Gooder foods, inc.",
+        "ingredients": [
+            "semolina (wheat)",
+            "wheat flour",
+            "chickpea protein",
+            "wheat protein",
+            "nutrients extracted from (broccoli",
+            "spinach",
+            "kale",
+            "pumpkin",
+            "sweet potato",
+            "sunflower seed",
+            "cranberry",
+            "chlorella",
+            "maitake mushroom",
+            "shiitake mushroom)."
+        ],
+        "name": "Curveballs pasta, pipette"
+    },
+    "051500255377": {
+        "name": "Creamy peanut butter",
+        "company": "The j.m. smucker company",
+        "ingredients": [
+            "peanut butter (made from roasted peanuts and sugar",
+            "contains 2% or less of: molasses",
+            "fully hydrogenated vegetable oils [rapeseed and soybean]",
+            "mono and diglycerides",
+            "salt)",
+            "anchovy and sardine oil",
+            "tilapia gelatin",
+            "tocopherols and citric acid (antioxidants)."
+        ]
+    },
+    "014100075707": {
+        "name": "Goldfish - Pizza Baked Snack Crackers",
+        "company": "Goldfish",
+        "ingredients": [
+            "enriched wheat flour (flour",
+            "niacin",
+            "reduced iron",
+            "thiamine mononitrate",
+            "riboflavin",
+            "folic acid)",
+            "canola and/or sunflower oils",
+            "tomato paste",
+            "cheddar cheese (cultured milk",
+            "salt",
+            "enzymes)",
+            "contains 2 percent or less of: salt",
+            "yeast",
+            "baking soda",
+            "spices",
+            "celery",
+            "paprika (color)",
+            "monocalcium phosphate",
+            "onion powder."
+        ]
     }
 }

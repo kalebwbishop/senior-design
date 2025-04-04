@@ -247,26 +247,8 @@ class AllrecipesSearch:
             ]
             temp_recipe["breadcrumbs"] = breadcrumbs
 
-            # Find all image tags inside figure elements
-            # image_tags = soup.find_all("div", class_="photo-dialog__item")
-            # print(f"Found {len(image_tags)} image tags")
-
             # Extract the image URLs
             # image_urls = find_image_urls(url)
-            # for idx, div in enumerate(image_tags):
-            #     inner1 = div.find("figure")
-            #     inner2 = inner1.find("div")
-
-            #     if not inner2:
-            #         img_tag = inner1.find("img")
-            #     else:
-            #         img_tag = inner2.find("img")
-
-            #     if img_tag:
-            #         # Get the image URL from the 'src' attribute
-            #         image_url = img_tag["data-src"]
-
-            #         image_urls.append(image_url)
 
             # if len(image_urls) == 0:
             #     raise ValueError("No images found")

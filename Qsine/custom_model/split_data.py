@@ -3,7 +3,7 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 # Define paths
-all_data_dir = "./dataset/all_data"
+all_data_dir = "./dataset/downloaded_images"
 train_dir = "./dataset/train"
 test_dir = "./dataset/test"
 val_dir = "./dataset/val"
