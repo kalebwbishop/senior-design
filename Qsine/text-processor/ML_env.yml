@@ -1,5 +1,6 @@
 name: ML
 channels:
+  - anaconda
   - conda-forge
 dependencies:
   - transformers
@@ -11,4 +12,6 @@ dependencies:
   - sentencepiece
   - accelerate
   - protobuf
-  - huggingface_hub[hf_xet]
+  - huggingface_hub
+  - git-lfs
+  - pandas
