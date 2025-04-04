@@ -1,0 +1,12 @@
+name: ML
+dependencies:
+  - transformers
+  - datasets
+  - scikit-learn
+  - numpy
+  - pytorch
+  - tiktoken
+  - sentencepiece
+  - accelerate
+  - protobuf
+  - huggingface_hub[hf_xet]
