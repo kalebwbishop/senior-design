@@ -1,13 +1,17 @@
 name: ML
 channels:
-  - anaconda
   - conda-forge
+  - defaults
+  - anaconda
+channel_priority: flexible #added flexible channel priority.
 dependencies:
+  - python = 3.12
   - transformers
   - datasets
   - scikit-learn
   - numpy
   - pytorch
+  - python_abi
   - tiktoken
   - sentencepiece
   - accelerate
