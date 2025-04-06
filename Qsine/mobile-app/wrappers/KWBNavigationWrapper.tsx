@@ -4,28 +4,34 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { RootParamList } from '../types';
 import CameraPage from '@/pages/Camera';
-import PictureTaken from '@/pages/PictureTaken';
-import BarcodeScannedPage from '@/pages/BarcodeScanned';
+import ImageNextPage from '@/pages/ImageNextPage';
+import ImageNextPageResults from '@/pages/ImageNextPage/Results';
+import TextNextPage from '@/pages/TextNextPage';
+import BarcodeNextPage from '@/pages/BarcodeNextPage';
+import BarcodeNextPageEdit from '@/pages/BarcodeNextPage/Edit';
 import UserSettingsPage from '@/pages/UserSettings';
-
+import TextNextPageResults from '@/pages/TextNextPage/Results';
 const Stack = createStackNavigator<RootParamList>();
 
 export default function KWBNavigationWrapper() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="UserSettingsPage"
+                initialRouteName="CameraPage"
                 screenOptions={{
                     cardStyle: {
-                        backgroundColor: '#A0BBEA',
+                        backgroundColor: '#F5F7FA',
                     },
                     headerShown: false,
                 }}>
                 <Stack.Screen name="CameraPage" component={CameraPage} />
-                <Stack.Screen name="PictureTaken" component={PictureTaken} />
-                <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': "000000099482"}} />
+                <Stack.Screen name="ImageNextPage" component={ImageNextPage} />
+                <Stack.Screen name="ImageNextPageResults" component={ImageNextPageResults} />
+                <Stack.Screen name="BarcodeNextPage" component={BarcodeNextPage} initialParams={{'barcode': "051500255445"}} />
+                <Stack.Screen name="BarcodeNextPageEdit" component={BarcodeNextPageEdit} />
+                <Stack.Screen name="TextNextPage" component={TextNextPage} />
+                <Stack.Screen name="TextNextPageResults" component={TextNextPageResults} />
                 <Stack.Screen name="UserSettingsPage" component={UserSettingsPage} />
-                {/* <Stack.Screen name="BarcodeScannedPage" component={BarcodeScannedPage} initialParams={{'barcode': "014100099482"}} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     );

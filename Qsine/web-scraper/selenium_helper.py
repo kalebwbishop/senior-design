@@ -9,10 +9,12 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 import hashlib
 import requests
 from bs4 import BeautifulSoup
+import concurrent.futures
+import re
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -24,8 +26,23 @@ options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-driver = webdriver.Firefox(service=service, options=options)
+# Create a pool of drivers
+driver_pool = []
+MAX_DRIVERS = 5
 
+def get_driver():
+    """Get a driver from the pool or create a new one if needed"""
+    if driver_pool:
+        return driver_pool.pop()
+    else:
+        return webdriver.Firefox(service=service, options=options)
+
+def return_driver(driver):
+    """Return a driver to the pool"""
+    if len(driver_pool) < MAX_DRIVERS:
+        driver_pool.append(driver)
+    else:
+        driver.quit()
 
 def get_recipe_data(url):
     """
@@ -107,110 +124,89 @@ def get_recipe_data(url):
     return temp_recipe
 
 
+def extract_images_from_page(driver, url):
+    """Extract images from a single page"""
+    try:
+        driver.get(url)
+        
+        # Find all image elements with data-src attribute
+        image_elements = driver.find_elements(By.CSS_SELECTOR, "img[data-src]")
+        
+        # Extract image URLs
+        image_urls = []
+        for img in image_elements:
+            try:
+                img_url = img.get_attribute("data-src")
+                if img_url and "thmb" not in img_url:  # Filter out thumbnail images
+                    image_urls.append(img_url)
+            except Exception:
+                continue
+                
+        return image_urls
+    except Exception as e:
+        print(f"Error extracting images from {url}: {e}")
+        return []
+
+
 def find_image_urls(url):
-    driver.get(url)
-    print(driver.title)
-
-    # Find all 'a' tags with the specified class
-    gallery_links = driver.find_elements(
-        By.CSS_SELECTOR, "a.gallery-photo.dialog-link.mntl-text-link"
-    )
-
-    # Click the first link if it exists
-    if gallery_links:
+    """Find image URLs using a more efficient approach"""
+    driver = get_driver()
+    try:
+        # First try to get images directly from the page
+        image_urls = extract_images_from_page(driver, url)
+        
+        # If we found images, return them
+        if image_urls:
+            return image_urls
+            
+        # If not, try the gallery approach
+        driver.get(url)
+        
+        # Find gallery links
+        gallery_links = driver.find_elements(
+            By.CSS_SELECTOR, "a.gallery-photo.dialog-link.mntl-text-link"
+        )
+        
+        if not gallery_links:
+            return []
+            
+        # Get the first gallery link
+        first_link = gallery_links[0]
+        gallery_url = first_link.get_attribute("href")
+        
+        if not gallery_url:
+            return []
+            
+        # Navigate to the gallery
+        driver.get(gallery_url)
+        
+        # Extract images from the gallery
+        gallery_images = extract_images_from_page(driver, gallery_url)
+        
+        # Try to navigate through pagination if available
         try:
-            first_link = gallery_links[0]
-            href = first_link.get_attribute("href")
-            print(f"Clicking on the first link: {href}")
-            first_link.click()
-        except Exception as e:
-            print(f"Error clicking the first link: {e}")
-    else:
-        print("No gallery links found.")
-
-    data_page = 2
-    while True:
-        try:
-            # Scroll to the bottom of the page first
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(0.5)  # Allow time for content to load
-
-            # Wait until the next button becomes clickable
-            next_button = WebDriverWait(driver, 5).until(
-                EC.element_to_be_clickable(
-                    (By.CSS_SELECTOR, f".pagination__next[data-page='{data_page}']")
-                )
-            )
-
-            # Scroll directly to the next button
-            driver.execute_script(
-                "arguments[0].scrollIntoView({block: 'center'});", next_button
-            )
-            time.sleep(0.5)
-
-            try:
-                dismiss_button = driver.find_element(
-                    By.CSS_SELECTOR, ".pushly-prompt-btn-dismiss"
-                )
-                dismiss_button.click()
-                print("Pushly prompt dismissed.")
-                time.sleep(1)
-
-            except NoSuchElementException:
-                print("No Pushly prompt found.")
-
-            try:
-                no_thanks_button = driver.find_element(
-                    By.CSS_SELECTOR, "div.fb_lightbox-overlay.fb_lightbox-overlay-fixed"
-                )
-                no_thanks_button.click()
-                print("No Thanks button clicked.")
-                time.sleep(1)
-            except NoSuchElementException:
-                print("No 'No Thanks' button found.")
-
-            # Click the next button
-            next_button.click()
-            print("Next button clicked.")
-
-            data_page += 1
-            time.sleep(0.5)
-        except Exception as e:
-            print(f"Error clicking next button: {e}")
-            break
-
-    # Find all divs with class 'photo-dialog__item'
-    image_tags = driver.find_elements(By.CLASS_NAME, "photo-dialog__item")
-    print(f"Found {len(image_tags)} image tags")
-
-    # Extract the image URLs
-    image_urls = []
-    for idx, div in enumerate(image_tags):
-        try:
-            # Find the nested figure element
-            figure = div.find_element(By.TAG_NAME, "figure")
-            inner_divs = figure.find_elements(By.TAG_NAME, "div")
-
-            # Look for the image tag inside the appropriate div
-            img_tag = None
-            if inner_divs:
-                img_tag = inner_divs[0].find_element(By.TAG_NAME, "img")
-            else:
-                img_tag = figure.find_element(By.TAG_NAME, "img")
-
-            # Get the 'data-src' attribute (change to 'src' if needed)
-            if img_tag:
-                image_url = img_tag.get_attribute("data-src")
-                image_urls.append(image_url)
-
-        except Exception as e:
-            print(f"Error processing image {idx}: {e}")
-
-    # Print the extracted image URLs
-    for url in image_urls:
-        print(url)
-
-    return image_urls
+            # Find pagination links
+            pagination_links = driver.find_elements(By.CSS_SELECTOR, ".pagination__next")
+            
+            for pagination_link in pagination_links:
+                try:
+                    next_url = pagination_link.get_attribute("href")
+                    if next_url:
+                        # Extract images from the next page
+                        next_page_images = extract_images_from_page(driver, next_url)
+                        gallery_images.extend(next_page_images)
+                except Exception:
+                    continue
+        except Exception:
+            pass
+            
+        return gallery_images
+        
+    except Exception as e:
+        print(f"Error in find_image_urls: {e}")
+        return []
+    finally:
+        return_driver(driver)
 
 
 @app.route("/scrape", methods=["GET"])

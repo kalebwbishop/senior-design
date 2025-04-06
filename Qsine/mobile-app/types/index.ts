@@ -4,25 +4,34 @@ import { RouteProp } from '@react-navigation/native';
 type RootParamList = {
   'CameraPage': undefined;
   'PictureTaken': {'uri': string};
-  'BarcodeScannedPage': { 'barcode': string };
+  'BarcodeNextPage': { 'barcode': string };
+  'BarcodeNextPageEdit': { 'barcode': string, 'product': Product['product'] };
   'UserSettingsPage': undefined;
+  'TextNextPage': { 'imagePath': string };
+  'TextNextPageResults': { 'processedText': string, 'manualText': boolean };
+  'ImageNextPage': { 'imagePath': string };
+  'ImageNextPageResults': { 'croppedImagePath': string, 'originalImagePath': string, 'classification': string };
 };
 
 type Product = {
-  name: string;
-  company: string;
-  ingredients: string[];
+  product: {
+    name: string;
+    company: string;
+    ingredients: string[];
+  };
 };
 
 type KWBNavProp = StackNavigationProp<RootParamList>;
 
 type PictureTakenPageRouteProp = RouteProp<RootParamList, 'PictureTaken'>;
-type BarcodeScannedPageRouteProp = RouteProp<RootParamList, 'BarcodeScannedPage'>;
+type BarcodeNextPageRouteProp = RouteProp<RootParamList, 'BarcodeNextPage'>;
+type BarcodeNextPageEditRouteProp = RouteProp<RootParamList, 'BarcodeNextPageEdit'>;
 
 export type {
   RootParamList,
   KWBNavProp,
   PictureTakenPageRouteProp,
-  BarcodeScannedPageRouteProp,
+  BarcodeNextPageRouteProp,
+  BarcodeNextPageEditRouteProp,
   Product,
 };

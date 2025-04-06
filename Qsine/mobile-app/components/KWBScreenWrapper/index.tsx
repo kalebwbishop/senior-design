@@ -34,7 +34,7 @@ const KWBScreenWrapper: React.FC<KWBScreenWrapperProps> = ({ backButtonActive = 
                             <Ionicons name="chevron-back" size={24} color="white" />
                         </Pressable>
                     )}
-                    <KWBTypography variant="h1" style={styles.headerText}>
+                    <KWBTypography variant="h1" style={[styles.headerText, { color: 'white' }]}>
                         {headerText}
                     </KWBTypography>
                     {navigation && backButtonActive && (

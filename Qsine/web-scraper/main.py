@@ -2,7 +2,7 @@ import requests
 import re
 import json
 import os
-from pymongo import MongoClient
+from pymongo import MongoClient, UpdateOne
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import time
@@ -10,6 +10,9 @@ import hashlib
 import zlib
 import json
 import base64
+import concurrent.futures
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from selenium_helper import find_image_urls
 
@@ -19,26 +22,32 @@ load_dotenv()
 class AllrecipesSearch:
     def __init__(self):
         self.start_url = "https://www.allrecipes.com/"
-        self.links_file_path = "./links.json"
-        self.failures_file_path = "./failures.txt"
         self.temp_recipes = []
         self.db = self.connect_to_mongodb()
+        self.session = self._create_session()
+        self.batch_size = 20  # Increased from 5 to 20 for better performance
+        self.max_workers = 10  # Number of parallel workers
+        
+        # Initialize MongoDB collections
+        self.recipes_collection = self.db.recipes
+        self.state_collection = self.db.scraper_state
+        self.failures_collection = self.db.failures
+        
+        # Load state from MongoDB
+        self.load_state()
 
-        try:
-            with open(self.failures_file_path, "r") as file:
-                self.failures = set(file.read().splitlines())
-
-        except FileNotFoundError:
-            with open(self.failures_file_path, "w") as file:
-                file.write("")
-            self.failures = set([])
-
-        try:
-            self.load()
-
-        except FileNotFoundError:
-            self.checked_urls = set()
-            self.to_check_urls = [self.start_url]
+    def _create_session(self):
+        """Create a session with retry strategy for better performance"""
+        session = requests.Session()
+        retry_strategy = Retry(
+            total=3,
+            backoff_factor=0.5,
+            status_forcelist=[429, 500, 502, 503, 504],
+        )
+        adapter = HTTPAdapter(max_retries=retry_strategy, pool_connections=20, pool_maxsize=20)
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+        return session
 
     # Connect to MongoDB
     def connect_to_mongodb(self):
@@ -56,132 +65,166 @@ class AllrecipesSearch:
         return base64.b64encode(compressed).decode("utf-8")  # Encode for storage
 
     def save(self):
-        os.makedirs(os.path.dirname(self.links_file_path), exist_ok=True)
-        with open(self.links_file_path, "w", encoding="utf-8") as file:
-            json.dump(
-                {
+        # Save state to MongoDB
+        self.state_collection.update_one(
+            {"_id": "scraper_state"},
+            {
+                "$set": {
                     "checked_urls": list(self.checked_urls),
                     "to_check_urls": self.to_check_urls,
-                },
-                file,
-                indent=4,
-            )
+                }
+            },
+            upsert=True,
+        )
 
-        for recipe in self.temp_recipes:
-            key = recipe["key"]
-
-            # Retrieve the recipe from the database using the key
-            existing_recipe = self.db.recipes.find_one({"key": key})
-
-            # If the recipe exists, update its image_urls
-            if existing_recipe:
-                existing_data = json.loads(
-                    zlib.decompress(base64.b64decode(existing_recipe["data"])).decode(
-                        "utf-8"
+        # Batch database operations
+        if self.temp_recipes:
+            # Prepare bulk operations
+            bulk_operations = []
+            for recipe in self.temp_recipes:
+                key = recipe["key"]
+                
+                # Retrieve the recipe from the database using the key
+                existing_recipe = self.recipes_collection.find_one({"key": key})
+                
+                # If the recipe exists, update its image_urls
+                if existing_recipe:
+                    existing_data = json.loads(
+                        zlib.decompress(base64.b64decode(existing_recipe["data"])).decode(
+                            "utf-8"
+                        )
                     )
+                    recipe["image_urls"] = existing_data.get("image_urls", [])
+                
+                compressed_recipe = self.compress_data(recipe)
+                
+                # Create UpdateOne operation
+                update_operation = UpdateOne(
+                    {"key": key},
+                    {"$set": {"data": compressed_recipe}},
+                    upsert=True
                 )
-                recipe["image_urls"] = existing_data.get("image_urls", [])
-
-            compressed_recipe = self.compress_data(recipe)
-
-            self.db.recipes.update_one(
-                {"key": key},
-                {"$set": {"data": compressed_recipe}},  # Store compressed data
-                upsert=True,
-            )
+                
+                # Add to bulk operations
+                bulk_operations.append(update_operation)
+            
+            # Execute bulk operations
+            if bulk_operations:
+                self.recipes_collection.bulk_write(bulk_operations)
+            
+            # Clear temp recipes after saving
+            self.temp_recipes = []
 
         print("Saved progress")
 
-    def load(self):
-        if not os.path.exists(self.links_file_path):
-            data = {"checked_urls": [], "to_check_urls": []}
+    def load_state(self):
+        """Load state from MongoDB"""
+        state_doc = self.state_collection.find_one({"_id": "scraper_state"})
+        
+        if state_doc:
+            self.checked_urls = set(state_doc.get("checked_urls", []))
+            self.to_check_urls = state_doc.get("to_check_urls", [])
         else:
-            with open(self.links_file_path, "r") as file:
-                try:
-                    data = json.load(file)
-                except json.JSONDecodeError:
-                    data = {"checked_urls": [], "to_check_urls": []}
+            self.checked_urls = set()
+            self.to_check_urls = [self.start_url]
+            
+        # Load failures from MongoDB
+        failures_docs = self.failures_collection.find({}, {"url": 1})
+        self.failures = set(doc["url"] for doc in failures_docs)
 
-        self.checked_urls = set(data.get("checked_urls", []))
-        self.to_check_urls = data.get("to_check_urls", []) + [self.start_url]
+    def add_failure(self, url):
+        """Add a URL to the failures collection"""
+        if url not in self.failures:
+            self.failures.add(url)
+            self.failures_collection.update_one(
+                {"url": url},
+                {"$set": {"url": url, "timestamp": time.time()}},
+                upsert=True
+            )
+
+    def process_url(self, url):
+        """Process a single URL - extracted from search method for parallel processing"""
+        if url in self.checked_urls:
+            return None
+        
+        try:
+            response = self.session.get(url)
+            if response.status_code != 200:
+                print(f"Bad response for {url}: {response.status_code}")
+                return None
+                
+            # Extract new links
+            new_links = re.findall(
+                r'href="(https://www.allrecipes.com/(?!thmb)[^"?]+)',
+                response.text,
+            )
+            
+            # Parse the recipe
+            recipe = self.parse(url)
+            
+            return {
+                "recipe": recipe,
+                "new_links": new_links,
+                "url": url
+            }
+            
+        except Exception as e:
+            print(f"Error processing {url}: {e}")
+            if url not in self.failures:
+                self.add_failure(url)
+            return None
 
     def search(self):
         count = 0
-        max_retries = 5  # Max retries before giving up
-        retry_wait_time = 10  # Seconds to wait before retrying
-
+        
         try:
             while len(self.to_check_urls) > 0:
-                curr_link = self.to_check_urls.pop()
-
-                if curr_link in self.checked_urls:
-                    continue
-
-                retries = 0
-                while retries < max_retries:
-                    try:
-                        response = requests.get(curr_link)
-                        if response.status_code != 200:
-                            print("Bad response")
-                            time.sleep(600)
-                            retries = max_retries
-                            continue
-                        break  # If successful, exit the retry loop
-
-                    except (
-                        requests.exceptions.ConnectionError,
-                        requests.exceptions.Timeout,
-                    ) as e:
-                        print(f"Error connecting to {curr_link}: {e}")
-                        retries += 1
-                        if retries < max_retries:
-                            print(
-                                f"Retrying {curr_link} in {retry_wait_time} seconds... ({retries}/{max_retries})"
-                            )
-                            time.sleep(retry_wait_time)
-                        else:
-                            print(
-                                f"Max retries reached for {curr_link}. Moving to the next URL."
-                            )
-                            self.failures.add(curr_link)
-                            with open(self.failures_file_path, "a") as file:
-                                file.write(curr_link + "\n")
-                            break  # Exit the retry loop after max retries
-
-                if retries >= max_retries:
-                    continue  # Skip to the next URL after max retries are reached
-
-                self.to_check_urls = list(
-                    set(
-                        self.to_check_urls
-                        + re.findall(
-                            r'href="(https://www.allrecipes.com/(?!thmb)[^"?]+)',
-                            response.text,
-                        )
-                    )
-                )
-                print(len(self.checked_urls), len(self.to_check_urls), curr_link)
-                self.checked_urls.add(curr_link)
-
-                self.parse(curr_link)
-
-                count += 1
-
-                if count >= 5:
-                    count = 0
-                    self.save()
+                # Get a batch of URLs to process
+                batch_size = min(self.max_workers, len(self.to_check_urls))
+                batch_urls = [self.to_check_urls.pop() for _ in range(batch_size)]
+                
+                # Process URLs in parallel
+                with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                    future_to_url = {executor.submit(self.process_url, url): url for url in batch_urls}
+                    
+                    for future in concurrent.futures.as_completed(future_to_url):
+                        url = future_to_url[future]
+                        try:
+                            result = future.result()
+                            if result:
+                                # Add new links to the queue
+                                self.to_check_urls = list(set(self.to_check_urls + result["new_links"]))
+                                
+                                # Add to checked URLs
+                                self.checked_urls.add(url)
+                                
+                                # Add recipe to temp recipes if it exists
+                                if result["recipe"]:
+                                    self.temp_recipes.append(result["recipe"])
+                                    count += 1
+                                    
+                                    # Save progress periodically
+                                    if count >= self.batch_size:
+                                        self.save()
+                                        count = 0
+                                        
+                        except Exception as e:
+                            print(f"Error processing {url}: {e}")
+                
+                print(f"Processed batch. Checked: {len(self.checked_urls)}, To check: {len(self.to_check_urls)}")
 
         except KeyboardInterrupt:
+            print("Interrupted by user. Saving progress...")
             self.save()
 
+        # Final save
         self.save()
 
     def parse(self, url, check_failures=True):
         try:
-
             if check_failures and url in self.failures:
                 print(f"{url}: URL already in failures")
-                return
+                return None
 
             temp_recipe = {}
             key = hashlib.md5(url.encode("utf-8")).hexdigest()
@@ -194,11 +237,11 @@ class AllrecipesSearch:
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
             }
 
-            response = requests.get(url, headers=headers)
+            response = self.session.get(url, headers=headers)
             if "Signal - Not Acceptable" in response.text:
                 print("Resting for 5 minutes")
                 time.sleep(300)
-                return
+                return None
 
             soup = BeautifulSoup(response.text, "html.parser")
 
@@ -247,28 +290,21 @@ class AllrecipesSearch:
             ]
             temp_recipe["breadcrumbs"] = breadcrumbs
 
-            # Extract the image URLs
+            # Extract the image URLs - commented out for now as it's slow
             # image_urls = find_image_urls(url)
-
             # if len(image_urls) == 0:
             #     raise ValueError("No images found")
-
             # temp_recipe["image_urls"] = image_urls
 
-            self.temp_recipes.append(temp_recipe)
             return temp_recipe
 
         except Exception as e:
             print(f"Error parsing {url}: {e}")
 
             if url not in self.failures:
-                print(f"Adding {url} to failures")
-                with open(self.failures_file_path, "a") as file:
-                    file.write(url + "\n")
+                self.add_failure(url)
 
-                self.failures.add(url)
-
-            return
+            return None
 
 
 if __name__ == "__main__":

@@ -29,7 +29,7 @@ const KWBTypography: React.FC<KWBTypographyProps> = ({ variant = 'body1', childr
     };
 
     return (
-        <Text style={[{ fontSize: getFontSize(), fontFamily: getFontFamily() }, styles.text, style]} {...props}>
+        <Text style={[{ fontSize: getFontSize(), fontFamily: getFontFamily() }, style]} {...props}>
             {children}
         </Text>
     );
@@ -37,7 +37,7 @@ const KWBTypography: React.FC<KWBTypographyProps> = ({ variant = 'body1', childr
 
 const styles = StyleSheet.create({
     text: {
-        color: 'white',
+        // Removed default white color to allow style prop to take precedence
     },
 });
 
