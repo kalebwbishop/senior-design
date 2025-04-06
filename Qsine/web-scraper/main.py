@@ -30,7 +30,6 @@ class AllrecipesSearch:
         
         # Initialize MongoDB collections
         self.recipes_collection = self.db.recipes
-        self.state_collection = self.db.scraper_state
         self.failures_collection = self.db.failures
         
         # Load state from MongoDB
@@ -65,13 +64,14 @@ class AllrecipesSearch:
         return base64.b64encode(compressed).decode("utf-8")  # Encode for storage
 
     def save(self):
-        # Save state to MongoDB
-        self.state_collection.update_one(
+        # Save state to MongoDB using the recipes collection
+        self.recipes_collection.update_one(
             {"_id": "scraper_state"},
             {
                 "$set": {
                     "checked_urls": list(self.checked_urls),
                     "to_check_urls": self.to_check_urls,
+                    "last_updated": time.time()
                 }
             },
             upsert=True,
@@ -118,8 +118,8 @@ class AllrecipesSearch:
         print("Saved progress")
 
     def load_state(self):
-        """Load state from MongoDB"""
-        state_doc = self.state_collection.find_one({"_id": "scraper_state"})
+        """Load state from MongoDB using the recipes collection"""
+        state_doc = self.recipes_collection.find_one({"_id": "scraper_state"})
         
         if state_doc:
             self.checked_urls = set(state_doc.get("checked_urls", []))

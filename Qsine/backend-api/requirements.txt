@@ -1,6 +1,11 @@
 Flask
-werkzeug
+Werkzeug
 Pillow
+python-dotenv
+requests
 ultralytics
 flask-cors
 pyopenssl
+nltk
+scikit-learn
+pymongo
