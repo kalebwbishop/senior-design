@@ -24,14 +24,14 @@ def compute_metrics(eval_pred):
 
 class BERT():
     #Initilize model and tokenizer
-    def __init__(self, data_filepath = "", label_filepath="", ):
+    def __init__(self, model_name, data_filepath = "", label_filepath=""):
         self.data = self.JSON2Dataset(data_filepath)
         self.unique_labels = self.GetLabels(self.data)
         print("Number of unique classes: {}".format(len(self.unique_labels)))
         
-        self.model_name = "microsoft/deberta-v3-base"
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModelForSequenceClassification.from_pretrained(self.model_name,
+        self.model_name = model_name
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name,
                                                                         num_labels=len(self.unique_labels))
         self.trainer = None
         self.training_args = None
@@ -50,7 +50,8 @@ class BERT():
             weight_decay=wgtdecay,
             evaluation_strategy="epoch",
             logging_strategy = "epoch",
-            save_strategy="epoch",
+            save_strategy ="epoch", # Disable automatic checkpoint saving
+            save_total_limit = 3, # 2 checkpoints and 1 model
             max_grad_norm = maxgrad, #Gradient clipping
             load_best_model_at_end=True,
             fp16=True,  # Enable float16 mixed precision
@@ -89,13 +90,13 @@ class BERT():
         # Now you can perform the train_test_split without stratification:
         self.data = self.data.train_test_split(test_size=0.2, shuffle=True, seed=42)
         
-        self.tk_train = self.data["train"].map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
-        self.tk_valid = self.data["test"].map(preprocess_function, batched=True, batch_size=bsize, num_proc=nprocs)
+        self.tk_train = self.data["train"].map(preprocess_function, batched=True, batch_size=bsize)
+        self.tk_valid = self.data["test"].map(preprocess_function, batched=True, batch_size=bsize)
         self.data = None
         self.train_ready = True
 
 
-    def Finetune(self, outdir, lr, bsize, epochs, wgtdecay, nprocs, maxlen, maxgrad):
+    def Finetune(self, outdir, lr, bsize, epochs, wgtdecay, nprocs, maxlen, maxgrad, checkpoint=False):
         if not self.train_ready:
             self.TokenizeDataset(bsize, nprocs, maxlen)
         
@@ -110,13 +111,13 @@ class BERT():
             callbacks=[early_stopping_callback], # Stop if no improvement for 3 epochs
         )
         print("Starting training")
-        history = trainer.train()
+        #history = trainer.train(resume_from_checkpoint=checkpoint) # Resume training from checkpoint in outdir
         print("Finished training")
         trainer.save_model(outdir)
         logs = self.ProcessLogs(trainer.state.log_history)
         lb_dict = self.ProcessLabels(self.unique_labels)
         
-        self.DumpData(outdir, "trainer_logs.csv", logs)
+        #self.DumpData(outdir, "trainer_logs.csv", logs)
         self.DumpData(outdir, "labels_dict.csv", lb_dict)
         return logs
     
@@ -143,11 +144,12 @@ class BERT():
     def Query(self):
         pass
     
+    
 
     
 if __name__ == "__main__":
     project_root = dirname(dirname(__file__))
-    data_path = join(project_root, "data","data.json")
+    data_path = join(project_root, "data","all_recipes.json")
     
     model = BERT(data_path)
     model.Finetune(
