@@ -20,3 +20,4 @@ dependencies:
   - git-lfs
   - pandas
   - sentence-transformers
+  - nltk 
