@@ -48,7 +48,7 @@ class BERT():
             per_device_eval_batch_size=bsize,
             num_train_epochs=epochs,
             weight_decay=wgtdecay,
-            evaluation_strategy="epoch",
+            eval_strategy="epoch",
             logging_strategy = "epoch",
             save_strategy ="epoch", # Disable automatic checkpoint saving
             save_total_limit = 3, # 2 checkpoints and 1 model
