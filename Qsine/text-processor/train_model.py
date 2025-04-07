@@ -111,13 +111,13 @@ class BERT():
             callbacks=[early_stopping_callback], # Stop if no improvement for 3 epochs
         )
         print("Starting training")
-        #history = trainer.train(resume_from_checkpoint=checkpoint) # Resume training from checkpoint in outdir
+        history = trainer.train(resume_from_checkpoint=checkpoint) # Resume training from checkpoint in outdir
         print("Finished training")
         trainer.save_model(outdir)
         logs = self.ProcessLogs(trainer.state.log_history)
         lb_dict = self.ProcessLabels(self.unique_labels)
         
-        #self.DumpData(outdir, "trainer_logs.csv", logs)
+        self.DumpData(outdir, "trainer_logs.csv", logs)
         self.DumpData(outdir, "labels_dict.csv", lb_dict)
         return logs
     
