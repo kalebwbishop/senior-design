@@ -5,7 +5,7 @@ import os
 
 
 # Path to your saved model
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pt")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "model2.pt")
 
 
 # Function to load and perform inference on an image
@@ -29,7 +29,9 @@ def infer_image(image_path):
     probs = result.probs
     class_names = result.names
 
-    return probs.top1conf.item(), class_names[probs.top1]
+    return [conf.item() for conf in probs.top5conf], [
+        class_names[prob] for prob in probs.top5
+    ]
 
 
 if __name__ == "__main__":

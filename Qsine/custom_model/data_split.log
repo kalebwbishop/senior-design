@@ -1,0 +1,578 @@
+2025-04-06 14:47:15,559 - INFO - Removing existing directory: ./dataset/train
+2025-04-06 14:47:16,712 - INFO - Removing existing directory: ./dataset/test
+2025-04-06 14:47:16,978 - INFO - Removing existing directory: ./dataset/val
+2025-04-06 14:47:16,994 - INFO - Creating output directories
+2025-04-06 14:47:16,994 - INFO - Starting data split process from ./dataset/all_data
+2025-04-06 14:47:17,009 - WARNING - Not enough files to split for class 4th of july. Skipping.
+2025-04-06 14:47:17,009 - WARNING - Not enough files to split for class air fryer. Skipping.
+2025-04-06 14:47:17,009 - WARNING - Not enough files to split for class allrecipes magazine recipes. Skipping.
+2025-04-06 14:47:17,174 - INFO - Processing class appetizers and snacks with 1593 files
+2025-04-06 14:47:17,174 - INFO - Class appetizers and snacks split: 1274 train, 303 test, 16 validation
+2025-04-06 14:47:17,174 - INFO - Moving 1274 files to ./dataset/train
+2025-04-06 14:47:22,978 - INFO - Moving 303 files to ./dataset/test
+2025-04-06 14:47:24,338 - INFO - Moving 16 files to ./dataset/val
+2025-04-06 14:47:24,637 - INFO - Processing class asian with 2246 files
+2025-04-06 14:47:24,637 - INFO - Class asian split: 1796 train, 427 test, 23 validation
+2025-04-06 14:47:24,637 - INFO - Moving 1796 files to ./dataset/train
+2025-04-06 14:47:32,776 - INFO - Moving 427 files to ./dataset/test
+2025-04-06 14:47:34,714 - INFO - Moving 23 files to ./dataset/val
+2025-04-06 14:47:34,824 - WARNING - Not enough files to split for class asparagus. Skipping.
+2025-04-06 14:47:34,837 - WARNING - Not enough files to split for class bacon. Skipping.
+2025-04-06 14:47:34,874 - INFO - Processing class baked and roasted with 437 files
+2025-04-06 14:47:34,874 - INFO - Class baked and roasted split: 349 train, 83 test, 5 validation
+2025-04-06 14:47:34,874 - INFO - Moving 349 files to ./dataset/train
+2025-04-06 14:47:36,431 - INFO - Moving 83 files to ./dataset/test
+2025-04-06 14:47:36,822 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:47:37,044 - INFO - Processing class banana bread with 2339 files
+2025-04-06 14:47:37,044 - INFO - Class banana bread split: 1871 train, 444 test, 24 validation
+2025-04-06 14:47:37,044 - INFO - Moving 1871 files to ./dataset/train
+2025-04-06 14:47:45,494 - INFO - Moving 444 files to ./dataset/test
+2025-04-06 14:47:47,416 - INFO - Moving 24 files to ./dataset/val
+2025-04-06 14:47:47,526 - WARNING - Not enough files to split for class bar cookie recipes. Skipping.
+2025-04-06 14:47:47,542 - WARNING - Not enough files to split for class bbq & grilling. Skipping.
+2025-04-06 14:47:47,558 - WARNING - Not enough files to split for class beans. Skipping.
+2025-04-06 14:47:47,639 - INFO - Processing class beans and peas with 752 files
+2025-04-06 14:47:47,640 - INFO - Class beans and peas split: 601 train, 143 test, 8 validation
+2025-04-06 14:47:47,640 - INFO - Moving 601 files to ./dataset/train
+2025-04-06 14:47:50,228 - INFO - Moving 143 files to ./dataset/test
+2025-04-06 14:47:50,837 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:47:50,969 - INFO - Processing class beef with 1128 files
+2025-04-06 14:47:50,974 - INFO - Class beef split: 902 train, 214 test, 12 validation
+2025-04-06 14:47:50,974 - INFO - Moving 902 files to ./dataset/train
+2025-04-06 14:47:54,869 - INFO - Moving 214 files to ./dataset/test
+2025-04-06 14:47:55,854 - INFO - Moving 12 files to ./dataset/val
+2025-04-06 14:47:55,918 - WARNING - Not enough files to split for class beef and pork salad recipes. Skipping.
+2025-04-06 14:47:55,918 - WARNING - Not enough files to split for class bowls. Skipping.
+2025-04-06 14:47:56,118 - INFO - Processing class bread with 2397 files
+2025-04-06 14:47:56,118 - INFO - Class bread split: 1917 train, 456 test, 24 validation
+2025-04-06 14:47:56,118 - INFO - Moving 1917 files to ./dataset/train
+2025-04-06 14:48:04,337 - INFO - Moving 456 files to ./dataset/test
+2025-04-06 14:48:06,291 - INFO - Moving 24 files to ./dataset/val
+2025-04-06 14:48:06,776 - INFO - Processing class breakfast and brunch with 4099 files
+2025-04-06 14:48:06,776 - INFO - Class breakfast and brunch split: 3279 train, 779 test, 41 validation
+2025-04-06 14:48:06,776 - INFO - Moving 3279 files to ./dataset/train
+2025-04-06 14:48:21,412 - INFO - Moving 779 files to ./dataset/test
+2025-04-06 14:48:24,796 - INFO - Moving 41 files to ./dataset/val
+2025-04-06 14:48:24,968 - WARNING - Not enough files to split for class breakfast bowl recipes. Skipping.
+2025-04-06 14:48:24,984 - WARNING - Not enough files to split for class breakfast casserole recipes. Skipping.
+2025-04-06 14:48:24,999 - WARNING - Not enough files to split for class broth and stock recipes. Skipping.
+2025-04-06 14:48:25,023 - WARNING - Not enough files to split for class brownie recipes. Skipping.
+2025-04-06 14:48:25,046 - WARNING - Not enough files to split for class brussels sprouts. Skipping.
+2025-04-06 14:48:25,046 - WARNING - Not enough files to split for class bundt cake recipes. Skipping.
+2025-04-06 14:48:25,078 - WARNING - Not enough files to split for class burger recipes. Skipping.
+2025-04-06 14:48:25,078 - WARNING - Not enough files to split for class butter cookie recipes. Skipping.
+2025-04-06 14:48:25,078 - WARNING - Not enough files to split for class cabbage. Skipping.
+2025-04-06 14:48:25,125 - INFO - Processing class cake mix cake recipes with 501 files
+2025-04-06 14:48:25,125 - INFO - Class cake mix cake recipes split: 400 train, 95 test, 6 validation
+2025-04-06 14:48:25,125 - INFO - Moving 400 files to ./dataset/train
+2025-04-06 14:48:26,920 - INFO - Moving 95 files to ./dataset/test
+2025-04-06 14:48:27,335 - INFO - Moving 6 files to ./dataset/val
+2025-04-06 14:48:27,680 - INFO - Processing class cakes with 3470 files
+2025-04-06 14:48:27,680 - INFO - Class cakes split: 2776 train, 659 test, 35 validation
+2025-04-06 14:48:27,680 - INFO - Moving 2776 files to ./dataset/train
+2025-04-06 14:48:39,624 - INFO - Moving 659 files to ./dataset/test
+2025-04-06 14:48:43,308 - INFO - Moving 35 files to ./dataset/val
+2025-04-06 14:48:43,525 - INFO - Processing class candy recipes with 665 files
+2025-04-06 14:48:43,525 - INFO - Class candy recipes split: 532 train, 126 test, 7 validation
+2025-04-06 14:48:43,525 - INFO - Moving 532 files to ./dataset/train
+2025-04-06 14:48:45,904 - INFO - Moving 126 files to ./dataset/test
+2025-04-06 14:48:46,433 - INFO - Moving 7 files to ./dataset/val
+2025-04-06 14:48:46,512 - INFO - Processing class canning and preserving recipes with 472 files
+2025-04-06 14:48:46,512 - INFO - Class canning and preserving recipes split: 377 train, 90 test, 5 validation
+2025-04-06 14:48:46,512 - INFO - Moving 377 files to ./dataset/train
+2025-04-06 14:48:48,228 - INFO - Moving 90 files to ./dataset/test
+2025-04-06 14:48:48,593 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:48:48,625 - WARNING - Not enough files to split for class caribbean. Skipping.
+2025-04-06 14:48:48,641 - WARNING - Not enough files to split for class carrots. Skipping.
+2025-04-06 14:48:48,687 - INFO - Processing class casserole recipes with 466 files
+2025-04-06 14:48:48,688 - INFO - Class casserole recipes split: 372 train, 89 test, 5 validation
+2025-04-06 14:48:48,688 - INFO - Moving 372 files to ./dataset/train
+2025-04-06 14:48:50,337 - INFO - Moving 89 files to ./dataset/test
+2025-04-06 14:48:50,732 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:48:50,805 - INFO - Processing class casseroles with 424 files
+2025-04-06 14:48:50,806 - INFO - Class casseroles split: 339 train, 80 test, 5 validation
+2025-04-06 14:48:50,806 - INFO - Moving 339 files to ./dataset/train
+2025-04-06 14:48:52,281 - INFO - Moving 80 files to ./dataset/test
+2025-04-06 14:48:52,622 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:48:52,670 - WARNING - Not enough files to split for class cauliflower. Skipping.
+2025-04-06 14:48:52,712 - INFO - Processing class cereals with 428 files
+2025-04-06 14:48:52,712 - INFO - Class cereals split: 342 train, 81 test, 5 validation
+2025-04-06 14:48:52,712 - INFO - Moving 342 files to ./dataset/train
+2025-04-06 14:48:54,212 - INFO - Moving 81 files to ./dataset/test
+2025-04-06 14:48:54,563 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:48:54,603 - WARNING - Not enough files to split for class cheese. Skipping.
+2025-04-06 14:48:54,634 - INFO - Processing class cheese dips and spreads recipes with 443 files
+2025-04-06 14:48:54,650 - INFO - Class cheese dips and spreads recipes split: 354 train, 84 test, 5 validation
+2025-04-06 14:48:54,650 - INFO - Moving 354 files to ./dataset/train
+2025-04-06 14:48:56,212 - INFO - Moving 84 files to ./dataset/test
+2025-04-06 14:48:56,557 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:48:56,653 - INFO - Processing class cheesecake recipes with 780 files
+2025-04-06 14:48:56,653 - INFO - Class cheesecake recipes split: 624 train, 148 test, 8 validation
+2025-04-06 14:48:56,653 - INFO - Moving 624 files to ./dataset/train
+2025-04-06 14:48:59,384 - INFO - Moving 148 files to ./dataset/test
+2025-04-06 14:49:00,056 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:49:00,087 - WARNING - Not enough files to split for class chef john. Skipping.
+2025-04-06 14:49:00,557 - INFO - Processing class chicken with 5380 files
+2025-04-06 14:49:00,557 - INFO - Class chicken split: 4304 train, 1022 test, 54 validation
+2025-04-06 14:49:00,557 - INFO - Moving 4304 files to ./dataset/train
+2025-04-06 14:49:19,415 - INFO - Moving 1022 files to ./dataset/test
+2025-04-06 14:49:23,774 - INFO - Moving 54 files to ./dataset/val
+2025-04-06 14:49:24,243 - INFO - Processing class chicken breast with 2535 files
+2025-04-06 14:49:24,259 - INFO - Class chicken breast split: 2028 train, 481 test, 26 validation
+2025-04-06 14:49:24,259 - INFO - Moving 2028 files to ./dataset/train
+2025-04-06 14:49:32,900 - INFO - Moving 481 files to ./dataset/test
+2025-04-06 14:49:34,962 - INFO - Moving 26 files to ./dataset/val
+2025-04-06 14:49:35,088 - WARNING - Not enough files to split for class chicken soup recipes. Skipping.
+2025-04-06 14:49:35,088 - WARNING - Not enough files to split for class chile peppers. Skipping.
+2025-04-06 14:49:35,262 - INFO - Processing class chili recipes with 1888 files
+2025-04-06 14:49:35,262 - INFO - Class chili recipes split: 1510 train, 359 test, 19 validation
+2025-04-06 14:49:35,262 - INFO - Moving 1510 files to ./dataset/train
+2025-04-06 14:49:41,712 - INFO - Moving 359 files to ./dataset/test
+2025-04-06 14:49:43,259 - INFO - Moving 19 files to ./dataset/val
+2025-04-06 14:49:43,337 - WARNING - Not enough files to split for class chinese. Skipping.
+2025-04-06 14:49:43,337 - WARNING - Not enough files to split for class chocolate cake recipes. Skipping.
+2025-04-06 14:49:43,353 - WARNING - Not enough files to split for class chocolate chip cookie recipes. Skipping.
+2025-04-06 14:49:43,369 - WARNING - Not enough files to split for class chocolate dessert recipes. Skipping.
+2025-04-06 14:49:43,400 - WARNING - Not enough files to split for class chowders. Skipping.
+2025-04-06 14:49:43,400 - WARNING - Not enough files to split for class christmas. Skipping.
+2025-04-06 14:49:43,400 - WARNING - Not enough files to split for class christmas appetizers. Skipping.
+2025-04-06 14:49:43,400 - WARNING - Not enough files to split for class christmas cookie recipes. Skipping.
+2025-04-06 14:49:43,400 - WARNING - Not enough files to split for class chutney recipes. Skipping.
+2025-04-06 14:49:43,415 - WARNING - Not enough files to split for class cobblers. Skipping.
+2025-04-06 14:49:43,447 - WARNING - Not enough files to split for class cocktail recipes. Skipping.
+2025-04-06 14:49:43,447 - WARNING - Not enough files to split for class coffee drinks recipes. Skipping.
+2025-04-06 14:49:43,478 - WARNING - Not enough files to split for class coleslaw recipes. Skipping.
+2025-04-06 14:49:43,946 - INFO - Processing class cookies with 5583 files
+2025-04-06 14:49:43,946 - INFO - Class cookies split: 4466 train, 1061 test, 56 validation
+2025-04-06 14:49:43,946 - INFO - Moving 4466 files to ./dataset/train
+2025-04-06 14:50:03,447 - INFO - Moving 1061 files to ./dataset/test
+2025-04-06 14:50:08,072 - INFO - Moving 56 files to ./dataset/val
+2025-04-06 14:50:08,310 - WARNING - Not enough files to split for class cooking by equipment. Skipping.
+2025-04-06 14:50:08,310 - WARNING - Not enough files to split for class corn. Skipping.
+2025-04-06 14:50:08,310 - WARNING - Not enough files to split for class corned beef recipes. Skipping.
+2025-04-06 14:50:08,341 - WARNING - Not enough files to split for class crab. Skipping.
+2025-04-06 14:50:08,364 - WARNING - Not enough files to split for class cream soup recipes. Skipping.
+2025-04-06 14:50:08,420 - INFO - Processing class creamy with 752 files
+2025-04-06 14:50:08,420 - INFO - Class creamy split: 601 train, 143 test, 8 validation
+2025-04-06 14:50:08,420 - INFO - Moving 601 files to ./dataset/train
+2025-04-06 14:50:10,974 - INFO - Moving 143 files to ./dataset/test
+2025-04-06 14:50:11,587 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:50:11,618 - WARNING - Not enough files to split for class crepes. Skipping.
+2025-04-06 14:50:11,668 - WARNING - Not enough files to split for class crisps and crumble recipes. Skipping.
+2025-04-06 14:50:11,701 - INFO - Processing class cupcake recipes with 434 files
+2025-04-06 14:50:11,712 - INFO - Class cupcake recipes split: 347 train, 82 test, 5 validation
+2025-04-06 14:50:11,712 - INFO - Moving 347 files to ./dataset/train
+2025-04-06 14:50:13,290 - INFO - Moving 82 files to ./dataset/test
+2025-04-06 14:50:13,639 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:50:13,670 - WARNING - Not enough files to split for class curries. Skipping.
+2025-04-06 14:50:13,688 - WARNING - Not enough files to split for class custard and cream pies. Skipping.
+2025-04-06 14:50:13,766 - INFO - Processing class custards and puddings with 915 files
+2025-04-06 14:50:13,766 - INFO - Class custards and puddings split: 732 train, 173 test, 10 validation
+2025-04-06 14:50:13,766 - INFO - Moving 732 files to ./dataset/train
+2025-04-06 14:50:16,911 - INFO - Moving 173 files to ./dataset/test
+2025-04-06 14:50:17,669 - INFO - Moving 10 files to ./dataset/val
+2025-04-06 14:50:17,717 - WARNING - Not enough files to split for class dairy recipes. Skipping.
+2025-04-06 14:50:17,717 - WARNING - Not enough files to split for class dessert salad recipes. Skipping.
+2025-04-06 14:50:17,733 - WARNING - Not enough files to split for class dessert sauce recipes. Skipping.
+2025-04-06 14:50:17,781 - INFO - Processing class desserts with 608 files
+2025-04-06 14:50:17,781 - INFO - Class desserts split: 486 train, 115 test, 7 validation
+2025-04-06 14:50:17,781 - INFO - Moving 486 files to ./dataset/train
+2025-04-06 14:50:19,806 - INFO - Moving 115 files to ./dataset/test
+2025-04-06 14:50:20,278 - INFO - Moving 7 files to ./dataset/val
+2025-04-06 14:50:20,310 - WARNING - Not enough files to split for class deviled eggs. Skipping.
+2025-04-06 14:50:20,453 - INFO - Processing class dips and spreads recipes with 1628 files
+2025-04-06 14:50:20,453 - INFO - Class dips and spreads recipes split: 1302 train, 309 test, 17 validation
+2025-04-06 14:50:20,453 - INFO - Moving 1302 files to ./dataset/train
+2025-04-06 14:50:25,891 - INFO - Moving 309 files to ./dataset/test
+2025-04-06 14:50:27,165 - INFO - Moving 17 files to ./dataset/val
+2025-04-06 14:50:27,290 - INFO - Processing class drinks recipes with 581 files
+2025-04-06 14:50:27,290 - INFO - Class drinks recipes split: 464 train, 111 test, 6 validation
+2025-04-06 14:50:27,290 - INFO - Moving 464 files to ./dataset/train
+2025-04-06 14:50:29,212 - INFO - Moving 111 files to ./dataset/test
+2025-04-06 14:50:29,663 - INFO - Moving 6 files to ./dataset/val
+2025-04-06 14:50:29,695 - WARNING - Not enough files to split for class dumpling recipes. Skipping.
+2025-04-06 14:50:29,695 - WARNING - Not enough files to split for class easter. Skipping.
+2025-04-06 14:50:29,712 - WARNING - Not enough files to split for class eastern european. Skipping.
+2025-04-06 14:50:29,727 - WARNING - Not enough files to split for class egg. Skipping.
+2025-04-06 14:50:29,853 - INFO - Processing class eggs with 1407 files
+2025-04-06 14:50:29,853 - INFO - Class eggs split: 1125 train, 267 test, 15 validation
+2025-04-06 14:50:29,853 - INFO - Moving 1125 files to ./dataset/train
+2025-04-06 14:50:34,473 - INFO - Moving 267 files to ./dataset/test
+2025-04-06 14:50:35,565 - INFO - Moving 15 files to ./dataset/val
+2025-04-06 14:50:35,718 - INFO - Processing class enchilada recipes with 947 files
+2025-04-06 14:50:35,718 - INFO - Class enchilada recipes split: 757 train, 180 test, 10 validation
+2025-04-06 14:50:35,718 - INFO - Moving 757 files to ./dataset/train
+2025-04-06 14:50:38,869 - INFO - Moving 180 files to ./dataset/test
+2025-04-06 14:50:39,610 - INFO - Moving 10 files to ./dataset/val
+2025-04-06 14:50:39,802 - INFO - Processing class european with 1775 files
+2025-04-06 14:50:39,803 - INFO - Class european split: 1420 train, 337 test, 18 validation
+2025-04-06 14:50:39,803 - INFO - Moving 1420 files to ./dataset/train
+2025-04-06 14:50:45,673 - INFO - Moving 337 files to ./dataset/test
+2025-04-06 14:50:47,045 - INFO - Moving 18 files to ./dataset/val
+2025-04-06 14:50:47,140 - WARNING - Not enough files to split for class everyday cooking. Skipping.
+2025-04-06 14:50:47,140 - WARNING - Not enough files to split for class everyday leftovers recipes. Skipping.
+2025-04-06 14:50:47,156 - WARNING - Not enough files to split for class fajita recipes. Skipping.
+2025-04-06 14:50:47,156 - WARNING - Not enough files to split for class fall. Skipping.
+2025-04-06 14:50:47,156 - WARNING - Not enough files to split for class filipino. Skipping.
+2025-04-06 14:50:47,172 - WARNING - Not enough files to split for class fillings. Skipping.
+2025-04-06 14:50:47,219 - INFO - Processing class fish with 588 files
+2025-04-06 14:50:47,222 - INFO - Class fish split: 470 train, 112 test, 6 validation
+2025-04-06 14:50:47,222 - INFO - Moving 470 files to ./dataset/train
+2025-04-06 14:50:49,150 - INFO - Moving 112 files to ./dataset/test
+2025-04-06 14:50:49,603 - INFO - Moving 6 files to ./dataset/val
+2025-04-06 14:50:49,634 - WARNING - Not enough files to split for class french fries recipes. Skipping.
+2025-04-06 14:50:49,650 - WARNING - Not enough files to split for class fries recipes. Skipping.
+2025-04-06 14:50:49,714 - INFO - Processing class frostings and icings with 828 files
+2025-04-06 14:50:49,714 - INFO - Class frostings and icings split: 662 train, 157 test, 9 validation
+2025-04-06 14:50:49,714 - INFO - Moving 662 files to ./dataset/train
+2025-04-06 14:50:52,437 - INFO - Moving 157 files to ./dataset/test
+2025-04-06 14:50:53,087 - INFO - Moving 9 files to ./dataset/val
+2025-04-06 14:50:53,118 - WARNING - Not enough files to split for class frozen dessert recipes. Skipping.
+2025-04-06 14:50:53,183 - INFO - Processing class fruit bread recipes with 718 files
+2025-04-06 14:50:53,183 - INFO - Class fruit bread recipes split: 574 train, 136 test, 8 validation
+2025-04-06 14:50:53,183 - INFO - Moving 574 files to ./dataset/train
+2025-04-06 14:50:55,540 - INFO - Moving 136 files to ./dataset/test
+2025-04-06 14:50:56,094 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:50:56,157 - INFO - Processing class fruit cookie recipes with 416 files
+2025-04-06 14:50:56,157 - INFO - Class fruit cookie recipes split: 332 train, 79 test, 5 validation
+2025-04-06 14:50:56,157 - INFO - Moving 332 files to ./dataset/train
+2025-04-06 14:50:57,525 - INFO - Moving 79 files to ./dataset/test
+2025-04-06 14:50:57,837 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:50:58,192 - INFO - Processing class fruit desserts with 3676 files
+2025-04-06 14:50:58,201 - INFO - Class fruit desserts split: 2940 train, 699 test, 37 validation
+2025-04-06 14:50:58,201 - INFO - Moving 2940 files to ./dataset/train
+2025-04-06 14:51:10,337 - INFO - Moving 699 files to ./dataset/test
+2025-04-06 14:51:13,221 - INFO - Moving 37 files to ./dataset/val
+2025-04-06 14:51:13,443 - INFO - Processing class fruit pies with 820 files
+2025-04-06 14:51:13,443 - INFO - Class fruit pies split: 656 train, 155 test, 9 validation
+2025-04-06 14:51:13,443 - INFO - Moving 656 files to ./dataset/train
+2025-04-06 14:51:16,150 - INFO - Moving 155 files to ./dataset/test
+2025-04-06 14:51:16,790 - INFO - Moving 9 files to ./dataset/val
+2025-04-06 14:51:16,837 - WARNING - Not enough files to split for class fruit salad recipes. Skipping.
+2025-04-06 14:51:16,837 - WARNING - Not enough files to split for class fruits. Skipping.
+2025-04-06 14:51:16,837 - WARNING - Not enough files to split for class fruits and vegetables. Skipping.
+2025-04-06 14:51:16,853 - WARNING - Not enough files to split for class fudge recipes. Skipping.
+2025-04-06 14:51:16,853 - WARNING - Not enough files to split for class game meats. Skipping.
+2025-04-06 14:51:16,947 - INFO - Processing class global cuisines with 1069 files
+2025-04-06 14:51:16,947 - INFO - Class global cuisines split: 855 train, 203 test, 11 validation
+2025-04-06 14:51:16,947 - INFO - Moving 855 files to ./dataset/train
+2025-04-06 14:51:20,478 - INFO - Moving 203 files to ./dataset/test
+2025-04-06 14:51:21,343 - INFO - Moving 11 files to ./dataset/val
+2025-04-06 14:51:21,390 - WARNING - Not enough files to split for class gluten free. Skipping.
+2025-04-06 14:51:21,406 - WARNING - Not enough files to split for class grain side dish recipes. Skipping.
+2025-04-06 14:51:21,406 - WARNING - Not enough files to split for class grains. Skipping.
+2025-04-06 14:51:21,422 - WARNING - Not enough files to split for class gravy recipes. Skipping.
+2025-04-06 14:51:21,422 - WARNING - Not enough files to split for class greek. Skipping.
+2025-04-06 14:51:21,462 - WARNING - Not enough files to split for class green salad recipes. Skipping.
+2025-04-06 14:51:21,462 - WARNING - Not enough files to split for class greens. Skipping.
+2025-04-06 14:51:21,462 - WARNING - Not enough files to split for class halloween. Skipping.
+2025-04-06 14:51:21,470 - WARNING - Not enough files to split for class ham. Skipping.
+2025-04-06 14:51:21,470 - WARNING - Not enough files to split for class hanukkah. Skipping.
+2025-04-06 14:51:21,494 - WARNING - Not enough files to split for class herbs and spices recipes. Skipping.
+2025-04-06 14:51:21,494 - WARNING - Not enough files to split for class holiday planning. Skipping.
+2025-04-06 14:51:21,502 - WARNING - Not enough files to split for class holidays and events recipes. Skipping.
+2025-04-06 14:51:21,502 - WARNING - Not enough files to split for class ice cream. Skipping.
+2025-04-06 14:51:21,525 - WARNING - Not enough files to split for class indian. Skipping.
+2025-04-06 14:51:21,533 - WARNING - Not enough files to split for class ingredients. Skipping.
+2025-04-06 14:51:21,533 - WARNING - Not enough files to split for class instant pot¨. Skipping.
+2025-04-06 14:51:21,565 - WARNING - Not enough files to split for class international cookie recipes. Skipping.
+2025-04-06 14:51:21,565 - WARNING - Not enough files to split for class italian. Skipping.
+2025-04-06 14:51:21,565 - WARNING - Not enough files to split for class japanese. Skipping.
+2025-04-06 14:51:21,565 - WARNING - Not enough files to split for class kids. Skipping.
+2025-04-06 14:51:21,565 - WARNING - Not enough files to split for class kitchen tips. Skipping.
+2025-04-06 14:51:21,565 - WARNING - Not enough files to split for class korean. Skipping.
+2025-04-06 14:51:21,588 - WARNING - Not enough files to split for class lamb. Skipping.
+2025-04-06 14:51:21,617 - WARNING - Not enough files to split for class lasagna recipes. Skipping.
+2025-04-06 14:51:21,759 - INFO - Processing class latin american with 1728 files
+2025-04-06 14:51:21,759 - INFO - Class latin american split: 1382 train, 328 test, 18 validation
+2025-04-06 14:51:21,759 - INFO - Moving 1382 files to ./dataset/train
+2025-04-06 14:51:27,465 - INFO - Moving 328 files to ./dataset/test
+2025-04-06 14:51:28,807 - INFO - Moving 18 files to ./dataset/val
+2025-04-06 14:51:28,898 - WARNING - Not enough files to split for class liqueur dessert recipes. Skipping.
+2025-04-06 14:51:28,993 - INFO - Processing class macaroni and cheese recipes with 1057 files
+2025-04-06 14:51:28,993 - INFO - Class macaroni and cheese recipes split: 845 train, 201 test, 11 validation
+2025-04-06 14:51:28,993 - INFO - Moving 845 files to ./dataset/train
+2025-04-06 14:51:32,472 - INFO - Moving 201 files to ./dataset/test
+2025-04-06 14:51:33,322 - INFO - Moving 11 files to ./dataset/val
+2025-04-06 14:51:33,717 - INFO - Processing class main dishes with 3906 files
+2025-04-06 14:51:33,717 - INFO - Class main dishes split: 3124 train, 742 test, 40 validation
+2025-04-06 14:51:33,717 - INFO - Moving 3124 files to ./dataset/train
+2025-04-06 14:51:46,650 - INFO - Moving 742 files to ./dataset/test
+2025-04-06 14:51:49,743 - INFO - Moving 40 files to ./dataset/val
+2025-04-06 14:51:49,915 - WARNING - Not enough files to split for class mardi gras. Skipping.
+2025-04-06 14:51:50,010 - INFO - Processing class meat and poultry with 1044 files
+2025-04-06 14:51:50,010 - INFO - Class meat and poultry split: 835 train, 198 test, 11 validation
+2025-04-06 14:51:50,010 - INFO - Moving 835 files to ./dataset/train
+2025-04-06 14:51:53,462 - INFO - Moving 198 files to ./dataset/test
+2025-04-06 14:51:54,291 - INFO - Moving 11 files to ./dataset/val
+2025-04-06 14:51:54,341 - WARNING - Not enough files to split for class meat and seafood. Skipping.
+2025-04-06 14:51:54,353 - WARNING - Not enough files to split for class meatloaf recipes. Skipping.
+2025-04-06 14:51:54,369 - WARNING - Not enough files to split for class mexican. Skipping.
+2025-04-06 14:51:54,369 - WARNING - Not enough files to split for class middle eastern. Skipping.
+2025-04-06 14:51:54,369 - WARNING - Not enough files to split for class mini foods. Skipping.
+2025-04-06 14:51:54,385 - WARNING - Not enough files to split for class more meal ideas. Skipping.
+2025-04-06 14:51:54,385 - WARNING - Not enough files to split for class mousse recipes. Skipping.
+2025-04-06 14:51:54,401 - WARNING - Not enough files to split for class muffin recipes. Skipping.
+2025-04-06 14:51:54,417 - WARNING - Not enough files to split for class mushrooms. Skipping.
+2025-04-06 14:51:54,433 - WARNING - Not enough files to split for class no-bake pie recipes. Skipping.
+2025-04-06 14:51:54,433 - WARNING - Not enough files to split for class noodle recipes. Skipping.
+2025-04-06 14:51:54,448 - WARNING - Not enough files to split for class north african. Skipping.
+2025-04-06 14:51:54,448 - WARNING - Not enough files to split for class nut cookie recipes. Skipping.
+2025-04-06 14:51:54,464 - WARNING - Not enough files to split for class nut dessert recipes. Skipping.
+2025-04-06 14:51:54,480 - WARNING - Not enough files to split for class nuts and seed recipes. Skipping.
+2025-04-06 14:51:54,480 - WARNING - Not enough files to split for class nuts and seeds. Skipping.
+2025-04-06 14:51:54,512 - INFO - Processing class oatmeal cookie recipes with 414 files
+2025-04-06 14:51:54,512 - INFO - Class oatmeal cookie recipes split: 331 train, 78 test, 5 validation
+2025-04-06 14:51:54,512 - INFO - Moving 331 files to ./dataset/train
+2025-04-06 14:51:55,906 - INFO - Moving 78 files to ./dataset/test
+2025-04-06 14:51:56,224 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:51:56,255 - WARNING - Not enough files to split for class oatmeal recipes. Skipping.
+2025-04-06 14:51:56,284 - WARNING - Not enough files to split for class onion soup recipes. Skipping.
+2025-04-06 14:51:56,351 - INFO - Processing class pancake recipes with 806 files
+2025-04-06 14:51:56,351 - INFO - Class pancake recipes split: 644 train, 153 test, 9 validation
+2025-04-06 14:51:56,351 - INFO - Moving 644 files to ./dataset/train
+2025-04-06 14:51:59,012 - INFO - Moving 153 files to ./dataset/test
+2025-04-06 14:51:59,650 - INFO - Moving 9 files to ./dataset/val
+2025-04-06 14:51:59,806 - INFO - Processing class pasta with 1523 files
+2025-04-06 14:51:59,806 - INFO - Class pasta split: 1218 train, 289 test, 16 validation
+2025-04-06 14:51:59,806 - INFO - Moving 1218 files to ./dataset/train
+2025-04-06 14:52:04,798 - INFO - Moving 289 files to ./dataset/test
+2025-04-06 14:52:05,979 - INFO - Moving 16 files to ./dataset/val
+2025-04-06 14:52:06,059 - WARNING - Not enough files to split for class pasta and noodles. Skipping.
+2025-04-06 14:52:06,074 - WARNING - Not enough files to split for class pasta by shape recipes. Skipping.
+2025-04-06 14:52:06,122 - INFO - Processing class pasta salad with 475 files
+2025-04-06 14:52:06,122 - INFO - Class pasta salad split: 380 train, 90 test, 5 validation
+2025-04-06 14:52:06,122 - INFO - Moving 380 files to ./dataset/train
+2025-04-06 14:52:07,712 - INFO - Moving 90 files to ./dataset/test
+2025-04-06 14:52:08,067 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:52:08,150 - INFO - Processing class pasta sauces with 633 files
+2025-04-06 14:52:08,150 - INFO - Class pasta sauces split: 506 train, 120 test, 7 validation
+2025-04-06 14:52:08,150 - INFO - Moving 506 files to ./dataset/train
+2025-04-06 14:52:10,224 - INFO - Moving 120 files to ./dataset/test
+2025-04-06 14:52:10,714 - INFO - Moving 7 files to ./dataset/val
+2025-04-06 14:52:10,819 - INFO - Processing class pastries with 646 files
+2025-04-06 14:52:10,820 - INFO - Class pastries split: 516 train, 123 test, 7 validation
+2025-04-06 14:52:10,820 - INFO - Moving 516 files to ./dataset/train
+2025-04-06 14:52:12,928 - INFO - Moving 123 files to ./dataset/test
+2025-04-06 14:52:13,431 - INFO - Moving 7 files to ./dataset/val
+2025-04-06 14:52:13,462 - WARNING - Not enough files to split for class pickles. Skipping.
+2025-04-06 14:52:13,466 - WARNING - Not enough files to split for class pie crusts. Skipping.
+2025-04-06 14:52:13,624 - INFO - Processing class pies with 1787 files
+2025-04-06 14:52:13,628 - INFO - Class pies split: 1429 train, 340 test, 18 validation
+2025-04-06 14:52:13,628 - INFO - Moving 1429 files to ./dataset/train
+2025-04-06 14:52:19,723 - INFO - Moving 340 files to ./dataset/test
+2025-04-06 14:52:21,182 - INFO - Moving 18 files to ./dataset/val
+2025-04-06 14:52:21,293 - WARNING - Not enough files to split for class pizza recipes. Skipping.
+2025-04-06 14:52:21,293 - WARNING - Not enough files to split for class popcorn candy recipes. Skipping.
+2025-04-06 14:52:21,420 - INFO - Processing class pork with 1502 files
+2025-04-06 14:52:21,420 - INFO - Class pork split: 1201 train, 285 test, 16 validation
+2025-04-06 14:52:21,420 - INFO - Moving 1201 files to ./dataset/train
+2025-04-06 14:52:26,448 - INFO - Moving 285 files to ./dataset/test
+2025-04-06 14:52:27,612 - INFO - Moving 16 files to ./dataset/val
+2025-04-06 14:52:27,755 - INFO - Processing class pork chop recipes with 990 files
+2025-04-06 14:52:27,755 - INFO - Class pork chop recipes split: 792 train, 188 test, 10 validation
+2025-04-06 14:52:27,755 - INFO - Moving 792 files to ./dataset/train
+2025-04-06 14:52:31,024 - INFO - Moving 188 files to ./dataset/test
+2025-04-06 14:52:31,798 - INFO - Moving 10 files to ./dataset/val
+2025-04-06 14:52:31,883 - INFO - Processing class pork rib recipes with 477 files
+2025-04-06 14:52:31,885 - INFO - Class pork rib recipes split: 381 train, 91 test, 5 validation
+2025-04-06 14:52:31,885 - INFO - Moving 381 files to ./dataset/train
+2025-04-06 14:52:33,453 - INFO - Moving 91 files to ./dataset/test
+2025-04-06 14:52:33,833 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:52:33,865 - WARNING - Not enough files to split for class pork soup recipes. Skipping.
+2025-04-06 14:52:33,881 - WARNING - Not enough files to split for class pot pie recipes. Skipping.
+2025-04-06 14:52:33,944 - INFO - Processing class potato with 875 files
+2025-04-06 14:52:33,944 - INFO - Class potato split: 700 train, 166 test, 9 validation
+2025-04-06 14:52:33,944 - INFO - Moving 700 files to ./dataset/train
+2025-04-06 14:52:36,832 - INFO - Moving 166 files to ./dataset/test
+2025-04-06 14:52:37,496 - INFO - Moving 9 files to ./dataset/val
+2025-04-06 14:52:37,603 - INFO - Processing class potato salad recipes with 682 files
+2025-04-06 14:52:37,603 - INFO - Class potato salad recipes split: 545 train, 130 test, 7 validation
+2025-04-06 14:52:37,603 - INFO - Moving 545 files to ./dataset/train
+2025-04-06 14:52:39,856 - INFO - Moving 130 files to ./dataset/test
+2025-04-06 14:52:40,387 - INFO - Moving 7 files to ./dataset/val
+2025-04-06 14:52:40,419 - WARNING - Not enough files to split for class potatoes. Skipping.
+2025-04-06 14:52:40,419 - WARNING - Not enough files to split for class protein. Skipping.
+2025-04-06 14:52:40,435 - WARNING - Not enough files to split for class pumpkin cake recipes. Skipping.
+2025-04-06 14:52:40,435 - WARNING - Not enough files to split for class pumpkin pie recipes. Skipping.
+2025-04-06 14:52:40,435 - WARNING - Not enough files to split for class punch recipes. Skipping.
+2025-04-06 14:52:40,451 - WARNING - Not enough files to split for class quiche. Skipping.
+2025-04-06 14:52:40,451 - WARNING - Not enough files to split for class quick and easy. Skipping.
+2025-04-06 14:52:40,721 - INFO - Processing class quick bread recipes with 2985 files
+2025-04-06 14:52:40,721 - INFO - Class quick bread recipes split: 2388 train, 567 test, 30 validation
+2025-04-06 14:52:40,721 - INFO - Moving 2388 files to ./dataset/train
+2025-04-06 14:52:50,651 - INFO - Moving 567 files to ./dataset/test
+2025-04-06 14:52:53,000 - INFO - Moving 30 files to ./dataset/val
+2025-04-06 14:52:53,306 - INFO - Processing class recipes with 2282 files
+2025-04-06 14:52:53,306 - INFO - Class recipes split: 1825 train, 434 test, 23 validation
+2025-04-06 14:52:53,306 - INFO - Moving 1825 files to ./dataset/train
+2025-04-06 14:53:00,775 - INFO - Moving 434 files to ./dataset/test
+2025-04-06 14:53:02,540 - INFO - Moving 23 files to ./dataset/val
+2025-04-06 14:53:02,649 - WARNING - Not enough files to split for class relish recipes. Skipping.
+2025-04-06 14:53:02,701 - INFO - Processing class rice with 739 files
+2025-04-06 14:53:02,701 - INFO - Class rice split: 591 train, 140 test, 8 validation
+2025-04-06 14:53:02,701 - INFO - Moving 591 files to ./dataset/train
+2025-04-06 14:53:05,103 - INFO - Moving 140 files to ./dataset/test
+2025-04-06 14:53:05,656 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:53:05,719 - WARNING - Not enough files to split for class rice side dish recipes. Skipping.
+2025-04-06 14:53:05,799 - INFO - Processing class salad with 1003 files
+2025-04-06 14:53:05,799 - INFO - Class salad split: 802 train, 190 test, 11 validation
+2025-04-06 14:53:05,799 - INFO - Moving 802 files to ./dataset/train
+2025-04-06 14:53:09,087 - INFO - Moving 190 files to ./dataset/test
+2025-04-06 14:53:09,869 - INFO - Moving 11 files to ./dataset/val
+2025-04-06 14:53:09,932 - WARNING - Not enough files to split for class salad dressing recipes. Skipping.
+2025-04-06 14:53:09,994 - INFO - Processing class salmon with 773 files
+2025-04-06 14:53:09,994 - INFO - Class salmon split: 618 train, 147 test, 8 validation
+2025-04-06 14:53:09,994 - INFO - Moving 618 files to ./dataset/train
+2025-04-06 14:53:12,513 - INFO - Moving 147 files to ./dataset/test
+2025-04-06 14:53:13,104 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:53:13,168 - WARNING - Not enough files to split for class salsa recipes. Skipping.
+2025-04-06 14:53:13,217 - INFO - Processing class sandwich recipes with 482 files
+2025-04-06 14:53:13,217 - INFO - Class sandwich recipes split: 385 train, 92 test, 5 validation
+2025-04-06 14:53:13,217 - INFO - Moving 385 files to ./dataset/train
+2025-04-06 14:53:14,817 - INFO - Moving 92 files to ./dataset/test
+2025-04-06 14:53:15,185 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:53:15,264 - INFO - Processing class sauces with 669 files
+2025-04-06 14:53:15,264 - INFO - Class sauces split: 535 train, 127 test, 7 validation
+2025-04-06 14:53:15,264 - INFO - Moving 535 files to ./dataset/train
+2025-04-06 14:53:17,476 - INFO - Moving 127 files to ./dataset/test
+2025-04-06 14:53:17,996 - INFO - Moving 7 files to ./dataset/val
+2025-04-06 14:53:18,118 - INFO - Processing class sauces and condiments with 1308 files
+2025-04-06 14:53:18,118 - INFO - Class sauces and condiments split: 1046 train, 248 test, 14 validation
+2025-04-06 14:53:18,118 - INFO - Moving 1046 files to ./dataset/train
+2025-04-06 14:53:22,537 - INFO - Moving 248 files to ./dataset/test
+2025-04-06 14:53:23,561 - INFO - Moving 14 files to ./dataset/val
+2025-04-06 14:53:23,624 - WARNING - Not enough files to split for class sausage. Skipping.
+2025-04-06 14:53:23,656 - INFO - Processing class savory pie recipes with 417 files
+2025-04-06 14:53:23,656 - INFO - Class savory pie recipes split: 333 train, 79 test, 5 validation
+2025-04-06 14:53:23,656 - INFO - Moving 333 files to ./dataset/train
+2025-04-06 14:53:25,075 - INFO - Moving 79 files to ./dataset/test
+2025-04-06 14:53:25,416 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:53:25,504 - INFO - Processing class seafood with 756 files
+2025-04-06 14:53:25,504 - INFO - Class seafood split: 604 train, 144 test, 8 validation
+2025-04-06 14:53:25,504 - INFO - Moving 604 files to ./dataset/train
+2025-04-06 14:53:28,043 - INFO - Moving 144 files to ./dataset/test
+2025-04-06 14:53:28,651 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:53:28,724 - WARNING - Not enough files to split for class seafood main dishes. Skipping.
+2025-04-06 14:53:28,725 - WARNING - Not enough files to split for class seafood pasta salad recipes. Skipping.
+2025-04-06 14:53:28,751 - WARNING - Not enough files to split for class seafood salad recipes. Skipping.
+2025-04-06 14:53:28,753 - WARNING - Not enough files to split for class seasoning mix recipes. Skipping.
+2025-04-06 14:53:28,754 - WARNING - Not enough files to split for class shakes and floats recipes. Skipping.
+2025-04-06 14:53:28,806 - INFO - Processing class shellfish with 839 files
+2025-04-06 14:53:28,806 - INFO - Class shellfish split: 671 train, 159 test, 9 validation
+2025-04-06 14:53:28,806 - INFO - Moving 671 files to ./dataset/train
+2025-04-06 14:53:31,625 - INFO - Moving 159 files to ./dataset/test
+2025-04-06 14:53:32,280 - INFO - Moving 9 files to ./dataset/val
+2025-04-06 14:53:32,338 - WARNING - Not enough files to split for class shortcake recipes. Skipping.
+2025-04-06 14:53:32,416 - INFO - Processing class shrimp with 982 files
+2025-04-06 14:53:32,416 - INFO - Class shrimp split: 785 train, 187 test, 10 validation
+2025-04-06 14:53:32,416 - INFO - Moving 785 files to ./dataset/train
+2025-04-06 14:53:35,712 - INFO - Moving 187 files to ./dataset/test
+2025-04-06 14:53:36,534 - INFO - Moving 10 files to ./dataset/val
+2025-04-06 14:53:36,697 - INFO - Processing class side dish with 1646 files
+2025-04-06 14:53:36,697 - INFO - Class side dish split: 1316 train, 313 test, 17 validation
+2025-04-06 14:53:36,697 - INFO - Moving 1316 files to ./dataset/train
+2025-04-06 14:53:42,337 - INFO - Moving 313 files to ./dataset/test
+2025-04-06 14:53:43,700 - INFO - Moving 17 files to ./dataset/val
+2025-04-06 14:53:43,779 - WARNING - Not enough files to split for class side dishes. Skipping.
+2025-04-06 14:53:43,779 - WARNING - Not enough files to split for class smoothie recipes. Skipping.
+2025-04-06 14:53:43,795 - WARNING - Not enough files to split for class snack chip recipes. Skipping.
+2025-04-06 14:53:43,826 - INFO - Processing class snacks with 405 files
+2025-04-06 14:53:43,826 - INFO - Class snacks split: 324 train, 76 test, 5 validation
+2025-04-06 14:53:43,826 - INFO - Moving 324 files to ./dataset/train
+2025-04-06 14:53:45,261 - INFO - Moving 76 files to ./dataset/test
+2025-04-06 14:53:45,584 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:53:45,730 - INFO - Processing class soup recipes with 1587 files
+2025-04-06 14:53:45,730 - INFO - Class soup recipes split: 1269 train, 302 test, 16 validation
+2025-04-06 14:53:45,730 - INFO - Moving 1269 files to ./dataset/train
+2025-04-06 14:53:51,169 - INFO - Moving 302 files to ./dataset/test
+2025-04-06 14:53:52,531 - INFO - Moving 16 files to ./dataset/val
+2025-04-06 14:53:52,604 - WARNING - Not enough files to split for class soups and stews. Skipping.
+2025-04-06 14:53:52,635 - WARNING - Not enough files to split for class soups, stews and chili recipes. Skipping.
+2025-04-06 14:53:52,651 - WARNING - Not enough files to split for class south american. Skipping.
+2025-04-06 14:53:52,651 - WARNING - Not enough files to split for class spaghetti. Skipping.
+2025-04-06 14:53:52,651 - WARNING - Not enough files to split for class spanish. Skipping.
+2025-04-06 14:53:52,651 - WARNING - Not enough files to split for class special collections. Skipping.
+2025-04-06 14:53:52,731 - INFO - Processing class specialty dessert recipes with 852 files
+2025-04-06 14:53:52,731 - INFO - Class specialty dessert recipes split: 681 train, 162 test, 9 validation
+2025-04-06 14:53:52,731 - INFO - Moving 681 files to ./dataset/train
+2025-04-06 14:53:55,886 - INFO - Moving 162 files to ./dataset/test
+2025-04-06 14:53:56,650 - INFO - Moving 9 files to ./dataset/val
+2025-04-06 14:53:56,712 - INFO - Processing class squash with 406 files
+2025-04-06 14:53:56,712 - INFO - Class squash split: 324 train, 77 test, 5 validation
+2025-04-06 14:53:56,712 - INFO - Moving 324 files to ./dataset/train
+2025-04-06 14:53:58,400 - INFO - Moving 77 files to ./dataset/test
+2025-04-06 14:53:58,749 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:53:58,838 - INFO - Processing class squash soup recipes with 777 files
+2025-04-06 14:53:58,838 - INFO - Class squash soup recipes split: 621 train, 148 test, 8 validation
+2025-04-06 14:53:58,838 - INFO - Moving 621 files to ./dataset/train
+2025-04-06 14:54:01,809 - INFO - Moving 148 files to ./dataset/test
+2025-04-06 14:54:02,447 - INFO - Moving 8 files to ./dataset/val
+2025-04-06 14:54:02,487 - WARNING - Not enough files to split for class st. patrick's day. Skipping.
+2025-04-06 14:54:02,511 - WARNING - Not enough files to split for class steaks. Skipping.
+2025-04-06 14:54:02,603 - INFO - Processing class stews with 1172 files
+2025-04-06 14:54:02,603 - INFO - Class stews split: 937 train, 223 test, 12 validation
+2025-04-06 14:54:02,603 - INFO - Moving 937 files to ./dataset/train
+2025-04-06 14:54:06,728 - INFO - Moving 223 files to ./dataset/test
+2025-04-06 14:54:07,712 - INFO - Moving 12 files to ./dataset/val
+2025-04-06 14:54:07,807 - INFO - Processing class stir-fry with 468 files
+2025-04-06 14:54:07,807 - INFO - Class stir-fry split: 374 train, 89 test, 5 validation
+2025-04-06 14:54:07,807 - INFO - Moving 374 files to ./dataset/train
+2025-04-06 14:54:09,556 - INFO - Moving 89 files to ./dataset/test
+2025-04-06 14:54:09,979 - INFO - Moving 5 files to ./dataset/val
+2025-04-06 14:54:10,024 - WARNING - Not enough files to split for class stuffed. Skipping.
+2025-04-06 14:54:10,027 - WARNING - Not enough files to split for class stuffed bell pepper recipes. Skipping.
+2025-04-06 14:54:10,027 - WARNING - Not enough files to split for class stuffing and dressing recipes. Skipping.
+2025-04-06 14:54:10,027 - WARNING - Not enough files to split for class summer squash. Skipping.
+2025-04-06 14:54:10,027 - WARNING - Not enough files to split for class sweet potatoes. Skipping.
+2025-04-06 14:54:10,027 - WARNING - Not enough files to split for class syrup recipes. Skipping.
+2025-04-06 14:54:10,043 - WARNING - Not enough files to split for class taco recipes. Skipping.
+2025-04-06 14:54:10,043 - WARNING - Not enough files to split for class tacos. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class tarts. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class tea. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class thai. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class thanksgiving. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class tomato. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class tomatoes. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class treats. Skipping.
+2025-04-06 14:54:10,059 - WARNING - Not enough files to split for class trout. Skipping.
+2025-04-06 14:54:10,106 - INFO - Processing class trusted brands_ recipes and tips with 400 files
+2025-04-06 14:54:10,106 - INFO - Class trusted brands_ recipes and tips split: 320 train, 76 test, 4 validation
+2025-04-06 14:54:10,106 - INFO - Moving 320 files to ./dataset/train
+2025-04-06 14:54:11,502 - INFO - Moving 76 files to ./dataset/test
+2025-04-06 14:54:11,823 - INFO - Moving 4 files to ./dataset/val
+2025-04-06 14:54:11,871 - WARNING - Not enough files to split for class turkey. Skipping.
+2025-04-06 14:54:11,871 - WARNING - Not enough files to split for class u.s. recipes. Skipping.
+2025-04-06 14:54:11,900 - WARNING - Not enough files to split for class uk and ireland. Skipping.
+2025-04-06 14:54:11,903 - WARNING - Not enough files to split for class upside-down cake recipes. Skipping.
+2025-04-06 14:54:11,907 - WARNING - Not enough files to split for class vegan. Skipping.
+2025-04-06 14:54:11,935 - WARNING - Not enough files to split for class vegetable. Skipping.
+2025-04-06 14:54:11,935 - WARNING - Not enough files to split for class vegetable main dish recipes. Skipping.
+2025-04-06 14:54:12,030 - INFO - Processing class vegetable salad recipes with 1037 files
+2025-04-06 14:54:12,030 - INFO - Class vegetable salad recipes split: 829 train, 197 test, 11 validation
+2025-04-06 14:54:12,030 - INFO - Moving 829 files to ./dataset/train
+2025-04-06 14:54:15,512 - INFO - Moving 197 files to ./dataset/test
+2025-04-06 14:54:16,337 - INFO - Moving 11 files to ./dataset/val
+2025-04-06 14:54:16,556 - INFO - Processing class vegetable soup recipes with 1858 files
+2025-04-06 14:54:16,557 - INFO - Class vegetable soup recipes split: 1486 train, 353 test, 19 validation
+2025-04-06 14:54:16,557 - INFO - Moving 1486 files to ./dataset/train
+2025-04-06 14:54:22,791 - INFO - Moving 353 files to ./dataset/test
+2025-04-06 14:54:24,275 - INFO - Moving 19 files to ./dataset/val
+2025-04-06 14:54:24,583 - INFO - Processing class vegetables with 2718 files
+2025-04-06 14:54:24,583 - INFO - Class vegetables split: 2174 train, 516 test, 28 validation
+2025-04-06 14:54:24,583 - INFO - Moving 2174 files to ./dataset/train
+2025-04-06 14:54:33,671 - INFO - Moving 516 files to ./dataset/test
+2025-04-06 14:54:35,868 - INFO - Moving 28 files to ./dataset/val
+2025-04-06 14:54:35,995 - WARNING - Not enough files to split for class vegetarian. Skipping.
+2025-04-06 14:54:35,995 - WARNING - Not enough files to split for class vintage pie recipes. Skipping.
+2025-04-06 14:54:36,010 - WARNING - Not enough files to split for class whole grain bread recipes. Skipping.
+2025-04-06 14:54:36,010 - WARNING - Not enough files to split for class wings. Skipping.
+2025-04-06 14:54:36,026 - WARNING - Not enough files to split for class winter squash. Skipping.
+2025-04-06 14:54:36,026 - WARNING - Not enough files to split for class wraps and rolls. Skipping.
+2025-04-06 14:54:36,337 - INFO - Processing class yeast bread recipes with 3718 files
+2025-04-06 14:54:36,337 - INFO - Class yeast bread recipes split: 2974 train, 706 test, 38 validation
+2025-04-06 14:54:36,337 - INFO - Moving 2974 files to ./dataset/train
+2025-04-06 14:54:49,124 - INFO - Moving 706 files to ./dataset/test
+2025-04-06 14:54:52,283 - INFO - Moving 38 files to ./dataset/val
+2025-04-06 14:54:52,462 - WARNING - Not enough files to split for class zucchini. Skipping.
+2025-04-06 14:54:52,462 - INFO - Data splitting completed successfully

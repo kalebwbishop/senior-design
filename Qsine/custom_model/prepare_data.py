@@ -59,7 +59,11 @@ if __name__ == "__main__":
             recipe = decompress_data(compressed_data)
 
             # Create a directory based on the recipe name
-            recipe_path = "_".join(recipe["breadcrumbs"])
+            # recipe_name = recipe.get("name", "unknown").replace(" ", "_")
+            if len(recipe.get("breadcrumbs", ["recipe", ""])) < 2:
+                print(f"Skipping recipe with insufficient breadcrumbs: {recipe}")
+                continue
+            recipe_path = recipe.get("breadcrumbs", ["recipe", ""])[-2] or "unknown"
 
             directory_name = os.path.join(
                 "dataset/all_data", sanitize_directory_name(recipe_path)
@@ -69,6 +73,10 @@ if __name__ == "__main__":
                 os.makedirs(directory_name)
 
             unique_paths.add(directory_name)
+
+            if not recipe.get("image_urls"):
+                print(f"No image URLs found for recipe: {recipe}")
+                continue
 
             # Download the image
             image_urls = recipe["image_urls"]
@@ -84,7 +92,7 @@ if __name__ == "__main__":
                     continue
 
                 print(
-                    f"Downloading image {idx + 1}/{len(image_urls)} : {running_count} : {recipe_idx}/{len(data)} : Estimated total {int((running_count * len(data)) / recipe_idx)}"
+                    f"Downloading image {idx + 1}/{len(image_urls)} : {running_count} : {recipe_idx}/{len(data)} : Estimated total {int((running_count * len(data)) / (recipe_idx + 1))}"
                 )
 
                 try:
