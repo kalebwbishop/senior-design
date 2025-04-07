@@ -120,7 +120,7 @@ def PredictClass(query, model_path, label_path):
     return id2label[str(predicted_id)]
     
     
-def GetRecipe(query):
+def GetRecipe(query, n = 3):
     #Get dish class
     #dclass = PredictClass(query, model_path, label_path)
     project_root = dirname(dirname(__file__))
@@ -128,7 +128,7 @@ def GetRecipe(query):
     passage_path = join(data_path, "all_recipes.json")
     
     Ridentifier = BM25(passage_path)
-    return Ridentifier.get_top_n(query, n=3)
+    return Ridentifier.get_top_n(query, n=n)
         
 
 if __name__ == "__main__":
