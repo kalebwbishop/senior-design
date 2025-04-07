@@ -1,6 +1,3 @@
-import torch
-import csv
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import math
 import json
 from collections import Counter, defaultdict
@@ -86,38 +83,6 @@ class BM25:
                 "similarity": score
             })
         return results
-
-
-def ParseLabel(label_path):
-    with open(label_path, mode='r') as csvfile:
-        reader = csv.reader(csvfile)
-        header = next(reader, None)  # Skip the header row (if it exists)
-        data_rows = [row for row in reader if len(row) == 2]
-        id2label = {row[0]: row[1] for row in data_rows}
-        label2id = {row[1]: row[0] for row in data_rows}
-        return id2label, label2id, len(data_rows)
-    
-
-def PredictClass(query, model_path, label_path):
-    #Parse Label
-    id2label, label2id, nclass = ParseLabel(label_path)
-    
-    #Load model for inference
-    model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=nclass)
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    
-    # 2. Prepare Input Text
-    inputs = tokenizer(query, padding="max_length", truncation=True, return_tensors="pt", max_length=512)
-    
-    # 3. Perform Inference
-    with torch.no_grad():
-        logits = model(**inputs).logits
-
-    # The raw logits are in outputs.logits
-    predicted_id = logits.argmax().item()
-
-    # Return predicted class
-    return id2label[str(predicted_id)]
     
     
 def GetRecipe(query, n = 3):
