@@ -149,7 +149,7 @@ class BERT():
     
 if __name__ == "__main__":
     project_root = "/kaggle"
-    model_name = "microsoft/deberta-v3-base"
+    model_name = "microsoft/deberta-v3-large"
     print(project_root)
     project_root = dirname(dirname(__file__))
     data_path = join(project_root, "data","all_recipes.json")
