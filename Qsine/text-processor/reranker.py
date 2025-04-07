@@ -9,17 +9,17 @@ from collections import Counter, defaultdict
 from os.path import dirname, join
 
 class BM25:
-    def __init__(self, json_path, k1=1.5, b=0.75, text_key="text"):
+    def __init__(self, json_path, k1=1.5, b=0.75):
         self.k1 = k1
         self.b = b
-        self.text_key = text_key
-        
         # Load and store original passages
         with open(json_path, "r", encoding="utf-8") as f:
             self.data = json.load(f)
         
         # Extract text content from each passage
-        self.original_texts = [entry[text_key] for entry in self.data]
+        self.original_texts = [entry['recipe_name'] \
+                    + "\nIngredients: " + ",".join(entry['ingredients']) \
+                    + "\nDirections:" + " ".join(entry['steps']) for entry in self.data]
         
         # Tokenize and preprocess
         self.corpus = [self.tokenize(text) for text in self.original_texts]
@@ -81,8 +81,8 @@ def PredictClass(query, model_path, label_path):
     id2label, label2id, nclass = ParseLabel(label_path)
     
     #Load model for inference
-    model = AutoModelForSequenceClassification.from_pretrained(model_path, numclass=nclass local_files_only=True)
-    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path, numclass=nclass)
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
     
     # 2. Prepare Input Text
     inputs = tokenizer(query, padding=True, truncation=True, return_tensors="pt")
@@ -96,15 +96,6 @@ def PredictClass(query, model_path, label_path):
 
     # Return predicted class
     return id2label[predicted_id]
-
-def RerankRecipe(reranker, query, passage, rclass):
-    #  Rerank recipes within class
-    model = CrossEncoder(reranker)
-    ranks = model.rank(query, passage, return_documents=True)
-    
-    print("Query:", query)
-    for rank in ranks:
-        print(f"- #{rank['corpus_id']} ({rank['score']:.2f}): {rank['text']}")
     
     
 def GetRecipe(query, model_path, label_path, passage_path):
@@ -113,9 +104,12 @@ def GetRecipe(query, model_path, label_path, passage_path):
     
     Ridentifier = BM25(passage_path)
     return Ridentifier.get_top_n(query, n=3)
-    
         
 
 if __name__ == "__main__":
     project_root = dirname(dirname(__file__))
     data_path = join(project_root, "data")
+    model_path = "SussyCat/Qsine-DeBERTa-v1.2"
+    label_path = join(data_path, "labels_dict.csv")
+    passage_path = join(data_path, "all_recipes.json")
+    

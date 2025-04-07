@@ -1,0 +1,294 @@
+id,label
+0,Beans
+1,Melons
+2,Eastern European
+3,Pickles
+4,Whole Grain Bread Recipes
+5,Everyday Leftovers Recipes
+6,Broth and Stock Recipes
+7,Syrup Recipes
+8,BBQ & Grilling
+9,Vegetable
+10,On The Go
+11,Global Cuisines
+12,Rice
+13,Tea
+14,Dumpling Recipes
+15,Chinese
+16,European
+17,Popcorn Candy Recipes
+18,Slow Cooker
+19,Fillings
+20,Vegetable Main Dish Recipes
+21,Green Salad Recipes
+22,Smoothie Recipes
+23,Seafood Pasta Salad Recipes
+24,Mushrooms
+25,Crisps and Crumble Recipes
+26,Pork
+27,Chocolate Cake Recipes
+28,Chili Recipes
+29,Cakes
+30,Cake Mix Cake Recipes
+31,Appetizers and Snacks
+32,Liqueur Dessert Recipes
+33,Turkey
+34,Quick and Easy
+35,Drinks
+36,Casserole Recipes
+37,Meat and Seafood
+38,"Soups, Stews and Chili Recipes"
+39,Candy Recipes
+40,Shrimp
+41,Caribbean
+42,Whole Grain Recipes
+43,Southern
+44,Squash Soup Recipes
+45,Tomatoes
+46,Pot Pie Recipes
+47,Seasoning Mix Recipes
+48,South American
+49,Pastries
+50,Gluten Free
+51,French
+52,Chutney Recipes
+53,New Year
+54,Seafood
+55,Spaghetti
+56,Cocktail Recipes
+57,Snacks
+58,Canning and Preserving Recipes
+59,Cookies
+60,Casseroles
+61,Ham
+62,Instant Pot¨
+63,Hanukkah
+64,Vintage Pie Recipes
+65,Noodle Recipes
+66,French Fries Recipes
+67,Pet Food Recipes
+68,Macaroni and Cheese Recipes
+69,Seafood Salad Recipes
+70,Cooking by Equipment
+71,Breakfast and Brunch
+72,Sweet Potatoes
+73,Brussels Sprouts
+74,Cheese Dips and Spreads Recipes
+75,Brownie Recipes
+76,Greens
+77,Corn
+78,Drinks Recipes
+79,Summer
+80,Cereals
+81,Eggs
+82,Frozen Dessert Recipes
+83,Pizza Recipes
+84,Asparagus
+85,Shot Recipes
+86,Custards and Puddings
+87,African
+88,Oatmeal Cookie Recipes
+89,Vegan
+90,UK and Ireland
+91,Sauces
+92,Frostings and Icings
+93,Beef
+94,Nuts and Seeds
+95,Bundt Cake Recipes
+96,Ice Cream
+97,Dips and Spreads Recipes
+98,Beans and Peas
+99,Shellfish
+100,Nut Dessert Recipes
+101,Quiche
+102,Potatoes
+103,Chicken Breast
+104,More Meal Ideas
+105,Pumpkin Pie Recipes
+106,Christmas Appetizers
+107,Appetizers
+108,Easter
+109,Healthy Recipes
+110,Vegetable Salad Recipes
+111,Pasta Sauces
+112,Meat and Poultry
+113,Cobblers
+114,Bread
+115,Quick Bread Recipes
+116,Shortcake Recipes
+117,Halloween
+118,Coffee Drinks Recipes
+119,Oatmeal Recipes
+120,Carrots
+121,Grains
+122,Upside-Down Cake Recipes
+123,Indian
+124,Fudge Recipes
+125,Nut Cookie Recipes
+126,Savory Pie Recipes
+127,Coleslaw Recipes
+128,Berries
+129,U.S. Recipes
+130,Chowders
+131,Mardi Gras
+132,Protein
+133,Allrecipes Allstar Recipes
+134,Stuffed
+135,Ingredients
+136,Fall
+137,Citrus
+138,Dessert Salad Recipes
+139,Salsa Recipes
+140,Steaks
+141,Sauces and Condiments
+142,Cupcake Recipes
+143,Mini Foods
+144,Wraps and Rolls
+145,Zucchini
+146,Chicken Soup Recipes
+147,Side Dish
+148,Punch Recipes
+149,Wings
+150,Fruit Desserts
+151,Middle Eastern
+152,Allrecipes Magazine Recipes
+153,Fruits
+154,Fruit Bread Recipes
+155,Nuts and Seed Recipes
+156,Bowls
+157,Desserts
+158,Recipes
+159,Holiday Planning
+160,Sandwich Recipes
+161,Egg
+162,Rice Side Dish Recipes
+163,Burger Recipes
+164,Easter Dinner
+165,Cauliflower
+166,Taco Recipes
+167,Breakfast Casserole Recipes
+168,Pasta and Noodles
+169,Corned Beef Recipes
+170,Fruit Pies
+171,Japanese
+172,Shakes and Floats Recipes
+173,Stir-Fry
+174,Air Fryer
+175,Chef John
+176,Lemon Pies
+177,Main Dishes
+178,Thanksgiving
+179,Winter
+180,Pancake Recipes
+181,North African
+182,St. Patrick's Day
+183,Filipino
+184,Creamy
+185,Mousse Recipes
+186,Fruits and Vegetables
+187,Everyday Cooking
+188,Chocolate Dessert Recipes
+189,Grain Side Dish Recipes
+190,Recipes for the Super Bowl®
+191,Salad
+192,Game Meats
+193,Pumpkin Cake Recipes
+194,Squash
+195,Curries
+196,Side Dishes
+197,Pasta Salad
+198,Fish
+199,Potato Salad Recipes
+200,Christmas Cookie Recipes
+201,Onion Soup Recipes
+202,Beef and Pork Salad Recipes
+203,U.S. Recipes by State
+204,Vegetables
+205,Pasta by Shape Recipes
+206,Breakfast Bowl Recipes
+207,Vegetarian
+208,Gravy Recipes
+209,Meatloaf Recipes
+210,4th of July
+211,Muffin Recipes
+212,Tilapia
+213,Valentine's Day
+214,Special Collections
+215,Vegetable Soup Recipes
+216,Chicken
+217,Winter Squash
+218,Dairy Recipes
+219,Pork Rib Recipes
+220,Trout
+221,Chocolate Chip Cookie Recipes
+222,Dessert Sauce Recipes
+223,Stuffing and Dressing Recipes
+224,Candy
+225,Events and Gatherings Recipes
+226,Meatball Recipes
+227,Spices Recipes
+228,Salmon
+229,Treats
+230,Deviled Eggs
+231,Korean
+232,Relish Recipes
+233,Snack Chip Recipes
+234,Latin American
+235,Salad Dressing Recipes
+236,Greek
+237,Potato
+238,Tarts
+239,Pork Soup Recipes
+240,Holidays and Events Recipes
+241,Cheese
+242,Kids
+243,Herbs and Spices Recipes
+244,Pasta
+245,Cheese Recipes
+246,Stuffed Bell Pepper Recipes
+247,Asian
+248,Spinach Dip Recipes
+249,Stews
+250,Spanish
+251,Pie Crusts
+252,Mexican
+253,Fajita Recipes
+254,Fruit Cookie Recipes
+255,Italian
+256,Tacos
+257,Cheesecake Recipes
+258,International Cookie Recipes
+259,Scandinavian
+260,Bacon
+261,Banana Bread
+262,No-Bake Pie Recipes
+263,Fries Recipes
+264,Specialty Dessert Recipes
+265,Yeast Bread Recipes
+266,Crepes
+267,Baked and Roasted
+268,Pork Chop Recipes
+269,Summer Squash
+270,Enchilada Recipes
+271,Pies
+272,Seafood Main Dishes
+273,Crab
+274,Fruit Salad Recipes
+275,Cream Soup Recipes
+276,Cabbage
+277,Football
+278,Soup Recipes
+279,Chile Peppers
+280,Sausage
+281,Soups and Stews
+282,Lamb
+283,Christmas
+284,Tomato
+285,Thai
+286,Trusted Brands: Recipes and Tips
+287,Frozen Food
+288,Bar Cookie Recipes
+289,Kitchen Tips
+290,Lasagna Recipes
+291,Custard and Cream Pies
+292,Butter Cookie Recipes
