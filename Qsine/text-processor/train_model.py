@@ -114,6 +114,8 @@ class BERT():
         history = trainer.train(resume_from_checkpoint=checkpoint) # Resume training from checkpoint in outdir
         print("Finished training")
         trainer.save_model(outdir)
+        self.tokenizer.save_pretrained(outdir)
+
         logs = self.ProcessLogs(trainer.state.log_history)
         lb_dict = self.ProcessLabels(self.unique_labels)
         

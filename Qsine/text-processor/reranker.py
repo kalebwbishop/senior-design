@@ -1,24 +1,33 @@
 import torch
 import csv
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from sentence_transformers import CrossEncoder
-from .train_model import BERT
 import math
 import json
 from collections import Counter, defaultdict
 from os.path import dirname, join
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+import string
+import unicodedata
+
+
 
 class BM25:
-    def __init__(self, json_path, k1=1.5, b=0.75):
+    def __init__(self, json_path, rclass = "Recipes", k1=1.5, b=0.75):
         self.k1 = k1
         self.b = b
+        self.lemmatizer = WordNetLemmatizer()
+        self.stop_words = set(stopwords.words('english'))
         # Load and store original passages
-        with open(json_path, "r", encoding="utf-8") as f:
-            self.data = json.load(f)
+        with open(json_path, "r", encoding="utf-8") as file:
+            self.data = json.load(file)
+        
         
         # Extract text content from each passage
+        self.txt_ids = [entry["key"] for entry in self.data] 
         self.original_texts = [entry['recipe_name'] \
-                    + "\nIngredients: " + ",".join(entry['ingredients']) \
+                    + "\nIngredients: " + ", ".join(entry['ingredients']) \
                     + "\nDirections:" + " ".join(entry['steps']) for entry in self.data]
         
         # Tokenize and preprocess
@@ -29,7 +38,16 @@ class BM25:
         self.N = len(self.corpus)
 
     def tokenize(self, text):
-        return text.lower().split()
+        #Normalize to ASCII
+        text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
+        
+        #Remove punctuation
+        text = text.translate(str.maketrans('', '', string.punctuation))
+
+        # Tokenize and lemmatize
+        tokens = word_tokenize(text.lower())
+        tokens = [t for t in tokens if t not in self.stop_words and t.isalpha()]
+        return [self.lemmatizer.lemmatize(t) for t in tokens]
 
     def compute_df(self):
         df = defaultdict(int)
@@ -60,10 +78,14 @@ class BM25:
         scores = [(i, self.score(query, i)) for i in range(len(self.corpus))]
         sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
         
-        if return_ids and id_key in self.data[0]:
-            return [(self.data[i][id_key], score) for i, score in sorted_scores[:n]]
-        else:
-            return [(self.original_texts[i], score) for i, score in sorted_scores[:n]]
+        results = []
+        for i, score in sorted_scores[:n]:
+            results.append({
+                "id": self.txt_ids[i],  # 'key' from JSON
+                "recipe": self.data[i],
+                "similarity": score
+            })
+        return results
 
 
 def ParseLabel(label_path):
@@ -81,11 +103,11 @@ def PredictClass(query, model_path, label_path):
     id2label, label2id, nclass = ParseLabel(label_path)
     
     #Load model for inference
-    model = AutoModelForSequenceClassification.from_pretrained(model_path, numclass=nclass)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=nclass)
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     
     # 2. Prepare Input Text
-    inputs = tokenizer(query, padding=True, truncation=True, return_tensors="pt")
+    inputs = tokenizer(query, padding="max_length", truncation=True, return_tensors="pt", max_length=512)
     
     # 3. Perform Inference
     with torch.no_grad():
@@ -95,21 +117,26 @@ def PredictClass(query, model_path, label_path):
     predicted_id = logits.argmax().item()
 
     # Return predicted class
-    return id2label[predicted_id]
+    return id2label[str(predicted_id)]
     
     
-def GetRecipe(query, model_path, label_path, passage_path):
+def GetRecipe(query):
     #Get dish class
-    dclass = PredictClass(query, model_path, label_path)
+    #dclass = PredictClass(query, model_path, label_path)
+    project_root = dirname(dirname(__file__))
+    data_path = join(project_root, "data")
+    passage_path = join(data_path, "all_recipes.json")
     
     Ridentifier = BM25(passage_path)
     return Ridentifier.get_top_n(query, n=3)
         
 
 if __name__ == "__main__":
-    project_root = dirname(dirname(__file__))
-    data_path = join(project_root, "data")
-    model_path = "SussyCat/Qsine-DeBERTa-v1.2"
-    label_path = join(data_path, "labels_dict.csv")
-    passage_path = join(data_path, "all_recipes.json")
+    query = """Chicken Alfredo Pasta is a rich and creamy Italian-American dish made with tender slices 
+    of grilled or pan-seared chicken breast served over a bed of fettuccine noodles. 
+    The pasta is coated in a luxurious Alfredo sauce, typically made from butter, heavy cream, and Parmesan cheese, 
+    resulting in a silky, cheesy texture that clings to every strand. Often garnished with freshly cracked black pepper 
+    and parsley, this comfort dish balances savory flavors with a smooth, buttery finish. 
+    Perfect for weeknight dinners or a cozy date night at home."""
+    print(GetRecipe(query))
     
