@@ -1,0 +1,36 @@
+import json
+import base64
+import zlib
+from os.path import dirname, join
+
+def decompress_data(encoded_str):
+    """Decode and decompress the base64 zlib-compressed string"""
+    compressed = base64.b64decode(encoded_str)
+    json_str = zlib.decompress(compressed).decode("utf-8")
+    return json.loads(json_str)
+
+def data_extractor(input_path, output_path):
+    # Load the exported JSON file
+    with open(input_path, "r") as infile:
+        raw_data = json.load(infile)
+
+    # Decompress all recipes
+    decompressed_recipes = []
+    for entry in raw_data:
+        try:
+            recipe = decompress_data(entry["data"])
+            recipe["key"] = entry["key"]  # Optionally retain the key
+            decompressed_recipes.append(recipe)
+        except Exception as e:
+            print(f"Failed to decompress entry with key {entry.get('key')}: {e}")
+
+    # Save to a new, readable JSON file
+    with open(output_path, "w", encoding="utf-8") as outfile:
+        json.dump(decompressed_recipes, outfile, indent=2, ensure_ascii=False)
+
+    print("Recipes have been decompressed and saved to {}".format(output_path))
+
+if __name__ == "__main__":
+    project_root = dirname(dirname(__file__))
+    data_path = join(project_root, "data")
+    data_extractor(join(data_path, "db.recipes.json"), join(data_path, "all_recipes.json"))

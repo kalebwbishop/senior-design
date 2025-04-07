@@ -148,7 +148,6 @@ class BERT():
 if __name__ == "__main__":
     project_root = dirname(dirname(__file__))
     data_path = join(project_root, "data","data.json")
-    model
     
     model = BERT(data_path)
     model.Finetune(
