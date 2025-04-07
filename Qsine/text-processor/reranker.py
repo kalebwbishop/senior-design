@@ -78,7 +78,6 @@ class BM25:
         results = []
         for i, score in sorted_scores[:n]:
             results.append({
-                "id": self.txt_ids[i],  # 'key' from JSON
                 "recipe": self.data[i],
                 "similarity": score
             })
