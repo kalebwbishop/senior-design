@@ -148,10 +148,13 @@ class BERT():
 
     
 if __name__ == "__main__":
+    project_root = "/kaggle"
+    model_name = "microsoft/deberta-v3-base"
+    print(project_root)
     project_root = dirname(dirname(__file__))
     data_path = join(project_root, "data","all_recipes.json")
     
-    model = BERT(data_path)
+    model = BERT(model_name,data_path)
     model.Finetune(
         outdir = join(project_root, "text-processor", "deberta_multi-label_single-class"),
         lr = 1e-5,
@@ -159,8 +162,9 @@ if __name__ == "__main__":
         epochs = 20,
         wgtdecay = 0.01,
         maxgrad = 1.0,
-        nprocs = 8,
-        maxlen = 512
+        nprocs = 4,
+        maxlen = 512,
+        checkpoint = False
     )
     
     
