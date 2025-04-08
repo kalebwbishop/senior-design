@@ -6,17 +6,43 @@ import {
     TouchableOpacity,
     ActivityIndicator,
     Dimensions,
+    Modal,
+    ScrollView,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import { KWBScreenWrapper, KWBTypography } from '@/components';
-import { Picker } from '@react-native-picker/picker';
+import { KWBScreenWrapper, KWBTypography, KWBLoading } from '@/components';
+
+// Language codes mapping for Google Translate API
+const language_codes: Record<string, string> = {
+    'eng': 'en',
+    'fre': 'fr',
+    'spa': 'es',
+    'deu': 'de',
+    'ita': 'it',
+    'nld': 'nl',
+    'por': 'pt',
+    'rus': 'ru',
+    'tur': 'tr',
+    'jpn': 'ja',
+    'kor': 'ko',
+    'chi': 'zh',
+    'ara': 'ar',
+    'hin': 'hi',
+    'ben': 'bn',
+    'pan': 'pa',
+    'urd': 'ur',
+    'vie': 'vi',
+    'tha': 'th',
+    'ind': 'id',
+};
 
 type RootStackParamList = {
-    TextNextPageResults: {
+    TextNextPageConfirmText: {
         croppedImagePath: string;
         processedText: string;
+        language: string;
     };
 };
 
@@ -31,9 +57,33 @@ export default function TextNextPage() {
     const [error, setError] = useState<string | null>(null);
     const [croppedImagePath, setCroppedImagePath] = useState<string | null>(null);
     const [selectedLanguage, setSelectedLanguage] = useState('eng');
+    const [isLanguageModalVisible, setIsLanguageModalVisible] = useState(false);
     const route = useRoute();
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const imagePath = (route.params as RouteParams)?.imagePath;
+
+    const languages = [
+        { label: 'English', value: 'eng' },
+        { label: 'French', value: 'fre' },
+        { label: 'Spanish', value: 'spa' },
+        { label: 'German', value: 'deu' },
+        { label: 'Italian', value: 'ita' },
+        { label: 'Dutch', value: 'nld' },
+        { label: 'Portuguese', value: 'por' },
+        { label: 'Russian', value: 'rus' },
+        { label: 'Turkish', value: 'tur' },
+        { label: 'Japanese', value: 'jpn' },
+        { label: 'Korean', value: 'kor' },
+        { label: 'Chinese', value: 'chi' },
+        { label: 'Arabic', value: 'ara' },
+        { label: 'Hindi', value: 'hin' },
+        { label: 'Bengali', value: 'ben' },
+        { label: 'Punjabi', value: 'pan' },
+        { label: 'Urdu', value: 'urd' },
+        { label: 'Vietnamese', value: 'vie' },
+        { label: 'Thai', value: 'tha' },
+        { label: 'Indonesian', value: 'ind' },
+    ];
 
     const handleCropImage = async () => {
         try {
@@ -102,9 +152,10 @@ export default function TextNextPage() {
             console.log('Upload successful:', result);
 
             // Navigate to Results screen with the processed data
-            navigation.navigate('TextNextPageResults', {
+            navigation.navigate('TextNextPageConfirmText', {
                 croppedImagePath: croppedImagePath,
-                processedText: result.text
+                processedText: result.text,
+                language: selectedLanguage
             });
             
         } catch (err) {
@@ -123,6 +174,10 @@ export default function TextNextPage() {
                 </View>
             </KWBScreenWrapper>
         );
+    }
+
+    if (loading) {
+        return <KWBLoading text="Processing your image..." />;
     }
 
     return (
@@ -155,13 +210,9 @@ export default function TextNextPage() {
                         onPress={handleCropImage}
                         disabled={loading}
                     >
-                        {loading ? (
-                            <ActivityIndicator color="#FFFFFF" />
-                        ) : (
-                            <KWBTypography style={styles.buttonText}>
-                                {croppedImagePath ? 'Recrop Image' : 'Crop Image'}
-                            </KWBTypography>
-                        )}
+                        <KWBTypography style={styles.buttonText}>
+                            {croppedImagePath ? 'Recrop Image' : 'Crop Image'}
+                        </KWBTypography>
                     </TouchableOpacity>
 
                     {croppedImagePath && (
@@ -170,28 +221,61 @@ export default function TextNextPage() {
                             onPress={handleSubmitImage}
                             disabled={loading}
                         >
-                            {loading ? (
-                                <ActivityIndicator color="#FFFFFF" />
-                            ) : (
-                                <KWBTypography style={styles.buttonText}>Submit Image</KWBTypography>
-                            )}
+                            <KWBTypography style={styles.buttonText}>Submit Image</KWBTypography>
                         </TouchableOpacity>
                     )}
                 </View>
 
                 <View style={styles.languageContainer}>
                     <KWBTypography style={styles.languageLabel}>Select Language:</KWBTypography>
-                    <View style={styles.pickerContainer}>
-                        <Picker
-                            selectedValue={selectedLanguage}
-                            onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
-                            style={styles.picker}
+                    <TouchableOpacity
+                        style={styles.languageButton}
+                        onPress={() => setIsLanguageModalVisible(true)}
+                    >
+                        <KWBTypography style={styles.languageButtonText}>
+                            {languages.find(lang => lang.value === selectedLanguage)?.label || 'Select Language'}
+                        </KWBTypography>
+                    </TouchableOpacity>
+
+                    <Modal
+                        visible={isLanguageModalVisible}
+                        transparent={true}
+                        animationType="fade"
+                        onRequestClose={() => setIsLanguageModalVisible(false)}
+                    >
+                        <TouchableOpacity
+                            style={styles.modalOverlay}
+                            activeOpacity={1}
+                            onPress={() => setIsLanguageModalVisible(false)}
                         >
-                            <Picker.Item label="English" value="eng" />
-                            <Picker.Item label="French" value="fre" />
-                            <Picker.Item label="Spanish" value="spa" />
-                        </Picker>
-                    </View>
+                            <View style={styles.modalContent}>
+                                <ScrollView style={styles.languageScrollView}>
+                                    {languages.map((language) => (
+                                        <TouchableOpacity
+                                            key={language.value}
+                                            style={[
+                                                styles.languageOption,
+                                                selectedLanguage === language.value && styles.selectedLanguageOption
+                                            ]}
+                                            onPress={() => {
+                                                setSelectedLanguage(language.value);
+                                                setIsLanguageModalVisible(false);
+                                            }}
+                                        >
+                                            <KWBTypography
+                                                style={[
+                                                    styles.languageOptionText,
+                                                    selectedLanguage === language.value && styles.selectedLanguageOptionText
+                                                ]}
+                                            >
+                                                {language.label}
+                                            </KWBTypography>
+                                        </TouchableOpacity>
+                                    ))}
+                                </ScrollView>
+                            </View>
+                        </TouchableOpacity>
+                    </Modal>
                 </View>
             </View>
         </KWBScreenWrapper>
@@ -283,15 +367,47 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         color: '#666666',
     },
-    pickerContainer: {
+    languageButton: {
         borderWidth: 1,
         borderColor: '#E0E0E0',
         borderRadius: 8,
-        overflow: 'hidden',
-        height: 150,
+        padding: 12,
+        backgroundColor: '#FFFFFF',
     },
-    picker: {
-        height: 150,
-        width: '100%',
+    languageButtonText: {
+        color: '#333333',
+        fontSize: 16,
+    },
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalContent: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 12,
+        padding: 16,
+        width: '80%',
+        maxWidth: 300,
+        maxHeight: '80%',
+    },
+    languageScrollView: {
+        maxHeight: 400,
+    },
+    languageOption: {
+        padding: 16,
+        borderRadius: 8,
+        marginBottom: 8,
+    },
+    selectedLanguageOption: {
+        backgroundColor: '#2196F3',
+    },
+    languageOptionText: {
+        fontSize: 16,
+        color: '#333333',
+    },
+    selectedLanguageOptionText: {
+        color: '#FFFFFF',
     },
 });

@@ -14,7 +14,7 @@ import { KWBScreenWrapper, KWBTypography } from '@/components';
 
 type RootStackParamList = {
     ImageNextPageResults: {
-        classification: string;
+        imagePath: string;
     };
 };
 
@@ -73,33 +73,9 @@ export default function ImageNextPage() {
             setLoading(true);
             setError(null);
 
-            // Create form data to send the image
-            const formData = new FormData();
-            formData.append('image', {
-                uri: croppedImagePath,
-                type: 'image/png',
-                name: 'cropped_image.png',
-            } as any);
-
-            // Send the image to the API
-            const response = await fetch('https://9k6z4zqt-5001.use.devtunnels.ms/upload-image', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to upload image to server');
-            }
-
-            const result = await response.json();
-            console.log('Upload successful:', result);
-
-            // Navigate to Results screen with the processed data
+            // Navigate to Results screen with the image path
             navigation.navigate('ImageNextPageResults', {
-                classification: result.classification
+                imagePath: croppedImagePath
             });
             
         } catch (err) {

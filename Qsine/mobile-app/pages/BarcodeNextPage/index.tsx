@@ -8,6 +8,7 @@ import { BarcodeNextPageRouteProp } from "@/types";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import KWBScreenWrapper from "@/components/KWBScreenWrapper";
 import { RootState } from '@/store';
+import KWBTypography from "@/components/KWBTypography";
 
 type RootStackParamList = {
     BarcodeNextPageEdit: { barcode: string; product: Product['product'] };
@@ -76,19 +77,22 @@ export default function BarcodeScanned() {
         return (
             <KWBScreenWrapper headerText="Product Details">
                 <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="large" color="#007AFF" />
-                    <Text style={styles.loadingText}>Loading Product Details</Text>
-                    <Text style={styles.loadingSubtext}>
-                        This may take up to two minutes because I am cheap and don't want to pay for better cloud services.
-                    </Text>
+                    <View style={styles.card}>
+                        <KWBTypography variant="h3" style={styles.title}>Analyzing Product</KWBTypography>
+                        <KWBTypography style={styles.subtitle}>
+                            Please wait while we process the barcode information
+                        </KWBTypography>
+                    </View>
+
                     <View style={styles.loadingCard}>
-                        <Text style={styles.loadingCardTitle}>What's happening?</Text>
-                        <Text style={styles.loadingCardText}>
-                            • Scanning product information{'\n'}
-                            • Analyzing ingredients{'\n'}
-                            • Checking for allergens{'\n'}
-                            • Preparing detailed report
-                        </Text>
+                        <ActivityIndicator size="large" color="#2196F3" style={styles.loader} />
+                        <View style={styles.loadingSteps}>
+                            <KWBTypography style={styles.loadingStep}>• Scanning barcode data</KWBTypography>
+                            <KWBTypography style={styles.loadingStep}>• Retrieving product information</KWBTypography>
+                            <KWBTypography style={styles.loadingStep}>• Analyzing ingredients</KWBTypography>
+                            <KWBTypography style={styles.loadingStep}>• Checking for allergens</KWBTypography>
+                            <KWBTypography style={styles.loadingStep}>• Preparing detailed report</KWBTypography>
+                        </View>
                     </View>
                 </View>
             </KWBScreenWrapper>
@@ -249,46 +253,35 @@ const styles = StyleSheet.create({
     },
     loadingContainer: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
-    },
-    loadingText: {
-        fontSize: 24,
-        fontWeight: '600',
-        color: '#1A1A1A',
-        textAlign: 'center',
-        marginTop: 20,
-        marginBottom: 12,
-    },
-    loadingSubtext: {
-        fontSize: 16,
-        color: '#666666',
-        textAlign: 'center',
-        marginBottom: 30,
-        lineHeight: 22,
+        padding: 16,
     },
     loadingCard: {
         backgroundColor: '#FFFFFF',
         borderRadius: 12,
         padding: 20,
-        width: '100%',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 8,
         elevation: 3,
     },
-    loadingCardTitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#1A1A1A',
-        marginBottom: 12,
+    loader: {
+        marginBottom: 20,
     },
-    loadingCardText: {
+    loadingSteps: {
+        gap: 12,
+    },
+    loadingStep: {
         fontSize: 16,
         color: '#4A4A4A',
         lineHeight: 24,
+    },
+    title: {
+        marginBottom: 8,
+    },
+    subtitle: {
+        color: '#666666',
+        lineHeight: 22,
     },
     errorText: {
         fontSize: 16,

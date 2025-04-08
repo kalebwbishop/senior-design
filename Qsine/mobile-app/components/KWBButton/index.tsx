@@ -50,3 +50,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#4CAF50',
     },
 }); 
+
+export default KWBButton;

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { StyleSheet, SafeAreaView, Pressable, ScrollView } from "react-native";
+import { StyleSheet, SafeAreaView, Pressable, ScrollView, useColorScheme } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BlurView } from "expo-blur";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -15,14 +15,16 @@ interface KWBScreenWrapperProps {
 
 const KWBScreenWrapper: React.FC<KWBScreenWrapperProps> = ({ backButtonActive = false, headerText, children }) => {
     const navigation = useNavigation();
+    const colorScheme = useColorScheme();
+    const isDark = colorScheme === 'dark';
     
     const insets = useSafeAreaInsets();
     const scrollViewRef = useRef<ScrollView>(null);
     const scrollViewPaddingTop = 100 - insets.top + 16; // Header height - top inset + 16px margin
 
     return (
-        <SafeAreaView style={styles.container}>
-            <BlurView style={styles.blurHeader} intensity={50} tint="default">
+        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? '#000000' : '#FFFFFF' }]}>
+            <BlurView style={styles.blurHeader} intensity={isDark ? 30 : 50} tint={isDark ? 'dark' : 'light'}>
                 <Pressable
                     onPress={() => {
                         scrollViewRef.current?.scrollTo({ y: 0, animated: true });
@@ -31,15 +33,15 @@ const KWBScreenWrapper: React.FC<KWBScreenWrapperProps> = ({ backButtonActive = 
                 >
                     {navigation && backButtonActive && (
                         <Pressable onPress={() => { navigation.goBack() }} style={styles.chevronContainer}>
-                            <Ionicons name="chevron-back" size={24} color="white" />
+                            <Ionicons name="chevron-back" size={24} color={isDark ? '#FFFFFF' : '#000000'} />
                         </Pressable>
                     )}
-                    <KWBTypography variant="h1" style={[styles.headerText, { color: 'white' }]}>
+                    <KWBTypography variant="h1" style={[styles.headerText, { color: isDark ? '#FFFFFF' : '#000000' }]}>
                         {headerText}
                     </KWBTypography>
                     {navigation && backButtonActive && (
                         <Pressable onPress={() => {}} style={[styles.chevronContainer, { opacity: 0 }]}>
-                            <Ionicons name="chevron-back" size={24} color="white" />
+                            <Ionicons name="chevron-back" size={24} color={isDark ? '#FFFFFF' : '#000000'} />
                         </Pressable>
                     )}
                 </Pressable>
@@ -75,8 +77,8 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         flexDirection: 'row',
-        alignItems: 'center', // Center vertically
-        justifyContent: 'center', // Center horizontally
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingTop: 40,
     },
     chevronContainer: {

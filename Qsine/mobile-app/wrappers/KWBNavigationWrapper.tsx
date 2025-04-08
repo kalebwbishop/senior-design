@@ -11,6 +11,7 @@ import BarcodeNextPage from '@/pages/BarcodeNextPage';
 import BarcodeNextPageEdit from '@/pages/BarcodeNextPage/Edit';
 import UserSettingsPage from '@/pages/UserSettings';
 import TextNextPageResults from '@/pages/TextNextPage/Results';
+import TextNextPageConfirmText from '@/pages/TextNextPage/ConfirmText';
 const Stack = createStackNavigator<RootParamList>();
 
 export default function KWBNavigationWrapper() {
@@ -30,6 +31,7 @@ export default function KWBNavigationWrapper() {
                 <Stack.Screen name="BarcodeNextPage" component={BarcodeNextPage} initialParams={{'barcode': "051500255445"}} />
                 <Stack.Screen name="BarcodeNextPageEdit" component={BarcodeNextPageEdit} />
                 <Stack.Screen name="TextNextPage" component={TextNextPage} />
+                <Stack.Screen name="TextNextPageConfirmText" component={TextNextPageConfirmText} />
                 <Stack.Screen name="TextNextPageResults" component={TextNextPageResults} />
                 <Stack.Screen name="UserSettingsPage" component={UserSettingsPage} />
             </Stack.Navigator>

@@ -8,7 +8,8 @@ type RootParamList = {
   'BarcodeNextPageEdit': { 'barcode': string, 'product': Product['product'] };
   'UserSettingsPage': undefined;
   'TextNextPage': { 'imagePath': string };
-  'TextNextPageResults': { 'processedText': string, 'manualText': boolean };
+  'TextNextPageResults': { 'confirmedText': string };
+  'TextNextPageConfirmText': { 'processedText'?: string, 'manualText'?: boolean };
   'ImageNextPage': { 'imagePath': string };
   'ImageNextPageResults': { 'croppedImagePath': string, 'originalImagePath': string, 'classification': string };
 };

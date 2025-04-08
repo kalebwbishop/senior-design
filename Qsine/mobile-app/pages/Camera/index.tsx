@@ -43,9 +43,9 @@ export default function Camera() {
             case 'text':
                 return 'Take a picture of some text, such as a menu';
             case 'image':
-                return 'Take a picture of your food / medicine';
+                return 'Take a picture of your food';
             case 'barcode':
-                return 'Scan a barcode of your food / medicine';
+                return 'Scan a barcode of your food';
         }
     };
 
@@ -111,7 +111,7 @@ export default function Camera() {
                     {mode === 'text' && (
                         <TouchableOpacity
                             onPress={() => {
-                                navigation.push('TextNextPageResults', { manualText: true, processedText: '' });
+                                navigation.push('TextNextPageConfirmText', { manualText: true, processedText: '' });
                             }}
                             style={[styles.button, { marginBottom: insets.bottom + 40 }]}
                         >
