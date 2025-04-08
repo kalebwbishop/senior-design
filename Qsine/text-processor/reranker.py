@@ -83,7 +83,7 @@ class BM25:
             results.append({
                 "id": self.txt_ids[i],  # 'key' from JSON
                 "text": self.original_texts[i],
-                "recipe": self.data
+                "recipe": self.data[i]
             })
         return results
 
