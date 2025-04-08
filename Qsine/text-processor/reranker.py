@@ -99,9 +99,9 @@ def Reranker(query, model_path, old_results, n = 5):
     ranks = model.rank(query, passages)
     
     results = [{"recipe" : old_results[rank['corpus_id']]["recipe"],
-                "similarity": rank['score']} for rank in ranks]
+                "similarity": float(rank['score'])} for rank in ranks]
         
-    # Return predicted class
+    # Return predicted recipes
     return results
     
     
