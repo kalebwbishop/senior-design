@@ -128,5 +128,5 @@ if __name__ == "__main__":
     resulting in a silky, cheesy texture that clings to every strand. Often garnished with freshly cracked black pepper 
     and parsley, this comfort dish balances savory flavors with a smooth, buttery finish. 
     Perfect for weeknight dinners or a cozy date night at home."""
-    GetRecipe(query)
+    print(GetRecipe(query)[0])
     

@@ -8,4 +8,5 @@ sentencepiece
 accelerate
 protobuf
 huggingface_hub[hf_xet]
+sentence_transformers
 nltk
