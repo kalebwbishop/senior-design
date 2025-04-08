@@ -1,3 +1,5 @@
+import torch
+from sentence_transformers import CrossEncoder
 import math
 import json
 from collections import Counter, defaultdict
@@ -11,15 +13,16 @@ import unicodedata
 
 
 class BM25:
-    def __init__(self, json_path, rclass = "Recipes", k1=1.5, b=0.75):
+    def __init__(self, json_path, k1=1.5, b=0.75):
         self.k1 = k1
         self.b = b
         self.lemmatizer = WordNetLemmatizer()
         self.stop_words = set(stopwords.words('english'))
         # Load and store original passages
-        with open(json_path, "r", encoding="utf-8") as file:
-            self.data = json.load(file)
         
+        
+        with open(json_path, "r", encoding="utf-8") as file:        
+            self.data = json.load(file)
         
         # Extract text content from each passage
         self.txt_ids = [entry["key"] for entry in self.data] 
@@ -78,21 +81,44 @@ class BM25:
         results = []
         for i, score in sorted_scores[:n]:
             results.append({
-                "recipe": self.data[i],
-                "similarity": score
+                "id": self.txt_ids[i],  # 'key' from JSON
+                "text": self.original_texts[i],
+                "recipe": self.data
             })
         return results
+
+
+    
+
+def Reranker(query, model_path, old_results, n = 5):    
+    #Load model for inference
+    model = CrossEncoder(model_path)
+    
+    passages = [result["text"] for result in old_results[:n]]
+    
+    ranks = model.rank(query, passages)
+    
+    results = [{"recipe" : old_results[rank['corpus_id']]["recipe"],
+                "similarity": rank['score']} for rank in ranks]
+        
+    # Return predicted class
+    return results
     
     
-def GetRecipe(query, n = 3):
+def GetRecipe(query, n = 5):
     #Get dish class
-    #dclass = PredictClass(query, model_path, label_path)
+    
     project_root = dirname(dirname(__file__))
     data_path = join(project_root, "data")
     passage_path = join(data_path, "all_recipes.json")
+    model_path = "cross-encoder/ms-marco-MiniLM-L6-v2"
     
     Ridentifier = BM25(passage_path)
-    return Ridentifier.get_top_n(query, n=n)
+    results = Ridentifier.get_top_n(query, n=n*10)
+    results = Reranker(query, model_path, results, n=n)
+    print(len(results))
+    
+    return results
         
 
 if __name__ == "__main__":
@@ -102,5 +128,5 @@ if __name__ == "__main__":
     resulting in a silky, cheesy texture that clings to every strand. Often garnished with freshly cracked black pepper 
     and parsley, this comfort dish balances savory flavors with a smooth, buttery finish. 
     Perfect for weeknight dinners or a cozy date night at home."""
-    print(GetRecipe(query))
+    GetRecipe(query)
     

@@ -2,7 +2,7 @@ transformers
 datasets
 scikit-learn
 numpy
-pytorch
+torch
 tiktoken
 sentencepiece
 accelerate
