@@ -22,11 +22,11 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 9. [Budget](#budget)  
     - [Expenses to Date](#expenses-to-date)  
     - [Donated Items and Sources](#donated-items-and-sources)  
-10. [Appendix](#appendix)  
-    - [References and Citations](#references-and-citations)  
-    - [Code Repositories](#code-repositories)  
-    - [Meeting Notes](#meeting-notes)  
-    - [Evidence of Effort](#evidence-of-effort)
+10. [Test Plan and Results](#test-plan-and-results)
+11. [User Manual](#user-manual)
+12. [Spring Final PPT Presentation](#spring-final-ppt-presentation)
+13. [Final Expo Poster](#final-expo-poster)
+14. [Summary of Expenses & Hours and Justification](#summary-of-expenses--hours-and-justification)
 
 ---
 
@@ -37,14 +37,14 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 - **Members:** Matthew Bryant, Kaleb Bishop, Hung Nguyen, Eric Buffington
 - **Project Abstract:** QSine is a machine-learning app that uses image recognition and text processing to identify dishes and allergens from images or text descriptions. Integrated with a robust recipe and allergen database, it offers quick, reliable insights for safe dining and improves accessibility and efficiency. With QSine, we empower users to make informed choices, enhancing their quality of life.
 
-[Full Page](./Assignments/Assignment2_Team_Formation_and_Project_Description/README.md)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment2_Team_Formation_and_Project_Description/README.md)
 
 ---
 
 ## Project Description
    QSine is a machine learning application designed to enhance food safety for individuals with allergies. By leveraging advanced image recognition and natural language processing (NLP) models, the app identifies dishes and their associated allergens based on images or text descriptions. The system integrates seamlessly with a robust database of recipes and allergens, providing users with quick and reliable insights to make informed dining choices. Our project aims to deliver an accessible, efficient, and secure tool to improve the quality of life for individuals navigating food allergies.
 
-[Full Page](./Assignments/Assignment2_Team_Formation_and_Project_Description/README.md)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment2_Team_Formation_and_Project_Description/README.md)
 
 ---
 
@@ -62,27 +62,27 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 
 5. **As a frequent traveler with food allergies,** I want to quickly analyze foreign menus for potential allergens using text or image input so that I can make safe dining choices in unfamiliar places.
 
-[Full Page](./Assignments/Assignment4_Design_Diagrams/User_Stories.md)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/User_Stories.md)
 
 ### Design Diagrams
 
 - **Level 0 Diagram:**  
-![Design D0 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D0_diagram.png)
+![Design D0 Diagram](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README_images/D0_diagram.png)
 
 - **Level 0 Example:**
-![Design D0 Example](./Assignments/Assignment4_Design_Diagrams/README_images/D0-1.png)
+![Design D0 Example](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README_images/D0-1.png)
 
 - **Level 1 Diagram:**
-![Design D1 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D1_diagram.png)
+![Design D1 Diagram](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README_images/D1_diagram.png)
 
 - **Level 1 Example:**
-![Design D1 Example](./Assignments/Assignment4_Design_Diagrams/README_images/D1.png)
+![Design D1 Example](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README_images/D1.png)
 
 - **Level 2 Diagram:**
-![Design D2 Diagram](./Assignments/Assignment4_Design_Diagrams/README_images/D2_diagram.png)
+![Design D2 Diagram](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README_images/D2_diagram.png)
 
 - **Level 2 Example:**
-![Design D2 Example](./Assignments/Assignment4_Design_Diagrams/README_images/D2.png)
+![Design D2 Example](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README_images/D2.png)
 
 ## Conventions and Description of Components
 
@@ -153,7 +153,7 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
     - **Purpose:** Displays the final allergen report to the user.
     - **Details:** Includes detected allergens, confidence levels, aliases, and recommendations.
 
-[Full Page](./Assignments/Assignment4_Design_Diagrams/README.md)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment4_Design_Diagrams/README.md)
 
 ---
 
@@ -195,7 +195,7 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 - Integrate Allergen detection model with database
 - Test App for performance, endurance and availability
 
-[Full Page](./Assignments/Assignment5_Task_Lists/)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment5_Task_Lists/)
 
 ### Timeline
 
@@ -257,28 +257,28 @@ Welcome to our Final Fall Design Report repository. This document outlines our p
 
 ---
 
-[Full Page](./Assignments/Assignment6_Milestones_Timeline_Effort_Matrix/README.md)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment6_Milestones_Timeline_Effort_Matrix/README.md)
 
 ---
 
 ## ABET Concerns Essay
 Our project is focused on training an artificial intelligence to be able to identify potential allergens in text or images and integrating it into an accessible form.  One constraint that we see is our economics where we are operating with a very small budget. We must rely on open-source tools such as TensorFlow but costly datasets, tools and computational power are out of our reach. This project also has implications on our professional development in that it requires the specialized skills in the realm of computer science such as machine learning, NLP, image processing, and full stack development.  If our end product is unable to reliably deliver correct results, it will reflect on the reputation of each of us team members.  Security considerations will also be a constraint given the sensitivity of dietary information. We must ensure that all personal information is not tradable back to an individual, that all data transfers are confidential and that all data is stored securely. The largest constraint we have is health due to the impact of incorrect results. Posting a false negative could result in the user consuming an item that can harm them. Furthermore, a bad actor may falsify the data to make allergic recipies appear as non-allergic. Thus, transparency is our strongest tool in giving users as much information as possible to guide their choices.
 
-[Full Page](./Assignments/Assignment7_Project_Constraints_Essay/README.md)
+[Full Page](./Assignments/Senior%20Design%20I/Assignment7_Project_Constraints_Essay/README.md)
 
 ---
 
 ## PPT Slideshow
-[Link to PPT](./Assignments/Assignment8_Slide_Show_Fall_Design_Presentations/slide_deck.pptx)
+[Link to PPT](./Assignments/Senior%20Design%20I/Assignment8_Slide_Show_Fall_Design_Presentations/slide_deck.pptx)
 
-[Link to Video](./Assignments/Assignment9_Presentation_Videos_and_Peer_Review_Assessments/slide_deck.mp4)
+[Link to Video](./Assignments/Senior%20Design%20I/Assignment9_Presentation_Videos_and_Peer_Review_Assessments/slide_deck.mp4)
 
 ---
 
 ## Self-Assessment Essays
 
 ### Kaleb Bishop
-[Kaleb Bishop Essay (bishopkw)](./Assignments/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/Bishopkw.docx)
+[Kaleb Bishop Essay (bishopkw)](./Assignments/Senior%20Design%20I/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/Bishopkw.docx)
 
 **Introduction**  
 My name is Kaleb Bishop, and my senior design project is focused on developing an application that allows users with allergies to scan text or images of their meals to detect potential allergens. Along with my teammates—Eric Buffington, Matthew Bryant, and Hung Nguyen—we are working together to create a solution that combines advanced machine learning with practical, real-world applications. From an academic perspective, this project is an opportunity to apply the diverse technical skills we’ve gained throughout our computer science education while addressing a real-world problem that can impact many lives. Our goal is to give users peace of mind by helping them identify allergens in their meals quickly and accurately. This tool will enable users to scan ingredient lists or even images of their food, using machine learning to analyze and detect any potential allergens. Although our initial focus is on food allergies, this project has the potential to expand into other areas, such as medication allergies. This aspect is particularly meaningful to me because my fiancé has allergies to certain medicines, which has deepened my understanding of how critical it is to avoid accidental exposure to allergens. By combining practicality with advanced technology, we aim to create a simple yet powerful solution that improves the safety and confidence of those with allergies.
@@ -296,7 +296,7 @@ I’m excited about this project because of its potential to make a significant 
 Our preliminary approach involves creating a web-based Minimum Viable Product (MVP) that features a camera interface and outputs potential allergens based on the scanned text or image. We aim to design the interface to be as simple and intuitive as possible, with a focus on transparency. Users will see the confidence level of the AI’s predictions, and even slight suspicions of allergens will be reported to ensure safety. The biggest technical challenge we anticipate is connecting our trained AI model with the database to deliver accurate allergen information. Over time, we plan to allow users to contribute to and expand the allergen database, making it more comprehensive. Success for me will be marked by the completion of key milestones, such as successfully integrating the AI model, launching the MVP, and gathering feedback from early users. I will measure my contributions based on how well our application performs in real-world testing and whether it meets users’ needs effectively.
 
 ### Matthew Bryant
-[Matthew Bryant Essay (bryantmw)](./Assignments/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/bryantmw.docx)
+[Matthew Bryant Essay (bryantmw)](./Assignments/Senior%20Design%20I/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/bryantmw.docx)
 
 From an academic perspective, our project, Qsine, is very exciting. The goal is to create an app that can recognize foods and dishes from a picture and return a common list of allergens that are likely to be present in such foods. While not a foolproof tool by any means as recipes can vary, it’s an interesting tech demo to show off what we’re capable of and help teach us some new tools. The main purpose of this project is to cover machine learning, computer vision, back end / front end, etc. all at once. Web scraping will be invaluable to us in this project, and that’s another tool to add to our repertoire.
 
@@ -309,7 +309,7 @@ I’m excited to work on this because machine learning is one of those topics wh
 Having worked with some of the group members in the past, I know that they’re good group members who will be proactive and work ahead of schedule. That said, it’s best to have specific goals to have a metric for self-evaluation and making sure we stay on track. The goals for the project should be to get a script that just lets you type in the name for a food or dish then returns common allergens, then to train it to recognize some basic dishes and pipe those outputs into the first script, and then to expand that to more dishes and work on camera integration. For myself, I’ll know I did my job if my assignment of tasks is completed in a timely fashion and my suite of tests is useful in maintaining the integrity of our codebase as the project continues. It’s an exciting project that will broaden my horizons of web development, server back end, machine learning, and API usage. All of these skills feel like they’ve been neglected in recent years and I’m happy to have an opportunity to progress them.
 
 ### Hung Nguyen
-[Hung Nguyen Essay (nguye3hv)](./Assignments/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/nguye3hv.pdf)
+[Hung Nguyen Essay (nguye3hv)](./Assignments/Senior%20Design%20I/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/nguye3hv.pdf)
 
 My senior design project involves developing an Android application that helps users identify dishes and potential allergens based on user input, dish images, and restaurant menu data. The application will query recipe websites like Allrecipes and Food Network to determine the most likely recipe for a dish, providing valuable insight into its ingredients and any associated allergens. Written in Java, the app includes a robust backend database to store recipes and manage data, as well as an intuitive frontend that allows users to easily input information and receive allergy-related feedback. This project merges my academic interest in mobile development, data extraction, and user-centered design.
 
@@ -322,7 +322,7 @@ I am highly motivated to participate in this project because it aligns with my s
 My preliminary approach to designing the solution will involve carefully considering potential problems the application could solve, particularly within the domains of data science and computer vision. I'll begin by identifying clear goals and determining how to implement functionalities like dish identification, allergy detection, and external recipe querying. Time and budget constraints will play a significant role in deciding the complexity of the solution, ensuring we can deliver a functional, user-friendly application within the set parameters. The expected result is a fully functional Android application, complete with a well-structured UI and backend. To self-evaluate my contributions, I will rely on quality checks and user testing to ensure the program runs smoothly, meeting both performance and accuracy requirements.
 
 ### Eric Buffington
-[Eric Buffington Essay (buffinea)](./Assignments/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/buffinea.docx)
+[Eric Buffington Essay (buffinea)](./Assignments/Senior%20Design%20I/Assignment3_Team_Contract_and_Individual_Capstone_Assessment/buffinea.docx)
 
 **Introduction**  
 My name is Eric Buffington, and my team is working on a senior design project focused on creating an application that gives users with allergies the ability to scan text or images of their meals to detect possible allergens. With my teammates: Kaleb Bishop, Hung Nguyen, and Matthew Bryant. We will utilize our collective knowledge of machine learning and apply this to our real-world application. Our application aims to help users accurately and quickly identify potential allergens in their food by scanning images or ingredient lists. While our main focus is on food allergies, we hope to extend this application to cover other types of allergies, including medications. This project has even more meaning to our team because of Kaleb’s fiancé, she has a personal connection to food allergies, which has motivated us to deliver a solution that could make a significant difference in people’s lives. The end goal is to deliver an application that is capable of aiding people in avoiding potentially dangerous allergy attacks.
@@ -344,7 +344,7 @@ Our first focus is on creating a Minimum Viable Product (MVP) that allows users 
 ## Professional Biographies
 
 ### Kaleb Bishop
-[Kaleb Bishop Biography (bishopkw)](./Assignments/Assignment1_Professional_Biography/Bishopkw.md)
+[Kaleb Bishop Biography (bishopkw)](./Assignments/Senior%20Design%20I/Assignment1_Professional_Biography/Bishopkw.md)
 
 #### Contact Information
 - **Location:** Findlay, OH
@@ -410,7 +410,7 @@ Our first focus is on creating a Minimum Viable Product (MVP) that allows users 
 
 
 ### Matthew Bryant
-[Matthew Bryant Biography (bryantmw)](./Assignments/Assignment1_Professional_Biography/bryantmw.md)
+[Matthew Bryant Biography (bryantmw)](./Assignments/Senior%20Design%20I/Assignment1_Professional_Biography/bryantmw.md)
 
 #### Contact Information
 - **Email:** bryantmw@mail.uc.edu
@@ -443,7 +443,7 @@ Our first focus is on creating a Minimum Viable Product (MVP) that allows users 
 - 3D Rendering, Smartphone/Desktop app with a professional quality UI, useful Linux module, usable website, Audio Encoding, Systems Programming project to develop a physical tool
 
 ### Hung Nguyen
-[Hung Nguyen Biography (nguye3hv)](./Assignments/Assignment1_Professional_Biography/nguye3hv.md)
+[Hung Nguyen Biography (nguye3hv)](./Assignments/Senior%20Design%20I/Assignment1_Professional_Biography/nguye3hv.md)
 
 #### Contact Information
 - **Email:** nguye3hv@mail.uc.edu
@@ -478,7 +478,7 @@ Our first focus is on creating a Minimum Viable Product (MVP) that allows users 
 - A variation of the normal chess game with with added squares to swap chess piece type.
 
 ### Eric Buffington
-[Eric Buffington Biography (buffinea)](./Assignments/Assignment1_Professional_Biography/buffinea.docx)
+[Eric Buffington Biography (buffinea)](./Assignments/Senior%20Design%20I/Assignment1_Professional_Biography/buffinea.docx)
 
 #### Contact Information
 - **Email:** ericbuff73@gmail.com
@@ -532,6 +532,23 @@ Future expenses may include hosing costs for our API and database.
 ### Donated Items and Sources
 
 No donated items or sources as of now.
+
+---
+
+## Test Plan and Results
+<!-- TODO -->
+
+## User Manual
+[User Manual](./Assignments/Senior%20Design%20II/Assignment_2_User_Docs/Assignment.md)
+
+## Spring Final PPT Presentation
+[Spring Final PPT Presentation](./Assignments/Senior%20Design%20II/Assignment_3_Presentation_Slidedeck/Qsine_Slidedeck_2.pptx)
+
+## Final Expo Poster
+[Final Expo Poster](./Assignments/Senior%20Design%20II/Assignment_4_Expo_Poster/SD_Poster.pdf)
+
+## Summary of Expenses & Hours and Justification
+<!-- TODO -->
 
 ---
 

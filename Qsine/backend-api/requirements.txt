@@ -9,3 +9,17 @@ pyopenssl
 nltk
 scikit-learn
 pymongo
+transformers
+sentence_transformers
+transformers
+datasets
+scikit-learn
+numpy
+torch
+tiktoken
+sentencepiece
+accelerate
+protobuf
+huggingface_hub[hf_xet]
+sentence_transformers
+nltk

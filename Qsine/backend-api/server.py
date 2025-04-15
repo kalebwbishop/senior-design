@@ -9,6 +9,7 @@ import logging
 import time
 from logging.handlers import RotatingFileHandler
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -36,6 +37,10 @@ from test_model import ProcessRecipe, GetAllergenData
 sys.path.append("../data")
 
 from get_ingredients import get_ingredients_by_category
+
+sys.path.append("../text-processor")
+
+from reranker import GetRecipe
 
 
 from helpers import attempt_to_find_product, clean_text
@@ -317,9 +322,20 @@ def upload_text_image(lang):
             logger.info("OCR API request successful")
             result = response.json()
             logger.debug(f"OCR API response: {result}")
-            cleaned_text = clean_text(
-                result.get("ParsedResults", [{}])[0].get("ParsedText", "None")
-            )
+            parsed_results = result.get("ParsedResults", [{}])
+            if not parsed_results:
+                logger.warning("No parsed results found in OCR API response")
+                return (
+                    jsonify(
+                        {
+                            "message": "Image successfully processed",
+                            "text": "No Text Found",
+                        }
+                    ),
+                )
+                200,
+
+            cleaned_text = clean_text(parsed_results[0].get("ParsedText", "None"))
             logger.info(f"Cleaned text extracted: {cleaned_text[:100]}...")
             return (
                 jsonify(
@@ -344,29 +360,82 @@ def upload_text_image(lang):
 def classify_text():
     logger.info("Starting text classification")
     text = request.get_json().get("text")
-    logger.debug(f"Received text for classification: {text[:100]}...")
+    logger.info(f"Received text for classification: {text}...")
 
-    # classification = infer_text(text)
-    classification = "cookies"
-    logger.info(f"Text classified as: {classification}")
+    results = GetRecipe(text)
 
-    ingredients, _ = get_ingredients_by_category(classification)
+    recipe = results[0].get("recipe", "")
 
-    logger.debug(f"Retrieved ingredients: {ingredients}")
+    logger.info(f"Got result: {results}")
 
     allergens = ProcessRecipe(
-        {"ingredients": ingredients[:20], "recipe_name": classification}
+        {
+            "ingredients": recipe.get("ingredients", []),
+            "recipe_name": recipe.get("recipe_name", ""),
+        }
     )
     logger.info(f"Allergens detected: {allergens}")
 
     return_item = {
-        "classifications": [classification],
-        "ingredients": ingredients[:20],
+        "classifications": [
+            result.get("recipe", {}).get("recipe_name", "") for result in results
+        ],
+        "keys": [result.get("recipe", {}).get("key", "") for result in results],
+        "confidences": [result.get("similarity", 0) for result in results],
+        "ingredients": recipe.get("ingredients", []),
         "allergens": allergens,
+        "steps": recipe.get("steps", []),
     }
 
     return (
         jsonify({"message": "Text successfully classified", "data": return_item}),
+        200,
+    )
+
+
+@app.route("/get-recipe/<key>", methods=["GET"])
+def get_recipe(key):
+    logger.info(f"Retrieving recipe with key: {key}")
+
+    # Validate the key
+    if not key:
+        logger.warning("No key provided")
+        return jsonify({"error": "No key provided"}), 400
+
+    return_recipe = None
+
+    with open("../data/all_recipes.json", "r", encoding="utf8") as file:
+        data = json.load(file)
+
+        for recipe in data:
+            if recipe["key"] == key:
+                return_recipe = recipe
+                break
+        else:
+            return_recipe = None
+
+    if not return_recipe:
+        logger.warning(f"Recipe not found for key: {key}")
+        return jsonify({"error": "Recipe not found"}), 404
+
+    # Process allergens for the recipe
+    allergens = ProcessRecipe(
+        {
+            "ingredients": recipe.get("ingredients", []),
+            "recipe_name": recipe.get("recipe_name", ""),
+        }
+    )
+    logger.info(f"Allergens detected: {allergens}")
+
+    return_item = {
+        "recipe": recipe,
+        "allergens": allergens,
+        "ingredients": recipe.get("ingredients", []),
+        "steps": recipe.get("steps", []),
+    }
+
+    return (
+        jsonify({"message": "Recipe retrieved successfully", "data": return_item}),
         200,
     )
 
