@@ -536,7 +536,7 @@ No donated items or sources as of now.
 ---
 
 ## Test Plan and Results
-<!-- TODO -->
+[Test Plan and Results](./Assignments/Senior%20Design%20II/Assignment_1_Test_Plan/Assignment%20.pdf)
 
 ## User Manual
 [User Manual](./Assignments/Senior%20Design%20II/Assignment_2_User_Docs/Assignment.md)
@@ -548,7 +548,16 @@ No donated items or sources as of now.
 [Final Expo Poster](./Assignments/Senior%20Design%20II/Assignment_4_Expo_Poster/SD_Poster.pdf)
 
 ## Summary of Expenses & Hours and Justification
-<!-- TODO -->
+| Name             | Expenses  | Semester 1 Hours | Semester 2 Hours | Total Hours |
+|------------------|-----------|------------------|------------------|-------------|
+| Kaleb Bishop     | $117.50   | 25               | 95               | 120         |
+| Eric Buffington  | $95.00    | 35               | 58               | 93          |
+| Hung Nguyen      | $7.56     | 35               | 82               | 117         |
+| Matthew Bryant   | $0.00     | 48               | 53               | 101         |
+| **Total**        | **$220.06**| **143**          | **288**          | **431**     |
+
+[Justification](./Assignments/Senior%20Design%20II/Assignment_7_Final_Design_Report/Summary%20of%20Hours%20&%20Expenses.pdf)
+
 
 ---
 
